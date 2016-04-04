@@ -1,5 +1,9 @@
 <?php
 return [
+    'action' => env(
+        'WORKBENCH_ACTION',
+        'create'
+    ),
     'type' => env(
         'WORKBENCH_TYPE',
         'laravel'

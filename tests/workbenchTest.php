@@ -24,9 +24,17 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     }
 
     /** @test */
-    public function testHardWorkKO()
+    public function testHardWorkCreateOk()
     {
         $action = "create";
+        $domain = "prova";
+        //Artisan::call('workbench:new',['action'=>$action,'domain'=>$domain]);
+    }
+
+    /** @test */
+    public function testHardWorkCreateNoOk()
+    {
+        $action = "cre";
         $domain = "prova";
         Artisan::call('workbench:new',['action'=>$action,'domain'=>$domain]);
     }
