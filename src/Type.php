@@ -6,7 +6,7 @@
 namespace Padosoft\Workbench;
 
 
-class Type
+class Type implements IEnumerable
 {
     use Traits\Enumerable;
 

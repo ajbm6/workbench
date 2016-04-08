@@ -5,7 +5,7 @@ namespace Padosoft\Workbench;
  * Class Git
  * @package Padosoft\Workbench
  */
-class Git
+class Git implements IEnumerable
 {
     use Traits\Enumerable;
 

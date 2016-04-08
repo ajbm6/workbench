@@ -6,7 +6,7 @@
 namespace Padosoft\Workbench;
 
 
-class GitAction
+class GitAction implements IEnumerable
 {
     use Traits\Enumerable;
 

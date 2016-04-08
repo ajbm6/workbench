@@ -5,7 +5,7 @@ namespace Padosoft\Workbench;
  * Class Action
  * @package Padosoft\Workbench
  */
-class Action
+class Action implements IEnumerable
 {
     use Traits\Enumerable;
 

@@ -12,6 +12,9 @@ return [
         'WORKBENCH_DIR',
         ''
     ),
+    'attemps' => env( 'WORKBENCH_ATTEMPS',
+        '5'
+    ),
     'git' => [
         'hosting' => env('WORKBENCH_GIT_HOSTING', 'github'),
         'action' => env('WORKBENCH_GIT_ACTION', 'pull'),

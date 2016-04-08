@@ -9,8 +9,12 @@
 namespace Padosoft\Workbench\Test;
 
 
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Console\IlluminateCaster;
+use Mockery\Mock;
 use Padosoft\Workbench\Workbench;
 use Illuminate\Support\Facades\Artisan;
+use Mockery;
 
 class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
 {
@@ -34,8 +38,31 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     /** @test */
     public function testHardWorkCreateNoOk()
     {
-        $action = "cre";
+        $action = "crea";
         $domain = "prova";
-        Artisan::call('workbench:new',['action'=>$action,'domain'=>$domain]);
+        $type = "laravel";
+        $dir = "y:/public/";
+        $git = "y:/public/";
+        $gitaction = "push";
+        $user="alevento";
+        $password="asd";
+
+
+        //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
+        //$cmd->shouldReceive('ask')->with('Ale');
+        Artisan::call('workbench:new',[
+            //'action'=>$action,
+            //'domain'=>$domain,
+            //'--type'=>$type,
+            //'--dir'=>$dir,
+            //'--git'=>$git,
+            //'--gitaction'=>$gitaction,
+            //'--user'=>$user,
+            //'--password'=>$password,
+            '--silent'=>true
+        ]);
+
     }
+
+
 }
