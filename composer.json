@@ -21,7 +21,8 @@
 				"tests/MailTestCase.php"
 			],
         "psr-4": {
-            "Padosoft\\Workbench\\": "src"
+            "Padosoft\\Workbench\\": "src",
+            "Phpseclib\\" : "phpseclib"
         }
     },
     "autoload-dev": {

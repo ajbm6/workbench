@@ -30,5 +30,10 @@ return [
             'email' => env('WORKBENCH_GIT_BITBUCKET_EMAIL', ''),
             'organization' => env('WORKBENCH_GIT_BITBUCKET_ORGANIZATION', 'padosoft'),
         ],
-],
+    ],
+    'ssh' => [
+        'server' => env('WORKBENCH_SSH_SERVER', ''),
+        'user' => env('WORKBENCH_SSH_USER', ''),
+        'password' => env('WORKBENCH_SSH_SERVER', ''),
+    ],
  ];

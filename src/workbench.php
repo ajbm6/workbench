@@ -2,9 +2,14 @@
 
 namespace Padosoft\Workbench;
 
+
 use Illuminate\Console\Command;
 use Config;
 use GrahamCampbell\GitHub\Facades\GitHub;
+use Padosoft\Workbench\Parameters;
+use File;
+use GuzzleHttp\Client;
+
 
 class Workbench extends Command
 {
@@ -25,6 +30,9 @@ class Workbench extends Command
                             {--e|email= : git email}
                             {--o|organization= : organization in github or bitbucket}
                             {--s|silent : no questions}
+                            {--sshhost= : host ssh}
+                            {--sshuser= : user ssh}
+                            {--sshpassword= : password ssh}
                             ';
 
     /**
@@ -36,8 +44,8 @@ class Workbench extends Command
 The <info>workbench:new</info> ....
 EOF;
 
-    protected $requested = array();
-
+    private $requested = array();
+    
     /**
      * Execute the console command.
      *
@@ -57,25 +65,46 @@ EOF;
         //$tuttoOk = true;
         $silent=$option["silent"];
         $this->validate($argument, $option);
+        $action = new Parameters\Action($this);
+        $domain = new Parameters\Domain($this);
+        $type = new Parameters\Type($this);
+        $dir = new Parameters\Dir($this);
+        $git = new Parameters\Git($this);
+        $sshhost = new Parameters\Sshhost($this);
 
-
-        $this->readAction($silent);
-        $this->readDomain($silent);
+        
+        $action->read($silent);
+        $domain->read($silent);
         if($this->requested["action"]["valore"]=="delete"){
-            $this->deleteDomain();
+            $domain->deleteDomain();
             return;
         }
-        $this->readType($silent);
-        $this->readDir($silent);
-        if($this->readGit($silent)){
-            $this->readGitaction($silent);
-            $this->readUser($silent);
-            $this->readPassword($silent);
-            $this->readEmail($silent);
-            $this->readOrganization($silent);
+        $type->read($silent);
+        $dir->read($silent);
+        if($git->read($silent)){
+            $gitaction = new Parameters\Gitaction($this);
+            $user = new Parameters\User($this);
+            $password = new Parameters\Password($this);
+            $email = new Parameters\Email($this);
+            $organization = new Parameters\Organization($this);
+            $gitaction->read($silent);
+            $user->read($silent);
+            $password->read($silent);
+            $email->read($silent);
+            $organization->read($silent);
         }
 
-        //$this->notifyResult( $tuttoOk);
+        if($sshhost->read($silent)){
+            $sshuser = new Parameters\Sshuser($this);
+            $sshpassword = new Parameters\Sshpassword($this);
+            $sshuser->read($silent);
+            $sshpassword->read($silent);
+        }
+
+        $this->createDomainFolder();
+
+
+
 
     }
 
@@ -108,12 +137,12 @@ EOF;
     {
         $validVal=true;
         $validClass=false;
-        $classwithnamespace = "Padosoft\\Workbench\\".ucfirst($class);
+        $classwithnamespace = "Padosoft\\Workbench\\Parameters\\".ucfirst($class);
         $myclass=null;
         if(class_exists($classwithnamespace))
         {
             $validClass=true;
-            $myclass=new $classwithnamespace();
+            $myclass=new $classwithnamespace($this);
             if(!$myclass::isValidValue($val))
             {
                 $validVal=false;
@@ -155,191 +184,41 @@ EOF;
         $this->requested["action"] = $this->prepare($argument["action"],"action");
         $this->requested["domain"] = $this->prepare($argument["domain"],"domain");
         $this->requested["type"] = $this->prepare($option["type"],"type");
-        $this->requested["dir"] = $this->prepare(Dir::adjustPath($option["dir"]),"dir");
+        $this->requested["dir"] = $this->prepare(Parameters\Dir::adjustPath($option["dir"]),"dir");
         $this->requested["git"] = $this->prepare($option["git"],"git");
         $this->requested["gitaction"] = $this->prepare($option["gitaction"],"gitaction");
         $this->requested["user"] = $this->prepare($option["user"],"user");
         $this->requested["password"] = $this->prepare($option["password"],"password");
         $this->requested["email"] = $this->prepare($option["email"],"email");
         $this->requested["organization"] = $this->prepare($option["organization"],"organization");
+        $this->requested["sshhost"] = $this->prepare($option["sshhost"],"sshhost");
+        $this->requested["sshuser"] = $this->prepare($option["sshuser"],"sshuser");
+        $this->requested["sshpassword"] = $this->prepare($option["sshpassword"],"sshpassword");
 
     }
 
-    private function readAction($silent)
-    {
-        if($silent && !$this->requested["action"]["valore-valido"] && !$this->requested["action"]["valore-default-valido"]){
-            $this->exitWork("Action is not correct, choice from 'create' or 'delete'");
+    public function createDomainFolder() {
+        if(File::exists($this->requested["dir"]['valore'].$this->requested["domain"]['valore'])){
+            $this->command->error("Domain directory exist.");
+            exit();
         }
+        $result = File::makeDirectory($this->requested["dir"]['valore'].$this->requested["domain"]['valore']);
+    }
 
-        if($silent && !$this->requested["action"]["valore-valido"] && $this->requested["action"]["valore-default-valido"]){
-            $this->requested["action"]["valore-valido"]= $this->requested["action"]["valore-default-valido"];
-        }
 
-        if(!$silent && !$this->requested["action"]["valore-valido"]){
-            $this->requested["action"]["valore"] = $this->choice('What do you want to do?', ['create', 'delete']);
+
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
         }
     }
 
-    private function readDir($silent)
-    {
-        if($silent && !$this->requested["dir"]["valore-valido"] && !$this->requested["dir"]["valore-default-valido"]){
-            $this->exitWork("Domain's path is not correct.");
-        }
-
-        if($silent && !$this->requested["dir"]["valore-valido"] && $this->requested["dir"]["valore-default-valido"]){
-            $this->requested["dir"]["valore-valido"] = $this->requested["dir"]["valore-default-valido"];
-        }
-
-        $attemps = Config::get('workbench.attemps');
-        $attemp=0;
-        while(!$silent && !$this->requested["dir"]["valore-valido"] && $attemp<$attemps){
-            $this->error("This domain path '" .$this->requested["dir"]["valore"]. "' is not valid");
-            $this->requested["dir"]["valore"] = Dir::adjustPath($this->ask('Path for domain', 
-                ($this->requested["dir"]["valore-default-valido"]?$this->requested["dir"]["valore-default"]:$this->requested["dir"]["valore"])));
-            $this->requested["dir"]["valore-valido"] = Dir::isValidValue($this->requested["dir"]["valore"]);
-            $attemp++;
-            if ($attemp== $attemps) return $this->error("Exit for invalid path");
+    public function __set($property, $value) {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
         }
     }
 
-    private function readDomain($silent)
-    {
-        if(silent && !$this->requested["domain"]["valore-valido"]){
-            $this->exitWork("Domain is not correct, specific a valid name.");
-        }
-        if(!silent && !$this->requested["domain"]["valore-valido"]){
-            $this->requested["domain"]["valore"] = $this->ask("What's the domain name?",$this->requested["domain"]["valore"]);
-        }
 
-    }
-
-    private function readEmail($silent)
-    {
-
-        if($silent && !$this->requested["email"]["valore-valido"] && !$this->requested["email"]["valore-default-valido"]){
-            $this->exitWork("Email is not correct.");
-        }
-
-        if($silent && !$this->requested["email"]["valore-valido"] && $this->requested["email"]["valore-default-valido"]){
-            $this->requested["email"]["valore-valido"] = $this->requested["email"]["valore-default-valido"];
-        }
-
-        $attemps = Config::get('workbench.attemps');
-        $attemp=0;
-
-        while(!$silent && (!$this->requested["email"]["valore-valido"] || empty($this->requested["email"]["valore"])) && $attemp<$attemps){
-            $this->error("This email '" .$this->requested["email"]["valore"]. "' is not valid");
-            $this->requested["email"]["valore"] = $this->ask('The email associated to git repository',
-                ($this->requested["email"]["valore-default-valido"]?$this->requested["email"]["valore-default"]:$this->requested["email"]["valore"]));
-            $this->requested["email"]["valore-valido"] = Email::isValidValue($this->requested["email"]["valore"]);
-            $attemp++;
-            if ($attemp== $attemps) return $this->error("Exit for invalid email");
-        }
-    }
-
-    private function readGit($silent)
-    {
-        if($silent && empty($this->requested["git"]["valore-valido"])) {
-            $this->requested["git"]["valore-valido"]= $this->requested["git"]["valore-valido-default"];
-        }
-
-        if($silent && !$this->requested["git"]["valore-valido"] && !$this->requested["git"]["valore-valido-default"] && !empty($this->requested["git"]["valore-valido"])){
-            $this->exitWork("Choice a git type, 'github', 'bitbucket' or ''.");
-        }
-
-        if($silent && !$this->requested["git"]["valore-valido"] && $this->requested["git"]["valore-valido-default"] && !empty($this->requested["git"]["valore-valido"])){
-            $this->requested["git"]["valore-valido"] = $this->requested["git"]["valore-valido-default"];
-        }
-
-        if(!$silent && !$this->requested["git"]["valore-valido"] && $this->confirm('Do you want add to git repository?')){
-            $this->requested["git"]["valore"] = $this->choice('Github or Bitbucket?', ['github', 'bitbucket']);
-            $this->requested["git"]["valore-valido"]=true;
-        }
-
-        return $this->requested["git"]["valore-valido"];
-    }
-
-    private function readGitaction($silent)
-    {
-        if($silent && !$this->requested["gitaction"]["valore-valido"] && !$this->requested["gitaction"]["valore-valido-default"]){
-            $this->exitWork("The action for git is not correct, choice from 'push', 'pull' or 'force'");
-        }
-        if($silent && !$this->requested["gitaction"]["valore-valido"] && $this->requested["gitaction"]["valore-valido-default"]){
-            $this->requested["gitaction"]["valore-valido"] = $this->requested["gitaction"]["valore-valido-default"];
-        }
-        if(!$silent && !$this->requested["gitaction"]["valore-valido"]){
-            $this->requested["gitaction"]["valore"] = $this->choice('What do you want do?', ['push', 'pull', 'force']);
-        }
-    }
-
-    private function readOrganization($silent)
-    {
-        if($silent && !$this->requested["organization"]["valore-valido"] && !$this->requested["organization"]["valore-valido-default"]){
-            $this->exitWork("The organization for git can't be void");
-        }
-
-        if($silent && !$this->requested["organization"]["valore-valido"] && $this->requested["organization"]["valore-valido-default"]){
-            $this->requested["organization"]["valore-valido"] = $this->requested["organization"]["valore-valido-default"];
-        }
-
-        if(!$this->requested["organization"]["valore-valido"]){
-            $this->requested["organization"]["valore"] = $this->ask('Git repository\'s organization');
-        }
-    }
-    
-    private function readPassword($silent)
-    {
-
-        if($silent && !$this->requested["password"]["valore-valido"] && !$this->requested["password"]["valore-valido-default"]){
-            $this->exitWork("The password for git can't be void");
-        }
-
-        if($silent && !$this->requested["password"]["valore-valido"] && $this->requested["password"]["valore-valido-default"]){
-            $this->requested["password"]["valore-valido"] = $this->requested["password"]["valore-valido-default"];
-        }
-
-        if(!$silent && !$this->requested["password"]["valore-valido"]){
-            $this->requested["password"]["valore"] = $this->secret('Git repository\'s password');
-        }
-    }
-
-    private function readType($silent)
-    {
-        if($silent && !$this->requested["type"]["valore-valido"] && !$this->requested["type"]["valore-valido-default"]){
-            $this->exitWork("Type is not correct, choice from 'laravel' or 'normal'");
-        }
-        if($silent && !$this->requested["type"]["valore-valido"] && $this->requested["type"]["valore-valido-default"]){
-            $this->requested["type"]["valore-valido"] = $this->requested["type"]["valore-valido-default"];
-        }
-        if(!$silent && !$this->requested["type"]["valore-valido"]){
-            $this->requested["type"]["valore"] = $this->choice('Project type?', ['laravel', 'normal']);
-        }
-    }
-
-    private function readUser($silent)
-    {
-
-        if($silent && !$this->requested["user"]["valore-valido"] && !$this->requested["user"]["valore-valido-default"]){
-            $this->exitWork("The user for git can't be void");
-        }
-
-        if($silent && !$this->requested["user"]["valore-valido"] && $this->requested["user"]["valore-valido-default"]){
-            $this->requested["user"]["valore-valido"] = $this->requested["user"]["valore-valido-default"];
-        }
-        if(!$this->requested["user"]["valore-valido"]){
-            $this->requested["user"]["valore"] = $this->ask('Git repository\'s username');
-        }
-    }
-
-    private function exitWork($error)
-    {
-        $this->error($error);
-        exit();
-    }
-
-    private function deleteDomain()
-    {
-
-    }
 }
 
