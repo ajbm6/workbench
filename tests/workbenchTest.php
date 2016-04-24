@@ -12,12 +12,15 @@ namespace Padosoft\Workbench\Test;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Console\IlluminateCaster;
 use Mockery\Mock;
+use Padosoft\Workbench\HttpHelper;
+use Padosoft\Workbench\MethodHttpHelper;
 use Padosoft\Workbench\Workbench;
 use Illuminate\Support\Facades\Artisan;
 use Mockery;
 use phpseclib\Net\SSH2;
 use Symfony\CS\Fixer\Symfony\PhpdocToCommentFixer;
 use Padosoft\Workbench\HeaderHttpHelper;
+use GuzzleHttp\Client;
 
 class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
 {
@@ -62,7 +65,14 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $sshpassword='ale';
 
         $head = new HeaderHttpHelper();
-        $head->allow_redirects__max = 5;
+        $head->headers__authorization__username='alevento';
+        $head->headers__authorization__password='129895ale';
+        $head->json=['name'=>'cicciu'];
+        //$head->authorization=['alevento','129895ale'];
+        //$head->name="ciccio";
+        $client = new client;
+        $req = new HttpHelper($client);
+        $req->request(MethodHttpHelper::POST,'https://api.github.com/orgs/b2msrl/repos',$head);
 
         //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
         //$cmd->shouldReceive('ask')->with('Ale');
