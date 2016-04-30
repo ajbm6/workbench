@@ -24,6 +24,7 @@ class HeaderHttpHelper
     protected  $headers__authorization__method;
     protected  $headers__authorization__username;
     protected  $headers__authorization__password;
+    protected  $headers__content_type;
     protected  $json;
     protected  $multipart;
     protected  $name;
@@ -100,9 +101,9 @@ class HeaderHttpHelper
 
         if(sizeof($subparam)==2) {
             switch($subparam[0]) {
-                //case 'authorization':
-                //    $this->options[$subparam[0]] = $this->authorization__method .' '. base64_encode($this->authorization__username.':'.$this->authorization__password);
-                //    break;
+                case 'content_type':
+                    $this->options[$subparam[0]]['content-type'] = $this->$param;
+                    break;
                 default :
                     $this->options[$subparam[0]][$subparam[1]]=$this->$param;
                     break;

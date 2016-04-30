@@ -10,6 +10,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 
 
+
 class HttpHelper
 {
 
@@ -26,7 +27,7 @@ class HttpHelper
     private function requestRaw($method ,$uri = null, HeaderHttpHelper $objheader = null )
     {
 
-
+        //new Psr7\Request($method, $uri, $headers, $body, $version); 
         /*$headers = [
             'headers' => [
                 'Authorization' => 'Basic YWxldmVudG86MTI5ODk1YWxl',

@@ -68,12 +68,14 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $head->headers__authorization__username='alevento';
         $head->headers__authorization__password='129895ale';
         $head->json=['name'=>'cicciu'];
+        $head->headers__content_type = 'application/json';
         //$head->authorization=['alevento','129895ale'];
         //$head->name="ciccio";
         $client = new client;
         $req = new HttpHelper($client);
         $req->request(MethodHttpHelper::POST,'https://api.github.com/orgs/b2msrl/repos',$head);
 
+        https://api.bitbucket.org/2.0/repositories/${team}/${repo}
         //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
         //$cmd->shouldReceive('ask')->with('Ale');
         Artisan::call('workbench:new',[
