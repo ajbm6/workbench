@@ -9,7 +9,10 @@ use GrahamCampbell\GitHub\Facades\GitHub;
 use Padosoft\Workbench\Parameters;
 use File;
 use GuzzleHttp\Client;
-
+use Padosoft\HTTPClient\HTTPClient;
+use Padosoft\HTTPClient\RequestHelper;
+use Padosoft\HTTPClient\Response;
+use Padosoft\HTTPClient\HttpHelper;
 
 class Workbench extends Command
 {
@@ -101,8 +104,9 @@ EOF;
             $sshpassword->read($silent);
         }
 
-        $this->createDomainFolder();
-
+        //$this->createDomainFolder();
+        //$this->createRepoGithub();
+        $this->createRepoBitBucket();
         //if($this->requested["git"]["valore-valido"]
 
 
@@ -197,7 +201,8 @@ EOF;
 
     }
 
-    public function createDomainFolder() {
+    public function createDomainFolder() 
+    {
         if(File::exists($this->requested["dir"]['valore'].$this->requested["domain"]['valore'])){
             $this->command->error("Domain directory exist.");
             exit();
@@ -205,7 +210,35 @@ EOF;
         $result = File::makeDirectory($this->requested["dir"]['valore'].$this->requested["domain"]['valore']);
     }
 
+    public function createRepoGithub() 
+    {
+        $response = new \Padosoft\HTTPClient\Response();
+        try {
+            $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
+            $response = $httphelper->sendPostJsonWithAuth("https://api.github.com/orgs/".$this->requested['organization']['valore']."/repos",$this->requested["user"]["valore"],$this->requested["password"]["valore"],['name'=>$this->requested["domain"]["valore"]]);
+            if($response->getStatusCode()==422) {
+                $this->error("Repository esistente");
+            }
+        } catch (\Exception $ex) {
 
+        }
+
+    }
+
+    public function createRepoBitBucket()
+    {
+        $response = new \Padosoft\HTTPClient\Response();
+        try {
+            $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
+            $response = $httphelper->sendPostJsonWithAuth("https://api.bitbucket.org/2.0/repositories/".$this->requested['organization']['valore']."/".$this->requested['domain']['valore'],$this->requested["user"]["valore"],$this->requested["password"]["valore"],['scm'=>'git', 'is_private'=>'true', 'name'=>$this->requested["domain"]["valore"]]);
+            if($response->getStatusCode()==422) {
+                $this->error("Repository esistente");
+            }
+        } catch (\Exception $ex) {
+
+        }
+
+    }
 
     public function __get($property) {
         if (property_exists($this, $property)) {

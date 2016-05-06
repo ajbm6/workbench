@@ -57,14 +57,14 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $git = "github";
         $gitaction = "push";
         $user="alevento";
-        $password="asd";
+        $password="mnnlsn";
         $email="a@a.it";
-        $organization="b2m";
+        $organization="b2msrl";
         $sshhost='192.168.0.29';
         $sshuser='ale';
         $sshpassword='ale';
 
-        $head = new HeaderHttpHelper();
+        /*$head = new HeaderHttpHelper();
         $head->headers__authorization__username='alevento';
         $head->headers__authorization__password='129895ale';
         $head->json=['name'=>'cicciu'];
@@ -73,7 +73,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         //$head->name="ciccio";
         $client = new client;
         $req = new HttpHelper($client);
-        $req->request(MethodHttpHelper::POST,'https://api.github.com/orgs/b2msrl/repos',$head);
+        $req->request(MethodHttpHelper::POST,'https://api.github.com/orgs/b2msrl/repos',$head);*/
 
         https://api.bitbucket.org/2.0/repositories/${team}/${repo}
         //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
