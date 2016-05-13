@@ -36,4 +36,10 @@ return [
         'user' => env('WORKBENCH_SSH_USER', ''),
         'password' => env('WORKBENCH_SSH_SERVER', ''),
     ],
+    'type_repository' => [
+        'laravel' => env('WORKBENCH_TYPE_REPOSITORY_LARAVEL', 'laravel5.2.x-skeleton'),
+        'normal' => env('WORKBENCH_TYPE_REPOSITORY_NORMAL', ''),
+        'laravel_package' => env('WORKBENCH_TYPE_REPOSITORY_LARAVEL_PACKAGE', 'laravel5.2.x-package-skeleton'),
+        'agnostic_package' => env('WORKBENCH_TYPE_REPOSITORY_AGNOSTIC_PACKAGE', 'package-skeleton'),
+    ],
  ];

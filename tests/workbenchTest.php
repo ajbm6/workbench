@@ -51,13 +51,13 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "prova2";
+        $domain = "testgit";
         $type = "laravel";
         $dir = "y:/public/";
         $git = "github";
         $gitaction = "push";
         $user="alevento";
-        $password="mnnlsn";
+        $password="129895ale";
         $email="a@a.it";
         $organization="b2msrl";
         $sshhost='192.168.0.29';

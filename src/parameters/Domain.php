@@ -55,7 +55,7 @@ class Domain implements IEnumerable
 
     public function deleteDomain()
     {
-
+        $this->command->info('Domain deleted.');
     }
 }
 
