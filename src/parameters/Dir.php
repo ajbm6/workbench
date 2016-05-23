@@ -39,7 +39,7 @@ class Dir implements IEnumerable
         $attemp=0;
         while(!$silent && !$this->requested["dir"]["valore-valido"] && $attemp<$attemps){
             $this->command->error("This domain path '" .$this->requested["dir"]["valore"]. "' is not valid");
-            $this->requested["dir"]["valore"] = Dir::adjustPath($this->command->ask('Path for domain',
+            $this->requested["dir"]["valore"] = Dir::adjustPath($this->command->ask('Path dir for domain, without dir domain folder',
                 ($this->requested["dir"]["valore-default-valido"]?$this->requested["dir"]["valore-default"]:$this->requested["dir"]["valore"])));
             $this->requested["dir"]["valore-valido"] = Dir::isValidValue($this->requested["dir"]["valore"]);
             $attemp++;

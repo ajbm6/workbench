@@ -79,7 +79,7 @@ EOF;
 
         $this->createDomainFolder();
         $this->manageRepoGit();
-        $this->createVirtualhost($option["filehosts"]);
+        $this->createVirtualhost($option["silent"],$option["filehosts"]);
         if($this->option['filehosts']) {
             $this->addToFileHosts();
         }
@@ -354,13 +354,16 @@ EOF;
         $this->createAndDownloadFromGit();
     }
 
-    private function createVirtualhost($filehosts)
+    private function createVirtualhost(bool $silent,bool $filehosts)
     {
         $apachedir="/var/www/html/";
 
-        $ssh = new SSH2('192.168.0.29');
+        $ssh = new SSH2($this->requested['sshhost']['valore']);
         if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['sshpassword']['valore'])) {
-            exit('Login Failed');
+            if($silent) {
+                exit('SSH login Failed');
+            }
+            exit('SSH login Failed');
         }
         //$ssh->read('/presente/',SSH2::READ_REGEX);
         if($ssh->exec("if [ -e /etc/apache2/sites-available/" . $this->requested['domain']['valore'].".conf ]; then echo 'presente'; else echo 'assente'; fi;")=="presente\n") {
@@ -414,12 +417,12 @@ EOF;
 
     private function deleteVirtualHost($filehosts)
     {
-        $this->error('sadfa');
+        $this->error('Attenzione il virtual host di '.$this->requested['domain']['valore']);
         $apachedir="/var/www/html/";
 
         $ssh = new SSH2('192.168.0.29');
         if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['password']['valore'])) {
-            exit('Login Failed');
+            exit('SSH login failed');
         }
 
         $ssh->exec('a2dissite '.$this->requested['domain']['valore']);
@@ -464,8 +467,8 @@ EOF;
                 $str=str_replace("@@@date", date("d.m.y"),$str);
                 $str=str_replace("@@@year", date("y"),$str);
                 $str=str_replace("@@@namespacevendor", ucfirst($vendor),$str);
-                $str=str_replace("@@@namespacepackage_name", ucfirst(str_replace("_","", $packagename)),$str);
-                $str=str_replace("@@@providerpackage_name", ucfirst(str_replace("_","", $packagename)),$str);
+                $str=str_replace("@@@namespacepackage_name", ucfirst(str_replace("-","", $packagename)),$str);
+                $str=str_replace("@@@providerpackage_name", ucfirst(str_replace("-","", $packagename)),$str);
 
 
                 file_put_contents($fileandpath, $str);

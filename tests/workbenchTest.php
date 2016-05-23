@@ -51,21 +51,21 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "testgitall";
-        $type = "laravel";
-        $dir = "y:/public/";
+        $domain = "paccettoprova";
+        $type = "laravel_package";
+        $dir = "y:/public";
         $git = "github";
         $gitaction = "push";
         $user="alevento";
         $password="129895ale";
-        $email="a@a.it";
+        $email="alessandro.manneschi@gmail.com";
         $organization="b2msrl";
         $sshhost='192.168.0.29';
         $sshuser='root';
         $sshpassword='padosoft2015';
-        $packagename='Pacchetto mio';
+        $packagename='pacchetto Prova';
         $packagedescr='Prova';
-        $packagekeywords='prova,keyword,pacchetto';
+        $packagekeywords='prova,workbench,pacchetto';
 
 
         /*$head = new HeaderHttpHelper();
@@ -79,7 +79,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $req = new HttpHelper($client);
         $req->request(MethodHttpHelper::POST,'https://api.github.com/orgs/b2msrl/repos',$head);*/
 
-        https://api.bitbucket.org/2.0/repositories/${team}/${repo}
+        //https://api.bitbucket.org/2.0/repositories/${team}/${repo}
         //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
         //$cmd->shouldReceive('ask')->with('Ale');
         Artisan::call('workbench:new',[
