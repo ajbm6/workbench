@@ -170,6 +170,12 @@ EOF;
             exit();
         }
 
+        $domain = new Parameters\Domain($this);
+        $domain->read($silent);
+        $type = new Parameters\Type($this);
+        $type->read($silent);
+        $dir = new Parameters\Dir($this);
+        $dir->read($silent);
 
         $git = new Parameters\Git($this);
         if($git->read($silent)){
@@ -185,12 +191,7 @@ EOF;
             $organization->read($silent);
         }
 
-        $domain = new Parameters\Domain($this);
-        $domain->read($silent);
-        $type = new Parameters\Type($this);
-        $type->read($silent);
-        $dir = new Parameters\Dir($this);
-        $dir->read($silent);
+
 
         $sshhost = new Parameters\Sshhost($this);
         if($sshhost->read($silent)) {
