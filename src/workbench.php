@@ -83,7 +83,7 @@ EOF;
         if($this->option['filehosts']) {
             $this->addToFileHosts();
         }
-
+        $this->info("Creation complete");
 
     }
 
@@ -163,10 +163,10 @@ EOF;
         $action = new Parameters\Action($this);
         $action->read($silent);
         if($this->requested["action"]["valore"]=="delete") {
-            $this->error("Attention the virtual host file of ".$this->requested["domein"]["valore"]." will be deleted.");
-            $this->confirm("Delete the virtual host file of ".$this->requested["domein"]["valore"]."?");
+            $this->error("Attention the virtual host file of ".$this->requested["domain"]["valore"]." will be deleted.");
+            $this->confirm("Delete the virtual host file of ".$this->requested["domain"]["valore"]."?");
             $this->deleteVirtualHost($option["filehosts"]); //ToDo
-
+            $this->info("Deleted complete");
             exit();
         }
 
@@ -207,6 +207,7 @@ EOF;
         $packagekeywords = new Parameters\Packagekeywords($this);
         $packagekeywords->read($silent);
 
+        $this->info("Parameters read");
         return true;
     }
 
@@ -222,28 +223,36 @@ EOF;
             switch($this->requested['type']['valore']) {
                 case Parameters\Type::AGNOSTIC_PACKAGE:
                     $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.agnostic_package').".git" );
+                    $this->info("Donwloading skeleton agnostic package...");
                     break;
                 case Parameters\Type::LARAVEL_PACKAGE:
                     $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel_package').".git" );
+                    $this->info("Donwloading skeleton laravel package...");
                     break;
                 case Parameters\Type::LARAVEL:
                     $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel').".git" );
+                    $this->info("Donwloading skeleton laravel project...");
                     break;
                 case Parameters\Type::NORMAL:
                     $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.normal').".git" );
+                    $this->info("Donwloading skeleton normal project...");
                     break;
             }
             if($this->requested['gitaction']['valore']==Parameters\GitAction::PULL) {
+                $this->info("Donwloading repo...");
                 $gitWorkingCopy->removeRemote('origin');
                 $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".com/".$this->requested['organization']['valore']."/".$this->requested['domain']['valore'].".git");
             }
             $gitWorkingCopy->pull('origin','master');
+            $this->info("Donwload complete.");
             if($this->requested['gitaction']['valore']==Parameters\GitAction::PUSH) {
                 $gitWorkingCopy->removeRemote('origin');
                 $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".com/".$this->requested['organization']['valore']."/".$this->requested['domain']['valore'].".git");
                 $this->substitute();
                 $gitWorkingCopy->add('.');
+                $this->info("Uploading repo...");
                 $gitWorkingCopy->push('origin','master');
+                $this->info("Upload complete");
             }
         } catch (\Exception $ex) {
             $this->error($ex->getMessage());
@@ -258,7 +267,9 @@ EOF;
             $this->error("Domain directory exist.");
             exit();
         }
+
         $result = File::makeDirectory($this->requested["dir"]['valore'].$this->requested["domain"]['valore']);
+        $this->info("Domain dir created at ".$this->requested["dir"]['valore'].$this->requested["domain"]['valore']);
     }
 
     private function checkRepoGithubExist()
@@ -282,6 +293,7 @@ EOF;
         try {
             $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
             $response = $httphelper->sendPostJsonWithAuth("https://api.github.com/orgs/".$this->requested['organization']['valore']."/repos",['name'=>$this->requested["domain"]["valore"]],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+            $this->info("Created repo https://github.com/".$this->requested['organization']["valore"]."/".$this->requested["domain"]["valore"]);
             if($response->status_code==422) {
                 $this->error("Repository esistente");
                 exit();
@@ -303,6 +315,7 @@ EOF;
         try {
             $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
             $response = $httphelper->sendPostJsonWithAuth("https://api.bitbucket.org/2.0/repositories/".$this->requested['organization']['valore']."/".$this->requested['domain']['valore'],['scm'=>'git', 'is_private'=>'true', 'name'=>$this->requested["domain"]["valore"]],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+            $this->info("Created repo https://bitbucket.org/".$this->requested['organization']."/".$this->requested["domain"]["valore"]);
             if($response->status_code==400) {
                 $this->error($response->body);
                 exit();
@@ -356,6 +369,7 @@ EOF;
 
     private function createVirtualhost(bool $silent,bool $filehosts)
     {
+        $this->info("Creating virtualhost");
         $apachedir="/var/www/html/";
 
         $ssh = new SSH2($this->requested['sshhost']['valore']);
@@ -393,7 +407,7 @@ EOF;
         $ssh->exec('echo "'.$virtualhost.'" > /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf');
         $ssh->exec('a2ensite '.$this->requested['domain']['valore']);
         $ssh->exec('/etc/init.d/apache2 reload');
-
+        $this->info("Virtualhost created");
         if($filehosts) {
             addToFileHosts($ssh);
         }
@@ -401,22 +415,26 @@ EOF;
 
     private function addToFileHosts(SSH2 $ssh)
     {
-
+        $this->info("Adding hosts in localhost");
         $output=$ssh->exec("grep -l '127.0.0.1[[:space:]]*provaasd.net' /etc/hosts");
         if($output=="") {
             $ssh->exec('127.0.0.1	'.$this->requested['domain']['valore'].'>/etc/hosts');
         }
+        $this->info("Host added");
     }
 
     private function removeToFileHosts(SSH2 $ssh)
     {
+        $this->info("Remove from host");
         $ssh->exec('sed -i "/'.$this->requested['domain']['valore'].'/d" /etc/hosts');
+        $this->info("Host removed");
     }
 
 
 
     private function deleteVirtualHost($filehosts)
     {
+        $this->info("Deleting virtualhost");
         $this->error('Attenzione il virtual host di '.$this->requested['domain']['valore']);
         $apachedir="/var/www/html/";
 
@@ -428,14 +446,16 @@ EOF;
         $ssh->exec('a2dissite '.$this->requested['domain']['valore']);
         $ssh->exec('/etc/init.d/apache2 reload');
         $ssh->exec("rm /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf");
-
+        $this->info("Virtualhost deleted");
         if($filehosts) {
             $this->removeToFileHosts($ssh);
         }
+
     }
 
     private function substitute()
     {
+        $this->info("Changing value in files");
         $author = Config::get('workbench.substitute.author','Padosoft');
         $emailauthor = Config::get('workbench.substitute.emailauthor','helpdesk@padosoft.com');
         $siteauthor = Config::get('workbench.substitute.siteauthor','www.padosoft.com');
@@ -447,14 +467,14 @@ EOF;
         $files = explode(",",Config::get('workbench.substitute.files'));
 
 
-        foreach($files as $file){
+        foreach($files as $file) {
 
             $fileandpath=$file;
             if(substr($file,0,1)!="/") {
                 $fileandpath=$this->requested['dir']['valore'].$this->requested['domain']['valore']."/".$file;
             }
             try {
-
+                $this->info("Changing in ".$fileandpath);
 
                 $str=file_get_contents($fileandpath);
                 $str=str_replace("@@@author", $author,$str);
@@ -476,7 +496,7 @@ EOF;
 
             }
         }
-
+        $this->info("Changing complete");
     }
     public function __get($property)
     {
