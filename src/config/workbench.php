@@ -47,8 +47,6 @@ return [
         'emailauthor' =>env('WORKBENCH_SUBSTITUTION_EMAILAUTHOR', 'helpdesk@padosoft.com'),
         'siteauthor' =>env('WORKBENCH_SUBSTITUTION_SITEAUTHOR', 'www.padosoft.com'),
         'vendor' =>env('WORKBENCH_SUBSTITUTION_VENDOR', 'Padosoft'),
-        'files' =>env('WORKBENCH_SUBSTITUTION_FILES', 'readme.md,changelog.md,license.md,travis.yml,composer.json,src/config/sedCommand.sh,src/config/sedCommandProvider.sh'),
-    ]
-    
-    
- ];
+        'files' =>env('WORKBENCH_SUBSTITUTION_FILES', 'readme.md,changelog.md,license.md,travis.yml,composer.json,tests/config/sedCommand.sh,tests/config/sedCommandProvider.sh'),
+    ],
+];
