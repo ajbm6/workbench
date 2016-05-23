@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "php": ">=7.0.0",
         "graham-campbell/github": "^4.2",
         "stevenmaguire/oauth2-bitbucket": "dev-master",
         "jketelaar/bitbucket": "dev-master",

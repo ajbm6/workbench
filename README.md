@@ -51,7 +51,7 @@ You must install this service provider.
 
 You can publish the config file of this package with this command:
 ``` bash
-php artisan vendor:publish --provider="Padosoft\@@@namespace\@@@provider"
+php artisan vendor:publish --provider="Padosoft\@@@namespace\@@@providerpackage_nameServiceProvider"
 ```
 The following config file will be published in `config/@@@package_name.php`
 ``` php
