@@ -39,7 +39,7 @@ class Packagename implements IEnumerable
         }
 
         if($this->requested["packagename"]["valore-valido"]){
-            $this->requested["packagename"]["valore"] = str_replace(" ","-",strtolower($this->requested["packagename"]["valore"]));
+            $this->requested["packagename"]["valore"] = str_replace([" ","."],"-",strtolower($this->requested["packagename"]["valore"]));
         }
 
         $this->command->requested=$this->requested;

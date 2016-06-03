@@ -7,7 +7,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
-use phpseclib\Net\SSH2;
+//use phpseclib\Net\SSH2;
 use Validator;
 use Config;
 
@@ -39,7 +39,7 @@ class Sshhost
         $attemps = Config::get('workbench.attemps');
         $attemp=0;
 
-        if(!$silent && !$this->requested["sshhost"]["valore-valido"] && !$this->command->confirm('Do you want use ssh to create virtualhost?')) {
+        if(!$silent && !$this->requested["sshhost"]["valore-valido"] && !$this->command->confirm('Do you want use ssh to '.$this->requested["action"]["valore"].' virtualhost?')) {
             return false;
         }
 

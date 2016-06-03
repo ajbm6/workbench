@@ -21,6 +21,7 @@ use phpseclib\Net\SSH2;
 use Symfony\CS\Fixer\Symfony\PhpdocToCommentFixer;
 use Padosoft\Workbench\HeaderHttpHelper;
 use GuzzleHttp\Client;
+use GitWrapper\GitWrapper;
 
 class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
 {
@@ -31,7 +32,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     {
         //$this->workbench = new Workbench();
         parent::setUp();
-    } 
+    }
 
     /** @test */
     /*public function testHardWorkCreateOk()
@@ -51,9 +52,9 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "pacchettoprova2";
+        $domain = "http://asd % & df.it";
         $type = "laravel_package";
-        $dir = "y:/public";
+        $dirtype = "public";
         $git = "github";
         $gitaction = "push";
         $user="alevento";
@@ -66,7 +67,6 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $packagename='pacchetto 2 Prova';
         $packagedescr='Prova,prova,tre';
         $packagekeywords='prova,workbench,pacchetto';
-
 
         /*$head = new HeaderHttpHelper();
         $head->headers__authorization__username='alevento';
@@ -86,7 +86,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
             'action'=>$action,
             'domain'=>$domain,
             '--type'=>$type,
-            '--dir'=>$dir,
+            '--dirtype'=>$dirtype,
             '--git'=>$git,
             '--gitaction'=>$gitaction,
             '--user'=>$user,

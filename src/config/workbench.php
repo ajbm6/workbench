@@ -12,6 +12,20 @@ return [
         'WORKBENCH_DIR',
         ''
     ),
+    'dirtype' => [
+        'private' => [
+            'apache' => env('WORKBENCH_DIR_PRIVATE_APACHE','/var/www/html/private/'),
+            'local' => env('WORKBENCH_DIR_PRIVATE_LOCAL','Y:/private/'),
+            'packages' => env('WORKBENCH_DIR_PRIVATE_PACKAGES','Y:/private/laravel-packages/www/packages/'),
+            'doc' => env('WORKBENCH_DIR_PRIVATE_DOC','Y:/private/laravel-packages/www/doc/'),
+        ],
+        'public' => [
+            'apache' => env('WORKBENCH_DIR_PUBLIC_APACHE','/var/www/html/public/'),
+            'local' => env('WORKBENCH_DIR_PUBLIC_LOCAL','Y:/public/'),
+            'packages' => env('WORKBENCH_DIR_PUBLIC_PACKAGES','Y:/Public/laravel-packages/www/packages/'),
+            'doc' => env('WORKBENCH_DIR_PUBLIC_DOC','Y:/Public/laravel-packages/www/doc/'),
+        ],
+    ],
     'attemps' => env( 'WORKBENCH_ATTEMPS',
         '5'
     ),

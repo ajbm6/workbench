@@ -8,6 +8,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
+use Validator;
 
 class Domain implements IEnumerable
 {
@@ -43,7 +44,7 @@ class Domain implements IEnumerable
         exit();
     }
     
-    public static function isValidValue($valore)
+    /*public static function isValidValue($valore)
     {
 
         if(!isset($valore) || trim($valore)=="")
@@ -51,7 +52,26 @@ class Domain implements IEnumerable
             return false;
         }
         return true;
+    }*/
+
+    public static function isValidValue($valore)
+    {
+        //$regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+        if(!isset($valore) || empty($valore)){
+            return false;
+        }
+
+        return Validator::make(
+            [
+                'host' => $valore,
+            ],
+            [
+                'host' => 'url',
+            ]
+        )->passes();
     }
+
+
 
     /*public function deleteDomain()
     {

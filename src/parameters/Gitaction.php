@@ -29,7 +29,7 @@ class GitAction implements IEnumerable
     public function read($silent)
     {
         if($silent && !$this->requested["gitaction"]["valore-valido"] && !$this->requested["gitaction"]["valore-valido-default"]){
-            $this->exitWork("The action for git is not correct, choice from 'push', 'pull' or 'force'");
+            $this->exitWork("The action for git is not correct, choice from 'push' or 'pull'");
         }
         if($silent && !$this->requested["gitaction"]["valore-valido"] && $this->requested["gitaction"]["valore-valido-default"]){
             $this->requested["gitaction"]["valore-valido"] = $this->requested["gitaction"]["valore-valido-default"];
