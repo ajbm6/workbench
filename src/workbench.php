@@ -139,7 +139,7 @@ EOF;
         $this->requested["dirtype"] = $this->prepare($option["dirtype"],"dirtype");
         $this->requested["dir"] = $this->prepare('',"dir");
         $this->requested["git"] = $this->prepare($option["git"],"git");
-        $this->requested["gitaction"] = $this->prepare($option["gitaction"],"gitaction");
+        $this->requested["gitaction"] = $this->prepare(Parameters\GitAction::PUSH,"gitaction");
         $this->requested["user"] = $this->prepare($option["user"],"user");
         $this->requested["password"] = $this->prepare($option["password"],"password");
         $this->requested["email"] = $this->prepare($option["email"],"email");
@@ -147,7 +147,7 @@ EOF;
         $this->requested["sshhost"] = $this->prepare($option["sshhost"],"sshhost");
         $this->requested["sshuser"] = $this->prepare($option["sshuser"],"sshuser");
         $this->requested["sshpassword"] = $this->prepare($option["sshpassword"],"sshpassword");
-        $this->requested["packagename"] = $this->prepare($option["packagename"],"packagename");
+        $this->requested["packagename"] = $this->prepare($this->requested["domain"]["valore"],"packagename");
         $this->requested["packagedescr"] = $this->prepare($option["packagedescr"],"packagedescr");
         $this->requested["packagekeywords"] = $this->prepare($option["packagekeywords"],"packagekeywords");
 
@@ -166,16 +166,29 @@ EOF;
         $filehost=$option["filehosts"];
 
         $this->validate($argument, $option);
+
+        $domain = new Parameters\Domain($this);
+        $domain->read($silent);
         $action = new Parameters\Action($this);
         $action->read($silent);
+        $type = new Parameters\Type($this);
+        $type->read($silent);
 
 
-        $sshhost = new Parameters\Sshhost($this);
-        if($sshhost->read($silent)) {
-            $sshuser = new Parameters\Sshuser($this);
-            $sshuser->read($silent);
-            $sshpassword = new Parameters\Sshpassword($this);
-            $sshpassword->read($silent);
+
+        if($this->requested["action"]["valore"]=="delete" && substr($this->requested["type"]['valore'],-7) == 'package') {
+            $this->info("No action for delete a package");
+            exit();
+        }
+
+        if(substr($this->requested["type"]['valore'],-7) != 'package') {
+            $sshhost = new Parameters\Sshhost($this);
+            if($sshhost->read($silent)) {
+                $sshuser = new Parameters\Sshuser($this);
+                $sshuser->read($silent);
+                $sshpassword = new Parameters\Sshpassword($this);
+                $sshpassword->read($silent);
+            }
         }
 
         if($this->requested["action"]["valore"]=="delete") {
@@ -191,17 +204,15 @@ EOF;
         $organization = new Parameters\Organization($this);
         $organization->read($silent);
 
-        $domain = new Parameters\Domain($this);
-        $domain->read($silent);
-        $type = new Parameters\Type($this);
-        $type->read($silent);
+
+
         $dirtype = new Parameters\Dirtype($this);
         $dirtype->read($silent);
 
         $git = new Parameters\Git($this);
         if($git->read($silent)){
-            $gitaction = new Parameters\Gitaction($this);
-            $gitaction->read($silent);
+            //$gitaction = new Parameters\Gitaction($this);
+            //$gitaction->read($silent);
             $user = new Parameters\User($this);
             $user->read($silent);
             $password = new Parameters\Password($this);
@@ -263,6 +274,7 @@ EOF;
                 $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".com/".$this->requested['organization']['valore']."/".$this->requested['domain']['valore'].".git");
                 $this->substitute();
                 $gitWorkingCopy->add('.');
+                $gitWorkingCopy->commit("Substitute");
                 $this->info("Uploading repo...");
                 $gitWorkingCopy->push('origin','master');
                 $this->info("Upload complete");
@@ -282,7 +294,7 @@ EOF;
         }
 
         $result = File::makeDirectory($this->requested["dir"]['valore'].$this->requested["domain"]['valore'],493,true);
-        if(!substr($this->requested["type"]['valore'],-7) == 'package') {
+        if(substr($this->requested["type"]['valore'],-7) != 'package') {
             File::makeDirectory(Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/',493,true);
             File::makeDirectory(Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'apache2_logs/',493,true);
         }

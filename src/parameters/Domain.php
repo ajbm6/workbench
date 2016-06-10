@@ -61,6 +61,13 @@ class Domain implements IEnumerable
             return false;
         }
 
+        if(!starts_with($valore,"http" )) {
+            $valore = "http://".$valore;
+        }
+        if(!str_contains($valore,".")) {
+            $valore = $valore.".com";
+        }
+
         return Validator::make(
             [
                 'host' => $valore,

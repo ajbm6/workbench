@@ -52,8 +52,8 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "http://asd % & df.it";
-        $type = "laravel_package";
+        $domain = "package090620164";
+        $type = "laravel";
         $dirtype = "public";
         $git = "github";
         $gitaction = "push";
@@ -64,7 +64,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $sshhost='192.168.0.29';
         $sshuser='root';
         $sshpassword='padosoft2015';
-        $packagename='pacchetto 2 Prova';
+        //$packagename='pacchetto 2 Prova';
         $packagedescr='Prova,prova,tre';
         $packagekeywords='prova,workbench,pacchetto';
 
@@ -97,7 +97,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
             '--sshhost'=>$sshhost,
             '--sshuser'=>$sshuser,
             '--sshpassword'=>$sshpassword,
-            '--packagename'=>$packagename,
+            //'--packagename'=>$packagename,
             '--packagedescr'=>$packagedescr,
             '--packagekeywords'=>$packagekeywords,
             '--filehosts'
