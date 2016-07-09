@@ -476,7 +476,7 @@ EOF;
         $this->error('Attenzione il virtual host di '.$this->requested['domain']['valore']);
         $apachedir="/var/www/html/";
 
-        $ssh = new SSH2('192.168.0.29');
+        $ssh = new SSH2($this->requested['sshhost']['valore']); //ToDo
         if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['sshpassword']['valore'])) {
             exit('SSH login failed at '.$this->requested['sshuser']['valore'].'@'.$this->requested['sshuser']['valore']);
         }
