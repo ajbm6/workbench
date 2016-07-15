@@ -17,6 +17,8 @@ class Email implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "git.email";
+
     private $command;
     private $requested;
 
@@ -30,12 +32,13 @@ class Email implements IEnumerable
     public function read($silent)
     {
 
-        if($silent && !$this->requested["email"]["valore-valido"] && !$this->requested["email"]["valore-default-valido"]){
+        if($silent && !$this->requested["email"]["valore-valido"] && !$this->requested["email"]["valore-valido-default"]){
             $this->exitWork("Email is not correct.");
         }
 
-        if($silent && !$this->requested["email"]["valore-valido"] && $this->requested["email"]["valore-default-valido"]){
-            $this->requested["email"]["valore-valido"] = $this->requested["email"]["valore-default-valido"];
+        if($silent && !$this->requested["email"]["valore-valido"] && $this->requested["email"]["valore-valido-default"]){
+            $this->requested["email"]["valore"]=$this->requested["email"]["valore-default"];
+            $this->requested["email"]["valore-valido"]= true;
         }
 
         $attemps = Config::get('workbench.attemps');
@@ -44,7 +47,7 @@ class Email implements IEnumerable
         while(!$silent && (!$this->requested["email"]["valore-valido"] || empty($this->requested["email"]["valore"])) && $attemp<$attemps){
             $this->command->error("This email '" .$this->requested["email"]["valore"]. "' is not valid");
             $this->requested["email"]["valore"] = $this->command->ask('The email associated to git repository',
-                ($this->requested["email"]["valore-default-valido"]?$this->requested["email"]["valore-default"]:$this->requested["email"]["valore"]));
+                ($this->requested["email"]["valore-valido-default"]?$this->requested["email"]["valore-default"]:$this->requested["email"]["valore"]));
             $this->requested["email"]["valore-valido"] = Email::isValidValue($this->requested["email"]["valore"]);
             $attemp++;
             if ($attemp== $attemps) return $this->command->error("Exit for invalid email");

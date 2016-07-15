@@ -16,6 +16,7 @@ class Type implements IEnumerable
     const NORMAL = "normal";
     const LARAVEL_PACKAGE = "laravel_package";
     const AGNOSTIC_PACKAGE = "agnostic_package";
+    const CONFIG = "type";
 
     private $command;
     private $requested;
@@ -28,14 +29,19 @@ class Type implements IEnumerable
 
     public function read($silent)
     {
+
         if($silent && !$this->requested["type"]["valore-valido"] && !$this->requested["type"]["valore-valido-default"]){
             $this->exitWork("Type is not correct, choice from 'laravel', 'normal', 'laravel_package' or 'agnostic_package'");
         }
+
         if($silent && !$this->requested["type"]["valore-valido"] && $this->requested["type"]["valore-valido-default"]){
-            $this->requested["type"]["valore-valido"] = $this->requested["type"]["valore-valido-default"];
+            $this->requested["type"]["valore"]=$this->requested["type"]["valore-default"];
+            $this->requested["type"]["valore-valido"] = true;
+
         }
         if(!$silent && !$this->requested["type"]["valore-valido"]){
             $this->requested["type"]["valore"] = $this->command->choice('Project type?', ['laravel', 'normal','laravel_package','agnostic_package']);
+            $this->requested["type"]["valore-valido"] = true;
         }
         $this->command->requested=$this->requested;
     }

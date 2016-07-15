@@ -15,6 +15,8 @@ class Packagekeywords implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "packagekeywords";
+
     private $command;
     private $requested;
 
@@ -31,11 +33,18 @@ class Packagekeywords implements IEnumerable
             $this->exitWork("The name of package can't be void");
         }*/
 
+        if($silent && !$this->requested["packagekeywords"]["valore-valido"]){
+            $this->requested["packagekeywords"]["valore"] = "";
+            $this->requested["packagekeywords"]["valore-valido"]=true;
+        }
+
         if($silent && !$this->requested["packagekeywords"]["valore-valido"] && $this->requested["packagekeywords"]["valore-valido-default"]){
-            $this->requested["packagekeywords"]["valore-valido"] = $this->requested["packagekeywords"]["valore-valido-default"];
+            $this->requested["packagekeywords"]["valore"]=$this->requested["packagekeywords"]["valore-default"];
+            $this->requested["packagekeywords"]["valore-valido"]= true;
         }
         if(!$this->requested["packagekeywords"]["valore-valido"]){
             $this->requested["packagekeywords"]["valore"] = $this->command->ask('Keywords of package, split by comma.');
+            $this->requested["packagekeywords"]["valore-valido"]= true;
         }
 
         if($this->requested["packagekeywords"]["valore-valido"]){

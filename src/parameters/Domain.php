@@ -16,6 +16,8 @@ class Domain implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "domain";
+
     private $command;
     private $requested;
 
@@ -33,6 +35,7 @@ class Domain implements IEnumerable
         }
         if(!$silent && !$this->requested["domain"]["valore-valido"]){
             $this->requested["domain"]["valore"] = $this->command->ask("What's the domain name?",$this->requested["domain"]["valore"]);
+            $this->requested["domain"]["valore-valido"]= true;
         }
 
         $this->command->requested=$this->requested;

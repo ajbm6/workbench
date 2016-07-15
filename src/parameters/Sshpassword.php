@@ -18,6 +18,8 @@ class Sshpassword implements IEnumerable
     private $command;
     private $requested;
 
+    const CONFIG = "ssh.password";
+
     public function __construct(Workbench $command)
     {
         $this->command=$command;
@@ -32,11 +34,13 @@ class Sshpassword implements IEnumerable
         }
 
         if($silent && !$this->requested["sshpassword"]["valore-valido"] && $this->requested["sshpassword"]["valore-valido-default"]){
-            $this->requested["sshpassword"]["valore-valido"] = $this->requested["sshpassword"]["valore-valido-default"];
+            $this->requested["sshpassword"]["valore"]=$this->requested["sshpassword"]["valore-default"];
+            $this->requested["sshpassword"]["valore-valido"]= true;
         }
 
         if(!$silent && !$this->requested["sshpassword"]["valore-valido"]){
             $this->requested["sshpassword"]["valore"] = $this->command->secret('SSH password');
+            $this->requested["sshpassword"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

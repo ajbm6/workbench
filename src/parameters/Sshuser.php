@@ -18,6 +18,8 @@ class Sshuser implements IEnumerable
     private $command;
     private $requested;
 
+    const CONFIG = "ssh.user";
+
     public function __construct(Workbench $command)
     {
         $this->command=$command;
@@ -32,10 +34,12 @@ class Sshuser implements IEnumerable
         }
 
         if($silent && !$this->requested["sshuser"]["valore-valido"] && $this->requested["sshuser"]["valore-valido-default"]){
-            $this->requested["sshuser"]["valore-valido"] = $this->requested["sshuser"]["valore-valido-default"];
+            $this->requested["sshuser"]["valore"]=$this->requested["sshuser"]["valore-default"];
+            $this->requested["sshuser"]["valore-valido"]= true;
         }
         if(!$this->requested["sshuser"]["valore-valido"]){
             $this->requested["sshuser"]["valore"] = $this->command->ask('SSH username');
+            $this->requested["sshuser"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

@@ -14,6 +14,7 @@ class Action implements IEnumerable
 
     const CREATE = "create";
     const DELETE = "delete";
+    const CONFIG = "action";
 
     private $command;
     private $requested;
@@ -26,17 +27,20 @@ class Action implements IEnumerable
 
     public function read($silent)
     {
-        if($silent && !$this->requested["action"]["valore-valido"] && !$this->requested["action"]["valore-default-valido"]){
+        if($silent && !$this->requested["action"]["valore-valido"] && !$this->requested["action"]["valore-valido-default"]){
             $this->exitWork("Action is not correct, choice from 'create' or 'delete'");
         }
 
-        if($silent && !$this->requested["action"]["valore-valido"] && $this->requested["action"]["valore-default-valido"]){
-            $this->requested["action"]["valore-valido"]= $this->requested["action"]["valore-default-valido"];
+        if($silent && !$this->requested["action"]["valore-valido"] && $this->requested["action"]["valore-valido-default"]){
+            $this->requested["action"]["valore"]=$this->requested["action"]["valore-default"];
+            $this->requested["action"]["valore-valido"]= true;
         }
 
 
         if(!$silent && !$this->requested["action"]["valore-valido"]){
             $this->requested["action"]["valore"] = $this->command->choice('What do you want to do?', ['create', 'delete']);
+            $this->requested["action"]["valore-valido"]= true;
+
         }
         $this->command->requested=$this->requested;
     }

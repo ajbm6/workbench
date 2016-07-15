@@ -14,6 +14,7 @@ class Git implements IEnumerable
 
     const GITHUB = "github";
     const BITBUCKET = "bitbucket";
+    const CONFIG = "git.hosting";
 
     private $command;
     private $requested;
@@ -26,16 +27,15 @@ class Git implements IEnumerable
 
     public function read($silent)
     {
-        if($silent && empty($this->requested["git"]["valore-valido"])) {
-            $this->requested["git"]["valore-valido"]= $this->requested["git"]["valore-valido-default"];
-        }
 
-        if($silent && !$this->requested["git"]["valore-valido"] && !$this->requested["git"]["valore-valido-default"] && !empty($this->requested["git"]["valore-valido"])){
+        if($silent && !$this->requested["git"]["valore-valido"] && !$this->requested["git"]["valore-valido-default"]){
             $this->exitWork("Choice a git type, 'github', 'bitbucket' or ''.");
         }
 
-        if($silent && !$this->requested["git"]["valore-valido"] && $this->requested["git"]["valore-valido-default"] && !empty($this->requested["git"]["valore-valido"])){
-            $this->requested["git"]["valore-valido"] = $this->requested["git"]["valore-valido-default"];
+        if($silent && !$this->requested["git"]["valore-valido"] && $this->requested["git"]["valore-valido-default"]){
+
+            $this->requested["git"]["valore"]=$this->requested["git"]["valore-default"];
+            $this->requested["git"]["valore-valido"]= true;
         }
 
         if(!$silent && !$this->requested["git"]["valore-valido"] && $this->command->confirm('Do you want add to git repository?')){

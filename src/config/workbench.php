@@ -8,11 +8,11 @@ return [
         'WORKBENCH_TYPE',
         'laravel'
     ),
-    'dir' => env(
+    'dir'  => env(
         'WORKBENCH_DIR',
-        ''
+        'public'
     ),
-    'dirtype' => [
+    'diraccess' => [
         'private' => [
             'apache' => env('WORKBENCH_DIR_PRIVATE_APACHE','/var/www/html/private/'),
             'local' => env('WORKBENCH_DIR_PRIVATE_LOCAL','Y:/private/'),
@@ -22,31 +22,28 @@ return [
         'public' => [
             'apache' => env('WORKBENCH_DIR_PUBLIC_APACHE','/var/www/html/public/'),
             'local' => env('WORKBENCH_DIR_PUBLIC_LOCAL','Y:/public/'),
-            'packages' => env('WORKBENCH_DIR_PUBLIC_PACKAGES','Y:/Public/laravel-packages/www/packages/'),
+            'packages' => env('WORKBENCH_DIR_PUBLIC_PACKAGES','Y:/public/laravel-packages/www/packages/'),
             'doc' => env('WORKBENCH_DIR_PUBLIC_DOC','Y:/Public/laravel-packages/www/doc/'),
         ],
     ],
+    'dirtype' => env(
+        'WORKBENCH_DIRTYPE',
+        'public'
+    ),
     'attemps' => env( 'WORKBENCH_ATTEMPS',
         '5'
     ),
     'git' => [
         'hosting' => env('WORKBENCH_GIT_HOSTING', 'github'),
-        'action' => env('WORKBENCH_GIT_ACTION', 'pull'),
-        'github' => [
-            'user' => env('WORKBENCH_GIT_GITHUB_USER', ''),
-            'password' => env('WORKBENCH_GIT_GITHUB_PASSWORD', ''),
-            'email' => env('WORKBENCH_GIT_GITHUB_EMAIL', ''),
-            'organization' => env('WORKBENCH_GIT_GITHUB_ORGANIZATION', 'padosoft'),
-        ],
-        'bitbucket' => [
-            'user' => env('WORKBENCH_GIT_BITBUCKET_USER', ''),
-            'password' => env('WORKBENCH_GIT_BITBUCKET_PASSWORD', ''),
-            'email' => env('WORKBENCH_GIT_BITBUCKET_EMAIL', ''),
-            'organization' => env('WORKBENCH_GIT_BITBUCKET_ORGANIZATION', 'padosoft'),
-        ],
+        'action' => env('WORKBENCH_GIT_ACTION', 'push'),
+        'user' => env('WORKBENCH_GIT_USER', ''),
+        'password' => env('WORKBENCH_GIT_PASSWORD', ''),
+        'email' => env('WORKBENCH_GIT_EMAIL', ''),
+
     ],
+    'organization' => env('WORKBENCH_GIT_GITHUB_ORGANIZATION', 'padosoft'),
     'ssh' => [
-        'server' => env('WORKBENCH_SSH_SERVER', ''),
+        'server' => env('WORKBENCH_SSH_SERVER', '192.168.0.29'),
         'user' => env('WORKBENCH_SSH_USER', ''),
         'password' => env('WORKBENCH_SSH_SERVER', ''),
     ],

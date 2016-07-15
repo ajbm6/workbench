@@ -20,7 +20,8 @@ class Dirtype implements IEnumerable
 
     const PUB = "public";
     const PRIV = "private";
-    
+    const CONFIG = "dirtype";
+
     private $command;
     private $requested;
 
@@ -38,17 +39,20 @@ class Dirtype implements IEnumerable
             $this->exitWork("The type of dir is not correct, choice from 'public' or 'private' ");
         }
         if($silent && !$this->requested["dirtype"]["valore-valido"] && $this->requested["dirtype"]["valore-valido-default"]){
-            $this->requested["dirtype"]["valore-valido"] = $this->requested["dirtype"]["valore-valido-default"];
+
+            $this->requested["dirtype"]["valore"]=$this->requested["dirtype"]["valore-default"];
+            $this->requested["dirtype"]["valore-valido"]= true;
         }
         if(!$silent && !$this->requested["dirtype"]["valore-valido"]){
             $this->requested["dirtype"]["valore"] = $this->command->choice('What type of dir?', ['public', 'private']);
+            $this->requested["dirtype"]["valore-valido"]= true;
         }
         $dirtype= $this->requested["dirtype"]["valore"];
         if(substr($this->requested["type"]['valore'],-7) == 'package') {
-            $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.dirtype.'.$dirtype.'.packages')).$this->requested["organization"]["valore"].'/';
+            $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.diraccess.'.$dirtype.'.packages')).$this->requested["organization"]["valore"].'/';
         }        
-        if(!substr($this->requested["type"]['valore'],-7) == 'package') {
-            $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.dirtype.'.$dirtype.'.local'));
+        if(substr($this->requested["type"]['valore'],-7) != 'package') {
+            $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.diraccess.'.$dirtype.'.local'));
         }
         
         $this->command->requested=$this->requested;

@@ -16,6 +16,8 @@ class Dir implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "dir";
+
     private $command;
     private $requested;
 
@@ -27,12 +29,15 @@ class Dir implements IEnumerable
 
     public function read($silent)
     {
-        if($silent && !$this->requested["dir"]["valore-valido"] && !$this->requested["dir"]["valore-default-valido"]){
+        if($silent && !$this->requested["dir"]["valore-valido"] && !$this->requested["dir"]["valore-valido-default"]){
             $this->exitWork("Domain's path is not correct.");
         }
 
-        if($silent && !$this->requested["dir"]["valore-valido"] && $this->requested["dir"]["valore-default-valido"]){
-            $this->requested["dir"]["valore-valido"] = $this->requested["dir"]["valore-default-valido"];
+        if($silent && !$this->requested["dir"]["valore-valido"] && $this->requested["dir"]["valore-valido-default"]){
+
+            $this->requested["dir"]["valore"]=$this->requested["dir"]["valore-default"];
+            $this->requested["dir"]["valore-valido"]= true;
+
         }
 
         $attemps = Config::get('workbench.attemps');
@@ -40,7 +45,7 @@ class Dir implements IEnumerable
         while(!$silent && !$this->requested["dir"]["valore-valido"] && $attemp<$attemps){
             $this->command->error("This domain path '" .$this->requested["dir"]["valore"]. "' is not valid");
             $this->requested["dir"]["valore"] = Dir::adjustPath($this->command->ask('Path dir for domain, without dir domain folder',
-                ($this->requested["dir"]["valore-default-valido"]?$this->requested["dir"]["valore-default"]:$this->requested["dir"]["valore"])));
+                ($this->requested["dir"]["valore-valido-default"]?$this->requested["dir"]["valore-default"]:$this->requested["dir"]["valore"])));
             $this->requested["dir"]["valore-valido"] = Dir::isValidValue($this->requested["dir"]["valore"]);
             $attemp++;
             if ($attemp== $attemps) return $this->command->error("Exit for invalid path");

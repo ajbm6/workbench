@@ -15,6 +15,8 @@ class Organization implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "organization";
+
     private $command;
     private $requested;
 
@@ -31,11 +33,13 @@ class Organization implements IEnumerable
         }
 
         if($silent && !$this->requested["organization"]["valore-valido"] && $this->requested["organization"]["valore-valido-default"]){
-            $this->requested["organization"]["valore-valido"] = $this->requested["organization"]["valore-valido-default"];
+            $this->requested["organization"]["valore"]=$this->requested["organization"]["valore-default"];
+            $this->requested["organization"]["valore-valido"]= true;
         }
 
         if(!$this->requested["organization"]["valore-valido"]){
             $this->requested["organization"]["valore"] = $this->command->ask('Vendor name and git repository\'s organization');
+            $this->requested["organization"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

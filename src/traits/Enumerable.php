@@ -36,4 +36,10 @@ trait Enumerable
     {
         return implode($separator, self::getCostants());
     }
+
+    public static function getCostant($costant)
+    {
+        $oClass = new \ReflectionClass(__CLASS__);
+        return $oClass->getConstant($costant);
+    }
 }

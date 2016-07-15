@@ -15,6 +15,8 @@ class User implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "git.user";
+
     private $command;
     private $requested;
 
@@ -32,10 +34,12 @@ class User implements IEnumerable
         }
 
         if($silent && !$this->requested["user"]["valore-valido"] && $this->requested["user"]["valore-valido-default"]){
-            $this->requested["user"]["valore-valido"] = $this->requested["user"]["valore-valido-default"];
+            $this->requested["user"]["valore"]=$this->requested["user"]["valore-default"];
+            $this->requested["user"]["valore-valido"]= true;
         }
         if(!$this->requested["user"]["valore-valido"]){
             $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username');
+            $this->requested["user"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

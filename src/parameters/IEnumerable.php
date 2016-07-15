@@ -13,6 +13,7 @@ interface IEnumerable
     public static function isValidValue($valore);
     public static function getCostantsValues($separator);
     public function read($silent);
+    public static function getCostant($costant);
     
 
 }

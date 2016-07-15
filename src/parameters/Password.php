@@ -15,6 +15,8 @@ class Password implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "git.password";
+
     private $command;
     private $requested;
 
@@ -32,11 +34,13 @@ class Password implements IEnumerable
         }
 
         if($silent && !$this->requested["password"]["valore-valido"] && $this->requested["password"]["valore-valido-default"]){
-            $this->requested["password"]["valore-valido"] = $this->requested["password"]["valore-valido-default"];
+            $this->requested["password"]["valore"]=$this->requested["password"]["valore-default"];
+            $this->requested["password"]["valore-valido"]= true;
         }
 
         if(!$silent && !$this->requested["password"]["valore-valido"]){
             $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
+            $this->requested["password"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

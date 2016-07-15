@@ -15,6 +15,8 @@ class Packagedescr implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+    const CONFIG = "packagedescr";
+
     private $command;
     private $requested;
 
@@ -31,11 +33,18 @@ class Packagedescr implements IEnumerable
             $this->exitWork("The description of package can't be void");
         }*/
 
+        if($silent && !$this->requested["packagedescr"]["valore-valido"]){
+            $this->requested["packagedescr"]["valore"] = "";
+            $this->requested["packagedescr"]["valore-valido"]=true;
+        }
+
         if($silent && !$this->requested["packagedescr"]["valore-valido"] && $this->requested["packagedescr"]["valore-valido-default"]){
-            $this->requested["packagedescr"]["valore-valido"] = $this->requested["packagedescr"]["valore-valido-default"];
+            $this->requested["packagedescr"]["valore"]=$this->requested["packagedescr"]["valore-default"];
+            $this->requested["packagedescr"]["valore-valido"]= true;
         }
         if(!$this->requested["packagedescr"]["valore-valido"]){
             $this->requested["packagedescr"]["valore"] = $this->command->ask('Description of package.');
+            $this->requested["packagedescr"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }

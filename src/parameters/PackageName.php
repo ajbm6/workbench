@@ -15,6 +15,8 @@ class Packagename implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
+
+
     private $command;
     private $requested;
 
@@ -26,16 +28,22 @@ class Packagename implements IEnumerable
 
     public function read($silent)
     {
+        if($silent && !$this->requested["packagename"]["valore-valido"]){
+            $this->requested["packagename"]["valore"] = $this->requested["domain"]["valore"];
+            $this->requested["packagename"]["valore-valido"]=true;
+        }
 
         if($silent && !$this->requested["packagename"]["valore-valido"] && !$this->requested["packagename"]["valore-valido-default"]){
             $this->exitWork("The name of package can't be void");
         }
 
         if($silent && !$this->requested["packagename"]["valore-valido"] && $this->requested["packagename"]["valore-valido-default"]){
-            $this->requested["packagename"]["valore-valido"] = $this->requested["packagename"]["valore-valido-default"];
+            $this->requested["packagename"]["valore"]=$this->requested["packagename"]["valore-default"];
+            $this->requested["packagename"]["valore-valido"]= true;
         }
         if(!$this->requested["packagename"]["valore-valido"]){
             $this->requested["packagename"]["valore"] = $this->command->ask('Name of package.');
+            $this->requested["packagename"]["valore-valido"]= true;
         }
 
         if($this->requested["packagename"]["valore-valido"]){

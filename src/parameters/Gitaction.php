@@ -15,7 +15,7 @@ class GitAction implements IEnumerable
 
     const PULL = "pull";
     const PUSH = "push";
- 
+    const CONFIG = "git.action";
 
     private $command;
     private $requested;
@@ -32,10 +32,12 @@ class GitAction implements IEnumerable
             $this->exitWork("The action for git is not correct, choice from 'push' or 'pull'");
         }
         if($silent && !$this->requested["gitaction"]["valore-valido"] && $this->requested["gitaction"]["valore-valido-default"]){
-            $this->requested["gitaction"]["valore-valido"] = $this->requested["gitaction"]["valore-valido-default"];
+            $this->requested["gitaction"]["valore"]=$this->requested["gitaction"]["valore-default"];
+            $this->requested["gitaction"]["valore-valido"]= true;
         }
         if(!$silent && !$this->requested["gitaction"]["valore-valido"]){
             $this->requested["gitaction"]["valore"] = $this->command->choice('What do you want do?', ['push', 'pull']);
+            $this->requested["gitaction"]["valore-valido"]= true;
         }
         $this->command->requested=$this->requested;
     }
