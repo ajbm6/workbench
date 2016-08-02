@@ -193,7 +193,7 @@ EOF;
             File::makeDirectory("y:/semver/oldversion",493,true);
         }
 
-        File::copyDirectory("../".$this->BASE_PATH,"y:/semver/original");
+        File::copyDirectory($this->BASE_PATH,"y:/semver/original");
         File::copyDirectory("y:/semver/original","y:/semver/oldversion");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
 
