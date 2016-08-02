@@ -73,8 +73,8 @@ EOF;
         {
             return;
         }*/
-        $this->line("Last tag version is " + $this->getLastTagVersion($gitWrapper));
-        
+        $this->line("Last tag version is ". $this->getLastTagVersion($gitWrapper));
+
         $tagVersion = array("0","0","0");
 
         $tagVersion = $this->getLastTagVersionArray($gitWrapper);
