@@ -65,8 +65,7 @@ EOF;
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
         $gitWrapper->git("config --global user.password ********");*/
 
-        //$messagepull =
-            $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
+        //$messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
         //$this->line($this->formatColorRedText($messagepull));
         /*if(!$this->ask("Do you want continue pushing and tagging project?","y"))
         {
