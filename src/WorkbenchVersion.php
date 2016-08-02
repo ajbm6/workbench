@@ -53,19 +53,19 @@ EOF;
         $branches = $this->getListBranches($gitWorkingCopy);
         $activebranch = $this->getActiveBranch($gitWrapper);
 
-        $message="";
-        do {
+        $message="Test package";
+        /*do {
             $message = $this->ask("Commit message");
-        } while ($message == "");
+        } while ($message == "");*/
 
         $this->info("Active branch is ".$activebranch);
         $this->addAndCommit($gitWorkingCopy,$message);
         $messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
         $this->line($this->formatColorRedText($messagepull));
-        if(!$this->ask("Do you want continue pushing and tagging project?","y"))
+        /*if(!$this->ask("Do you want continue pushing and tagging project?","y"))
         {
             return;
-        }
+        }*/
         $this->line("Last tag version is " + $this->getLastTagVersion($gitWrapper));
         $tagVersion = array();
         $tagVersion = $this->getLastTagVersionArray($gitWrapper);
@@ -183,6 +183,7 @@ EOF;
         {
             File::makeDirectory("y:/semver/oldversion",493,true);
         }
+
         File::copyDirectory("../".$this->BASE_PATH,"y:/semver/original");
         File::copyDirectory("y:/semver/original","y:/semver/oldversion");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
