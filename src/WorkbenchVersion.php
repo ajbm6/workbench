@@ -166,7 +166,7 @@ EOF;
         if(starts_with($lastlocaltag,"v")) {
             $lastlocaltag = str_replace("\n","",substr($lastlocaltag,1));
         }
-        $version = explode(".", rtrim($lastlocaltag));
+        $version[] = explode(".", rtrim($lastlocaltag));
         return $version;
     }
 
