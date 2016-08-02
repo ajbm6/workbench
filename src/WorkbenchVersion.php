@@ -28,7 +28,7 @@ class WorkbenchVersion extends Command
 The <info>workbench:version</info> ....
 EOF;
 
-    private  $BASE_PATH = "Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench";
+    private  $BASE_PATH = "Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
 
     private $parameters = array();
 
