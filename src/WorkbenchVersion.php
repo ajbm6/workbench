@@ -50,6 +50,7 @@ EOF;
     {
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
+
         $branches = $this->getListBranches($gitWorkingCopy);
         $activebranch = $this->getActiveBranch($gitWrapper);
 
@@ -59,6 +60,7 @@ EOF;
         } while ($message == "");*/
 
         $this->info("Active branch is ".$activebranch);
+        $gitWrapper->git("add .");
         $this->addAndCommit($gitWorkingCopy,$message);
 
         /*$gitWrapper->git("config --global user.name alevento");
@@ -206,7 +208,12 @@ EOF;
 
     public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
     {
-        $gitWorkingCopy->add(".");
+        $output = $gitWorkingCopy->status(array("porcelain"=>true));
+        if($output=="")
+        {
+            return;
+        }
+        //$gitWorkingCopy->add("/.");
         return $gitWorkingCopy->commit($message);
     }
 
