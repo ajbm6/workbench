@@ -175,6 +175,14 @@ EOF;
 
     public function createSemverCopyFolder(GitWrapper $gitWrapper)
     {
+        if(!File::exists("y:/semver/original"))
+        {
+            File::makeDirectory("y:/semver/original",493,true);
+        }
+        if(!File::exists("y:/semver/oldversion"))
+        {
+            File::makeDirectory("y:/semver/oldversion",493,true);
+        }
         File::copyDirectory("../".$this->BASE_PATH,"y:/semver/original");
         File::copyDirectory("y:/semver/original","y:/semver/oldversion");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
