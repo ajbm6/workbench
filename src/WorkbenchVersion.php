@@ -60,6 +60,11 @@ EOF;
 
         $this->info("Active branch is ".$activebranch);
         $this->addAndCommit($gitWorkingCopy,$message);
+
+        $gitWrapper->git("config --global user.name alevento");
+        $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
+        $gitWrapper->git("config --global user.password 129895ale");
+
         $messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
         $this->line($this->formatColorRedText($messagepull));
         /*if(!$this->ask("Do you want continue pushing and tagging project?","y"))
