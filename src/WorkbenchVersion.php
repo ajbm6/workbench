@@ -74,10 +74,8 @@ EOF;
             return;
         }*/
         $this->line("Last tag version is " + $this->getLastTagVersion($gitWrapper));
-        $tagVersion = array();
-        $tagVersion[0]="0";
-        $tagVersion[1]="0";
-        $tagVersion[2]="0";
+        $tagVersion = array("0","0","0");
+
         $tagVersion = $this->getLastTagVersionArray($gitWrapper);
         $this->createSemverCopyFolder($gitWrapper);
         $output = array();
