@@ -31,6 +31,7 @@ class Workbench extends Command
                             {--d|dirtype= : project dir type, public or private}
                             {--g|git= : github or bitbucket}
                             {--a|gitaction= : push or pull}
+                            {--githookenable : enable pre commit hook}
                             {--u|user= : git user}
                             {--p|password= : git password}
                             {--e|email= : git email}
@@ -79,11 +80,13 @@ EOF;
 
         $this->createDomainFolder();
         $this->manageRepoGit();
-        if(substr($this->requested["type"]['valore'],-7) != 'package') {
+        if($option["githookenable"]) $this->addHooks();
+        if(substr($this->requested["type"]['valore'],-7) != 'package' && $this->requested["sshhost"]["valore-valido"]) {
             $this->createVirtualhost($option["silent"],$option["filehosts"]);
             if($this->option['filehosts']) {
                 $this->addToFileHosts();
             }
+
             $this->info("Creation complete");
         }
         //$this->apigeneration();
@@ -114,7 +117,7 @@ EOF;
 
         $valDefault=Config::get('workbench.'.$myclass->getCostant("CONFIG"));
 
-        if(!isset($valDefault) || $valDefault=="") {
+        if(!isset($valDefault) || $valDefault==="" ) {
             $emptyDefault=true;
         }
 
@@ -141,6 +144,7 @@ EOF;
         $this->requested["dir"] = $this->prepare('',"dir");
         $this->requested["git"] = $this->prepare($option["git"],"git");
         $this->requested["gitaction"] = $this->prepare(Parameters\GitAction::PUSH,"gitaction");
+        $this->requested["githookenable"] = $this->prepare($option["githookenable"],"githookenable");
         $this->requested["user"] = $this->prepare($option["user"],"user");
         $this->requested["password"] = $this->prepare($option["password"],"password");
         $this->requested["email"] = $this->prepare($option["email"],"email");
@@ -167,6 +171,9 @@ EOF;
         $filehost=$option["filehosts"];
 
         $this->validate($argument, $option);
+
+
+
 
         $domain = new Parameters\Domain($this);
         $domain->read($silent);
@@ -214,12 +221,16 @@ EOF;
         if($git->read($silent)){
             //$gitaction = new Parameters\Gitaction($this);
             //$gitaction->read($silent);
+
             $user = new Parameters\User($this);
             $user->read($silent);
             $password = new Parameters\Password($this);
             $password->read($silent);
             $email = new Parameters\Email($this);
             $email->read($silent);
+            $githookenable = new Parameters\Githookenable($this);
+            $githookenable->read($silent);
+
             //$organization = new Parameters\Organization($this);
             //$organization->read($silent);
         }
@@ -240,7 +251,13 @@ EOF;
     {
         try {
             $gitWrapper = new GitWrapper();
-            $gitWorkingCopy=$gitWrapper->init($this->requested['dir']['valore'].$this->requested['domain']['valore'],[]);
+            if(substr($this->requested["type"]['valore'],-7) != 'package') {
+                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested['dir']['valore'].$this->requested['domain']['valore']."/www",[]));
+            }
+            if(substr($this->requested["type"]['valore'],-7) == 'package') {
+                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested['dir']['valore'].$this->requested['domain']['valore'],[]));
+            }
+            //$gitWorkingCopy=$gitWrapper->init($this->requested['dir']['valore'].$this->requested['domain']['valore'],[]);
             $gitWrapper->git("config --global user.name ".$this->requested['user']['valore']);
             $gitWrapper->git("config --global user.email ".$this->requested['email']['valore']);
             $gitWrapper->git("config --global user.password ".$this->requested['password']['valore']);
@@ -285,6 +302,23 @@ EOF;
                 $gitWorkingCopy->push('origin','master');
                 $this->info("Upload complete");
             }
+
+
+            $dir = \Padosoft\Workbench\Parameters\Dir::adjustPath(__DIR__).'config/pre-commit';
+            if(!File::exists($dir)) {
+                $this->error('File '.$dir.' not exist');
+                exit();
+            }
+
+            if(substr($this->requested["type"]['valore'],-7) != 'package') {
+                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
+            }
+            if(substr($this->requested["type"]['valore'],-7) == 'package') {
+                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'.git/hooks/pre-commit');
+            }
+
+
+
         } catch (\Exception $ex) {
             $this->error($ex->getMessage());
             exit();
@@ -292,7 +326,21 @@ EOF;
         return true;
     }
 
+    private function addHooks() {
 
+        $dir = \Padosoft\Workbench\Parameters\Dir::adjustPath(__DIR__).'config/pre-commit';
+        if(!File::exists($dir)) {
+            $this->error('File '.$dir.' not exist');
+            exit();
+        }
+
+        if(substr($this->requested["type"]['valore'],-7) != 'package') {
+            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
+        }
+        if(substr($this->requested["type"]['valore'],-7) == 'package') {
+            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'.git/hooks/pre-commit');
+        }
+    }
 
     private function createDomainFolder()
     {
@@ -420,9 +468,11 @@ EOF;
         $apachedir=Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested['dirtype']['valore'].'.apache2'));
         $rootdir=Parameters\Dir::adjustPath($apachedir.$this->requested['domain']['valore']);
         $webdir=$rootdir.'www/';
+
         if($this->requested['type']['valore']=='laravel') {
             $webdir=$webdir.'public/';
         }
+
         $ssh = new SSH2($this->requested['sshhost']['valore']);
         if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['sshpassword']['valore'])) {
             if($silent) {
@@ -459,6 +509,7 @@ EOF;
         if($filehosts) {
             addToFileHosts($ssh);
         }
+
     }
 
     private function addToFileHosts(SSH2 $ssh)
@@ -519,7 +570,11 @@ EOF;
 
             $fileandpath=$file;
             if(substr($file,0,1)!="/") {
+
                 $fileandpath=$this->requested['dir']['valore'].$this->requested['domain']['valore']."/".$file;
+                if(substr($this->requested["type"]['valore'],-7) != 'package') {
+                    $fileandpath=$this->requested['dir']['valore'].$this->requested['domain']['valore']."/www/".$file;
+                }
             }
             try {
                 $this->info("Changing in ".$fileandpath);

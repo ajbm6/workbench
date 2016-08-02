@@ -52,21 +52,21 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "laravelsilent3";
-        /*$type = "laravel_package";
+        $domain = "28072016lara1";
+        $type = "laravel";
         $dirtype = "public";
-        $git = "bitbucket";
+        $git = "github";
         $gitaction = "push";
-        $user="aleb2m";
-        $password="neicapelli";
+        $user="alevento";
+        $password="129895ale";
         $email="alessandro.manneschi@gmail.com";
         $organization="b2msrl";
         $sshhost='192.168.0.29';
         $sshuser='root';
         $sshpassword='padosoft2015';
-        $packagename='pacchetto_2_Prova';
+        $packagename='28072016lara1';
         $packagedescr='Prova,prova,tre';
-        $packagekeywords='prova,workbench,pacchetto';*/
+        $packagekeywords='prova,workbench,pacchetto';
 
         /*$head = new HeaderHttpHelper();
         $head->headers__authorization__username='alevento';
@@ -85,8 +85,8 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         Artisan::call('workbench:new',[
             'action'=>$action,
             'domain'=>$domain,
-            '--silent'
-            /*'--type'=>$type,
+            //'--silent'
+            '--type'=>$type,
             '--dirtype'=>$dirtype,
             '--git'=>$git,
             '--gitaction'=>$gitaction,
@@ -101,7 +101,8 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
             '--packagename'=>$packagename,
             '--packagedescr'=>$packagedescr,
             '--packagekeywords'=>$packagekeywords,
-            '--filehosts'*/
+            '--filehosts',
+            '--githookenable'
 
         ]);
 

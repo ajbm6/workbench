@@ -15,7 +15,7 @@ class Packagename implements IEnumerable
         Enumerable::isValidValue as isValidValueTrait;
     }
 
-
+    const CONFIG = "packagekename";
 
     private $command;
     private $requested;
@@ -42,7 +42,7 @@ class Packagename implements IEnumerable
             $this->requested["packagename"]["valore-valido"]= true;
         }
         if(!$this->requested["packagename"]["valore-valido"]){
-            $this->requested["packagename"]["valore"] = $this->command->ask('Name of package.');
+            $this->requested["packagename"]["valore"] = $this->command->ask('Name of package.',$this->requested["domain"]["valore"]);
             $this->requested["packagename"]["valore-valido"]= true;
         }
 
