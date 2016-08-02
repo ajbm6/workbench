@@ -192,6 +192,7 @@ EOF;
         {
             File::deleteDirectory("y:/semver/oldversion/");
         }
+
         if(!File::exists("y:/semver/original/"))
         {
             File::makeDirectory("y:/semver/original/",493,true);
