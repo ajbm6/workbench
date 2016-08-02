@@ -184,6 +184,14 @@ EOF;
 
     public function createSemverCopyFolder(GitWrapper $gitWrapper)
     {
+        if(File::exists("y:/semver/original"))
+        {
+            File::deleteDirectory("y:/semver/original");
+        }
+        if(File::exists("y:/semver/oldversion"))
+        {
+            File::deleteDirectory("y:/semver/oldversion");
+        }
         if(!File::exists("y:/semver/original"))
         {
             File::makeDirectory("y:/semver/original",493,true);
