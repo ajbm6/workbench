@@ -77,7 +77,7 @@ EOF;
 
         $tagVersion = array("0","0","0");
 
-        $tagVersion = $this->getLastTagVersionArray($gitWrapper);
+        $tagVersion[] = $this->getLastTagVersionArray($gitWrapper);
         $this->createSemverCopyFolder($gitWrapper);
         $output = array();
         $output = $this->runSemVer();
