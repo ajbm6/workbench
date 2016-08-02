@@ -6,7 +6,7 @@
  * Time: 12:18
  */
 
-namespace Padosoft\WorkbenchVersion\Test;
+namespace Padosoft\Workbench\Test;
 
 
 use Illuminate\Support\Facades\Artisan;

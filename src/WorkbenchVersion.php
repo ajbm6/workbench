@@ -1,6 +1,6 @@
 <?php
 
-namespace Padosoft\WorkbenchVersion;
+namespace Padosoft\Workbench;
 
 
 use Illuminate\Console\Command;

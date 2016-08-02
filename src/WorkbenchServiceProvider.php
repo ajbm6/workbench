@@ -37,6 +37,12 @@ class WorkbenchServiceProvider extends ServiceProvider
         );
         $this->commands('command.workbench:new');
 
+        $this->app['command.workbench:version'] = $this->app->share(
+            function ($app) {
+                return new WorkbenchVersion();
+            }
+        );
+        $this->commands('command.workbench:version');
     }
 
     /**
@@ -46,6 +52,6 @@ class WorkbenchServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['command.workbench:new'];
+        return ['command.workbench:version','command.workbench:version'];
     }
 }
