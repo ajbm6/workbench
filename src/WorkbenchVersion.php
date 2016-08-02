@@ -75,9 +75,9 @@ EOF;
         }*/
         $this->line("Last tag version is ". $this->getLastTagVersion($gitWrapper));
 
-        $tagVersion = array("0","0","0");
+        //$tagVersion = array("0","0","0");
 
-        $tagVersion[] = $this->getLastTagVersionArray($gitWrapper);
+        $tagVersion = $this->getLastTagVersionArray($gitWrapper);
         $this->createSemverCopyFolder($gitWrapper);
         $output = array();
         $output = $this->runSemVer();
@@ -166,8 +166,8 @@ EOF;
         if(starts_with($lastlocaltag,"v")) {
             $lastlocaltag = str_replace("\n","",substr($lastlocaltag,1));
         }
-        $version[] = explode(".", rtrim($lastlocaltag));
-        return $version;
+        return explode(".", rtrim($lastlocaltag));
+
     }
 
     public function getLastTagVersion(GitWrapper $gitWrapper)
