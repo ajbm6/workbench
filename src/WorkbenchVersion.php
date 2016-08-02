@@ -28,7 +28,7 @@ class WorkbenchVersion extends Command
 The <info>workbench:version</info> ....
 EOF;
 
-
+    private  $BASE_PATH = "Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench";
 
     private $parameters = array();
 
@@ -48,20 +48,63 @@ EOF;
      */
     private function hardWork($argument, $option)
     {
-
-        $this->runSemVer();
         $gitWrapper = new GitWrapper();
-        $gitWorkingCopy = $gitWrapper->workingCopy(base_path());
-
+        $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
         $branches = $this->getListBranches($gitWorkingCopy);
         $activebranch = $this->getActiveBranch($gitWrapper);
+
+        $message="";
+        do {
+            $message = $this->ask("Commit message");
+        } while ($message == "");
+
+        $this->info("Active branch is ".$activebranch);
+        $this->addAndCommit($gitWorkingCopy,$message);
+        $messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
+        $this->line($this->formatColorRedText($messagepull));
+        if(!$this->ask("Do you want continue pushing and tagging project?","y"))
+        {
+            return;
+        }
+        $this->line("Last tag version is " + $this->getLastTagVersion($gitWrapper));
+        $tagVersion = array();
+        $tagVersion = $this->getLastTagVersionArray($gitWrapper);
+        $this->createSemverCopyFolder($gitWrapper);
+        $output = array();
+        $output = $this->runSemVer();
+        $this->line(implode(",",$output));
+        $semVerVersion = $this->semVerAnalisys($output);
+        $this->line("Suggested semantic versioning change :" + $semVerVersion);
+
+        switch ($semVerVersion)
+            {
+            case "MAJOR";
+                $tagVersion[0] = $tagVersion[0] +1;
+                break;
+            case "MINOR";
+                $tagVersion[1] = $tagVersion[1] +1;
+                break;
+            case "PATCH";
+                $tagVersion[2] = $tagVersion[2] +1;
+                break;
+            default:
+                return;
+            break;
+            }
+
+        $this->line("Suggested TAG: " + implode(".",$tagVersion));
+
+        $this->line($this->pushOriginActiveBranch($gitWorkingCopy,$activebranch));
+        $this->line($this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch));
+
+
 
 
 
         //TODO
-        //chiedere messaggio di commit
-        //commit del progetto
-        //mostrare branch attivo
+        //chiedere messaggio di commit*
+        //commit del progetto*
+        //mostrare branch attivo*
         //una volta committato fare pull del progetto
         //mostrare il risultato del pull evidenziando parole tipo automerge e fail
         //chiedere se continuare
@@ -70,7 +113,7 @@ EOF;
         //lanciare il confronto, evidenziare il tipo di cambiamento e suggerire la versione
         //chiedere se pushare e taggare con la nuova versione
 
-        $version = $this->getLastTagVersionArray($gitWrapper);
+
 
 
 
@@ -78,24 +121,33 @@ EOF;
 
     }
 
-
-    public function createSemverCopyFolder(GitWrapper $gitWrapper)
+    public function runSemVer()
     {
-        File::copyDirectory("../".base_path(),"y:/semver/original");
-        File::copyDirectory("y:/semver/original","y:/semver/oldversion");
-        $lastTagVersion = $this->getLastTagVersion($gitWrapper);
+        $output = array();
+        $rawoutput = exec('C:/xampp/php/php.exe Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
 
-        $gitWorkingCopySemver = $gitWrapper->workingCopy("y:/semver/oldversion");
-        $this->checkoutToTagVersion($lastTagVersion,$gitWorkingCopySemver);
-
+        return $output;
 
     }
 
-    public function checkoutToTagVersion($version,GitWorkingCopy $gitWorkingCopySemver)
+    public function semVerAnalisys(array $output)
     {
-        $gitWorkingCopySemver->checkout("checkout ".$version);
+        $positionVersion = strpos($output[2],":")+2;
+        return substr($output[2],$positionVersion,strlen($output[2])-$positionVersion);
     }
 
+    public function getListBranches(GitWorkingCopy $gitWorkingCopy)
+    {
+        $gitbranches = new GitBranches($gitWorkingCopy);
+        $branches = array();
+        return $gitbranches->fetchBranches();
+    }
+
+    public function getActiveBranch(GitWrapper $gitWrapper)
+    {
+        $status=$gitWrapper->git("status");
+        return substr($status,10,strpos($status,"\n")-10);
+    }
 
     public function getLastTagVersionArray(GitWrapper $gitWrapper)
     {
@@ -121,22 +173,50 @@ EOF;
 
     }
 
-    public function getActiveBranch(GitWrapper $gitWrapper)
+    public function createSemverCopyFolder(GitWrapper $gitWrapper)
     {
-        $status=$gitWrapper->git("status");
-        return substr($status,10,strpos($status,"\n")-10);
+        File::copyDirectory("../".$this->BASE_PATH,"y:/semver/original");
+        File::copyDirectory("y:/semver/original","y:/semver/oldversion");
+        $lastTagVersion = $this->getLastTagVersion($gitWrapper);
+
+        $gitWorkingCopySemver = $gitWrapper->workingCopy("y:/semver/oldversion");
+        return $this->checkoutToTagVersion($lastTagVersion,$gitWorkingCopySemver);
+
+
     }
 
-    public function getListBranches(GitWorkingCopy $gitWorkingCopy)
+    public function checkoutToTagVersion($version,GitWorkingCopy $gitWorkingCopySemver)
     {
-        $gitbranches = new GitBranches($gitWorkingCopy);
-        $branches = array();
-        return $gitbranches->fetchBranches();
+        return $gitWorkingCopySemver->checkout("checkout ".$version);
+    }
+
+    public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
+    {
+        $gitWorkingCopy->add(".");
+        return $gitWorkingCopy->commit($message);
+    }
+
+    public function pushOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
+    {
+        return $gitWorkingCopy->push("origin",$branch);
+
+    }
+
+    public function pushTagOriginActiveBranch($tag,GitWorkingCopy $gitWorkingCopy)
+    {
+        return $gitWorkingCopy->pushTag($tag);
+
     }
 
     public function pullOriginMaster(GitWorkingCopy $gitWorkingCopy)
     {
         return $gitWorkingCopy->pull('origin','master');
+    }
+
+    public function pullOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
+    {
+        return $gitWorkingCopy->pull("origin",$branch);
+
     }
 
     public function formatColorRedText($testo)
@@ -146,13 +226,6 @@ EOF;
         $testo = str_replace("tracked ","<error>tracked </error>",$testo);
 
         return $testo;
-    }
-
-    public function runSemVer()
-    {
-        $output = array();
-        $rawoutput = exec('C:/xampp/php/php.exe Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
-        echo $rawoutput;
     }
 
 
