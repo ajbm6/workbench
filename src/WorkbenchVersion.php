@@ -61,7 +61,7 @@ EOF;
 
         $this->info("Active branch is ".$activebranch);
         $gitWrapper->git("add .");
-        $this->line( $this->addAndCommit($gitWorkingCopy,$message)->getStatus());
+        $this->line( $this->addAndCommit($gitWorkingCopy,$message));
 
         /*$gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
@@ -216,7 +216,7 @@ EOF;
             return;
         }
         //$gitWorkingCopy->add("/.");
-        return $gitWorkingCopy->commit($message);
+        return $gitWorkingCopy->commit($message)->getStatus();
     }
 
     public function pushOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
