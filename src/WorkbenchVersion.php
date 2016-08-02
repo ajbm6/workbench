@@ -184,29 +184,29 @@ EOF;
 
     public function createSemverCopyFolder(GitWrapper $gitWrapper)
     {
-        if(File::exists("y:/semver/original"))
+        if(File::exists("y:/semver/original/"))
         {
-            File::deleteDirectory("y:/semver/original");
+            File::deleteDirectory("y:/semver/original/");
         }
-        if(File::exists("y:/semver/oldversion"))
+        if(File::exists("y:/semver/oldversion/"))
         {
-            File::deleteDirectory("y:/semver/oldversion");
+            File::deleteDirectory("y:/semver/oldversion/");
         }
-        if(!File::exists("y:/semver/original"))
+        if(!File::exists("y:/semver/original/"))
         {
-            File::makeDirectory("y:/semver/original",493,true);
+            File::makeDirectory("y:/semver/original/",493,true);
         }
-        if(!File::exists("y:/semver/oldversion"))
+        if(!File::exists("y:/semver/oldversion/"))
         {
-            File::makeDirectory("y:/semver/oldversion",493,true);
+            File::makeDirectory("y:/semver/oldversion/",493,true);
         }
 
-        File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion");
-        File::copyDirectory($this->BASE_PATH,"y:/semver/original");
 
+        File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
+        File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
 
-        $gitWorkingCopySemver = $gitWrapper->workingCopy("y:/semver/oldversion");
+        $gitWorkingCopySemver = $gitWrapper->workingCopy("y:/semver/oldversion/");
         return $this->checkoutToTagVersion($lastTagVersion,$gitWorkingCopySemver);
 
 
