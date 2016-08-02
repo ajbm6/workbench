@@ -61,7 +61,7 @@ EOF;
 
         $this->info("Active branch is ".$activebranch);
         $gitWrapper->git("add .");
-        $this->line( $this->addAndCommit($gitWorkingCopy,$message));
+        $this->line( $this->addAndCommit($gitWorkingCopy,$message)->getStatus());
 
         /*$gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
