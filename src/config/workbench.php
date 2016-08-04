@@ -41,6 +41,9 @@ return [
         'email' => env('WORKBENCH_GIT_EMAIL', ''),
 
     ],
+    'githookenable' => env( 'WORKBENCH_GITHOOKENABLE',
+        false
+    ),
     'organization' => env('WORKBENCH_GIT_GITHUB_ORGANIZATION', 'padosoft'),
     'ssh' => [
         'server' => env('WORKBENCH_SSH_SERVER', '192.168.0.29'),

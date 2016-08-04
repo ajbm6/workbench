@@ -1,0 +1,4 @@
+#!/bin/sh
+
+php.exe "vendor/padosoft/hooks/src/php-cs-fix.php"
+php.exe "vendor/padosoft/hooks/src/static-review-pre-commit.php"
