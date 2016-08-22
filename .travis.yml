@@ -49,8 +49,7 @@ before_install:
 script:
   - vendor/bin/phpunit --configuration ./vendor/@@@vendor/@@@package_name/phpunit.xml.dist --testsuite Package --coverage-text --coverage-clover=coverage.clover
 
-
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - if [[ $TRAVIS_PHP_VERSION != '7.0' ]]; then php ocular.phar code-coverage:upload --access-token="93bdd4aee7a5446ac53fe372f1526b6a3d8af949ec675ab1963ca12398a4eebd" --format=php-clover coverage.clover; fi
+  #- wget https://scrutinizer-ci.com/ocular.phar
+  #- if [[ $TRAVIS_PHP_VERSION != '7.0' ]]; then php ocular.phar code-coverage:upload --access-token="93bdd4aee7a5446ac53fe372f1526b6a3d8af949ec675ab1963ca12398a4eebd" --format=php-clover coverage.clover; fi
 
