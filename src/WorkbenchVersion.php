@@ -205,7 +205,8 @@ EOF;
 
         $TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
-        $numFiles = \GlobIterator::count($this->BASE_PATH);
+        $iterator = new \GlobIterator($this->BASE_PATH);
+        $numFiles = $iterator->count();
         $bar = $this->output->createProgressBar($numFiles);
 
         DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
