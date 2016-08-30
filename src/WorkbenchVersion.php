@@ -205,13 +205,13 @@ EOF;
 
         $TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
+        $numFiles = \GlobIterator::count($this->BASE_PATH);
+        $bar = $this->output->createProgressBar($numFiles);
 
-        $bar = $this->output->createProgressBar(1000000);
-        $bar->advance();
-        //$TreadCopy->start();
         DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
-        DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"]);
-
+        $bar->finish();
+        $bar->clear();
+        DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
         $bar->finish();
         $this->line('finito copia');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
