@@ -203,8 +203,17 @@ EOF;
             File::makeDirectory("y:/semver/oldversion/",493,true);
         }
 
+        $TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
 
-        File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
+        $TreadCopy->start();
+        $bar = $this->output->createProgressBar(1000000);
+        while($TreadCopy->isRunning()) {
+            $bar->advance();
+            sleep(1);
+
+        }
+        echo 'finito copia';
+        //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
         File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
 
