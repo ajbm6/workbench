@@ -105,9 +105,12 @@ EOF;
             break;
             }
 
-        $this->line("Suggested TAG: " + implode(".",$tagVersion));
+        $this->line("Suggested TAG: ". implode(".",$tagVersion));
 
         $this->line($this->pushOriginActiveBranch($gitWorkingCopy,$activebranch));
+
+        $this->line("Active branch pushed on origin");
+
         $this->line($this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch));
 
 
