@@ -84,7 +84,7 @@ EOF;
         $output = $this->runSemVer();
         $this->line(implode(",",$output));
         $semVerVersion = $this->semVerAnalisys($output);
-        $this->line("Suggested semantic versioning change :". $semVerVersion);
+        $this->line("Suggested semantic versioning change: ". $semVerVersion);
 
         switch ($semVerVersion)
             {
@@ -107,13 +107,13 @@ EOF;
 
         $this->line("Suggested TAG: ". implode(".",$tagVersion));
 
-        $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
+        $this->line($this->pushOriginActiveBranch($gitWorkingCopy,$activebranch));
 
-        //$this->line("Active branch pushed on origin");
+        $this->line("Active branch pushed on origin");
 
-        $this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch);
+        $this->line($this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion)));
 
-
+        $this->line("Tagged");
 
 
 
@@ -252,7 +252,7 @@ EOF;
 
     }
 
-    public function pushTagOriginActiveBranch($tag,GitWorkingCopy $gitWorkingCopy)
+    public function pushTagOriginActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
     {
         return $gitWorkingCopy->pushTag($tag);
 
