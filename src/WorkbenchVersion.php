@@ -204,15 +204,16 @@ EOF;
         }
 
         $TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
-
+        $this->line('inizio copia');
         $TreadCopy->start();
         $bar = $this->output->createProgressBar(1000000);
+        $bar->advance();
         while($TreadCopy->isRunning()) {
             $bar->advance();
             sleep(1);
-
         }
-        echo 'finito copia';
+        $bar->finish();
+        $this->line('finito copia');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
         File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
         $lastTagVersion = $this->getLastTagVersion($gitWrapper);
