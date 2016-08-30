@@ -84,7 +84,7 @@ EOF;
         $output = $this->runSemVer();
         $this->line(implode(",",$output));
         $semVerVersion = $this->semVerAnalisys($output);
-        $this->line("Suggested semantic versioning change :" + $semVerVersion);
+        $this->line("Suggested semantic versioning change :". $semVerVersion);
 
         switch ($semVerVersion)
             {
@@ -109,7 +109,7 @@ EOF;
 
         $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
 
-        $this->line("Active branch pushed on origin");
+        //$this->line("Active branch pushed on origin");
 
         $this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch);
 
