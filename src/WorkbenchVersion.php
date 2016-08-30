@@ -225,7 +225,7 @@ EOF;
 
     public function checkoutToTagVersion($version,GitWorkingCopy $gitWorkingCopySemver)
     {
-        return $gitWorkingCopySemver->checkout("checkout ".$version);
+        return $gitWorkingCopySemver->checkout($version);
 
     }
 
