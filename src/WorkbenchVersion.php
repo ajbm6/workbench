@@ -39,6 +39,7 @@ EOF;
      */
     public function handle()
     {
+
         $this->hardWork($this->argument(), $this->option());
     }
 
