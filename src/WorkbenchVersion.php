@@ -179,7 +179,7 @@ EOF;
             return;
         }
 
-        return $gitWrapper->git("describe --abbrev=0 --tags");
+        return  trim(preg_replace('/\s\s+/', '', $gitWrapper->git("describe --abbrev=0 --tags")));
 
     }
 
