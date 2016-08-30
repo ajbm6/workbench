@@ -208,11 +208,12 @@ EOF;
 
         $bar = $this->output->createProgressBar(1000000);
         $bar->advance();
-        $TreadCopy->start();
-        while($TreadCopy->isRunning()) {
+        //$TreadCopy->start();
+        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],$bar->advance());
+        /*while($TreadCopy->isRunning()) {
             $bar->advance();
             sleep(1);
-        }
+        }*/
         $bar->finish();
         $this->line('finito copia');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
