@@ -209,7 +209,7 @@ EOF;
         $bar = $this->output->createProgressBar(1000000);
         $bar->advance();
         //$TreadCopy->start();
-        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],$bar->advance());
+        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"]);
         /*while($TreadCopy->isRunning()) {
             $bar->advance();
             sleep(1);
