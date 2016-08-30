@@ -107,11 +107,11 @@ EOF;
 
         $this->line("Suggested TAG: ". implode(".",$tagVersion));
 
-        $this->line($this->pushOriginActiveBranch($gitWorkingCopy,$activebranch));
+        $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
 
         $this->line("Active branch pushed on origin");
 
-        $this->line($this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch));
+        $this->pushTagOriginActiveBranch($gitWorkingCopy,$activebranch);
 
 
 
