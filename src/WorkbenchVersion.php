@@ -107,11 +107,11 @@ EOF;
 
         $this->line("Suggested TAG: ". implode(".",$tagVersion));
 
-        $this->line($this->pushOriginActiveBranch($gitWorkingCopy,$activebranch));
+        $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
 
         $this->line("Active branch pushed on origin");
 
-        $this->line($this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion)));
+        $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
 
         $this->line("Tagged");
 
@@ -254,7 +254,7 @@ EOF;
 
     public function pushTagOriginActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
     {
-        return $gitWorkingCopy->pushTag($tag);
+        return $gitWorkingCopy->pushTag($tag,"https://alevento:129895ale@github.com/padosoft/workbench.git");
 
     }
 
