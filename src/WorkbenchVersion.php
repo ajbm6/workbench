@@ -203,7 +203,6 @@ EOF;
             File::makeDirectory("y:/semver/oldversion/",493,true);
         }
 
-        //$TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
         $fi = new \GlobIterator($this->BASE_PATH."/.");
         printf("There were %d Files", iterator_count($fi));
@@ -211,7 +210,7 @@ EOF;
         $file = new \FilesystemIterator($this->BASE_PATH);
         $iterator = new \GlobIterator($this->BASE_PATH, \FilesystemIterator::KEY_AS_FILENAME);
         $numFiles = $iterator->count();
-        $bar = $this->output->createProgressBar($numFiles);
+        $bar = $this->output->createProgressBar();
 
         DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
         $bar->finish();
