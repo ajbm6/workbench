@@ -205,7 +205,7 @@ EOF;
 
         //$TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
-        $fi = new \FilesystemIterator($this->BASE_PATH, \FilesystemIterator::SKIP_DOTS);
+        $fi = new \GlobIterator($this->BASE_PATH, \FilesystemIterator::SKIP_DOTS);
         printf("There were %d Files", iterator_count($fi));
         $dir = new \DirectoryIterator($this->BASE_PATH);
         $file = new \FilesystemIterator($this->BASE_PATH);
