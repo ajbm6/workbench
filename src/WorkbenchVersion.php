@@ -90,9 +90,12 @@ EOF;
             {
             case "MAJOR";
                 $tagVersion[0] = $tagVersion[0] +1;
+                $tagVersion[1] = 0;
+                $tagVersion[2] = 0;
                 break;
             case "MINOR";
                 $tagVersion[1] = $tagVersion[1] +1;
+                $tagVersion[2] = 0;
                 break;
             case "PATCH";
                 $tagVersion[2] = $tagVersion[2] +1;
