@@ -207,8 +207,8 @@ EOF;
 
         $dir = new \DirectoryIterator($this->BASE_PATH);
         $file = new \FilesystemIterator($this->BASE_PATH);
-        $g =new  \GlobIterator($this->BASE_PATH."*");
-        
+
+
         DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"]);
         DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"]);
 
