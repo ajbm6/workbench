@@ -226,6 +226,7 @@ EOF;
     public function checkoutToTagVersion($version,GitWorkingCopy $gitWorkingCopySemver)
     {
         return $gitWorkingCopySemver->checkout("checkout ".$version);
+
     }
 
     public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
