@@ -205,6 +205,8 @@ EOF;
 
         //$TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
+        $dir = new \DirectoryIterator($this->BASE_PATH);
+        $file = new \FilesystemIterator($this->BASE_PATH);
         $iterator = new \GlobIterator($this->BASE_PATH, \FilesystemIterator::KEY_AS_FILENAME);
         $numFiles = $iterator->count();
         $bar = $this->output->createProgressBar($numFiles);
