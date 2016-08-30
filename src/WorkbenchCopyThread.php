@@ -10,7 +10,7 @@ namespace Padosoft\Workbench;
 
 use File;
 
-class WorkbenchCopyThread extends \Thread
+class WorkbenchCopyThread extends Thread
 {
     private $origin;
     private $dest;
