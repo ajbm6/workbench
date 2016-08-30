@@ -64,9 +64,9 @@ EOF;
         $gitWrapper->git("add .");
         $this->line( $this->addAndCommit($gitWorkingCopy,$message));
 
-        /*$gitWrapper->git("config --global user.name alevento");
+        $gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
-        $gitWrapper->git("config --global user.password ********");*/
+        $gitWrapper->git("config --global user.password 129895ale");
 
         //$messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
         //$this->line($this->formatColorRedText($messagepull));
