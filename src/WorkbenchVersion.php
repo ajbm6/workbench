@@ -204,19 +204,13 @@ EOF;
         }
 
         $this->line('inizio copia');
-        $fi = new \GlobIterator($this->BASE_PATH."/.");
-        printf("There were %d Files", iterator_count($fi));
+
         $dir = new \DirectoryIterator($this->BASE_PATH);
         $file = new \FilesystemIterator($this->BASE_PATH);
-        $iterator = new \GlobIterator($this->BASE_PATH, \FilesystemIterator::KEY_AS_FILENAME);
-        $numFiles = $iterator->count();
-        $bar = $this->output->createProgressBar();
 
-        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
-        $bar->finish();
-        $bar->clear();
-        DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"],function($source,$dest) use ($bar){$bar->advance();});
-        $bar->finish();
+        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"]);
+        DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"]);
+
         $this->line('finito copia');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
         //File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
