@@ -205,9 +205,10 @@ EOF;
 
         $TreadCopy = new WorkbenchCopyThread($this->BASE_PATH,"y:/semver/original/");
         $this->line('inizio copia');
-        $TreadCopy->start();
+
         $bar = $this->output->createProgressBar(1000000);
         $bar->advance();
+        $TreadCopy->start();
         while($TreadCopy->isRunning()) {
             $bar->advance();
             sleep(1);
