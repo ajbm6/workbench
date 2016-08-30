@@ -254,7 +254,7 @@ EOF;
 
     public function pushTagOriginActiveBranch($tag,GitWorkingCopy $gitWorkingCopy)
     {
-        return $gitWorkingCopy->pushTag($tag,"https://github.com/padosoft/workbench.git");
+        return $gitWorkingCopy->pushTag($tag);
 
     }
 
