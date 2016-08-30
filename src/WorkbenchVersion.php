@@ -8,7 +8,7 @@ use GitWrapper\GitWrapper;
 use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitBranches;
 use File;
-
+use Padosoft\Io\DirHelper;
 
 class WorkbenchVersion extends Command
 {
