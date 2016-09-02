@@ -111,6 +111,8 @@ EOF;
 
         $this->line("Active branch pushed on origin");
 
+        $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+
         $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
 
         $this->line("Tagged");
@@ -250,6 +252,11 @@ EOF;
     {
         return $gitWorkingCopy->push("https://alevento:129895ale@github.com/padosoft/workbench.git",$branch);
 
+    }
+
+    public function tagActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
+    {
+        return $gitWorkingCopy->tag($tag);
     }
 
     public function pushTagOriginActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
