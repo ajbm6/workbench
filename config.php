@@ -23,6 +23,6 @@ return new Sami($iterator,array(
     'versions'             => $versions,
     'build_dir'            => 'Y:/build/%version%',
     'cache_dir'            => 'Y:/cache/%version%',
-    'default_opened_level' => 1,
+    'default_opened_level' => 3,
 ));
 
