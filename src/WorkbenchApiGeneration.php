@@ -10,7 +10,7 @@ namespace Padosoft\Workbench;
 
 use Padosoft\Workbench\WorkbenchSettings;
 
-class ApiGeneration
+class WorkbenchApiGeneration
 {
 
     private $workbenchSettings;
