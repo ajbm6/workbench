@@ -9,7 +9,7 @@ $iterator = Finder::create()
     ->files()
     ->exclude('Vendor')
     ->exclude('tests')
-    ->in($dir = 'Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/src')
+    ->in($dir = '/src')
 ;
 
 $versions = GitVersionCollection::create($dir)

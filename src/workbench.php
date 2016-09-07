@@ -103,45 +103,24 @@ EOF;
 
     private function validate($argument, $option)
     {
-
-        //$this->workbenchSettings->requested["action"] =
             $this->workbenchSettings->prepare($argument["action"],"action");
-        //$this->workbenchSettings->requested["domain"] =
             $this->workbenchSettings->prepare($argument["domain"],"domain");
-        //$this->workbenchSettings->requested["type"] =
             $this->workbenchSettings->prepare($option["type"],"type");
-        //$this->workbenchSettings->requested["dirtype"] =
             $this->workbenchSettings->prepare($option["dirtype"],"dirtype");
-        //$this->workbenchSettings->requested["dir"] =
             $this->workbenchSettings->prepare('',"dir");
-        //$this->workbenchSettings->requested["git"] =
             $this->workbenchSettings->prepare($option["git"],"git");
-        //$this->workbenchSettings->requested["gitaction"] =
             $this->workbenchSettings->prepare(Parameters\GitAction::PUSH,"gitaction");
-        //$this->workbenchSettings->requested["githookenable"] =
             $this->workbenchSettings->prepare($option["githookenable"],"githookenable");
-        //$this->workbenchSettings->requested["user"] =
             $this->workbenchSettings->prepare($option["user"],"user");
-        //$this->workbenchSettings->requested["password"] =
             $this->workbenchSettings->prepare($option["password"],"password");
-        //$this->workbenchSettings->requested["email"] =
             $this->workbenchSettings->prepare($option["email"],"email");
-        //$this->workbenchSettings->requested["organization"] =
             $this->workbenchSettings->prepare($option["organization"],"organization");
-        //$this->workbenchSettings->requested["sshhost"] =
             $this->workbenchSettings->prepare($option["sshhost"],"sshhost");
-        //$this->workbenchSettings->requested["sshuser"] =
             $this->workbenchSettings->prepare($option["sshuser"],"sshuser");
-        //$this->workbenchSettings->requested["sshpassword"] =
             $this->workbenchSettings->prepare($option["sshpassword"],"sshpassword");
-        //$this->workbenchSettings->requested["packagename"] =
             $this->workbenchSettings->prepare($option["packagename"],"packagename");
-        //$this->workbenchSettings->requested["packagedescr"] =
             $this->workbenchSettings->prepare($option["packagedescr"],"packagedescr");
-        //$this->workbenchSettings->requested["packagekeywords"] =
             $this->workbenchSettings->prepare($option["packagekeywords"],"packagekeywords");
-
-
 
         /*foreach ($argument as $key => $value) {
             $requested[$key] = $this->workbenchSettings->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
@@ -149,6 +128,7 @@ EOF;
         foreach ($option as $key => $value) {
             $requested[$key] = $this->workbenchSettings->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
         }*/
+
     }
 
 
@@ -159,17 +139,12 @@ EOF;
 
         $this->validate($argument, $option);
 
-
-
-
         $domain = new Parameters\Domain($this);
         $domain->read($silent);
         $action = new Parameters\Action($this);
         $action->read($silent);
         $type = new Parameters\Type($this);
         $type->read($silent);
-
-
 
         if($this->workbenchSettings->requested["action"]["valore"]=="delete" && substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
             $this->info("No action for delete a package");
@@ -303,8 +278,6 @@ EOF;
             if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
                 File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'.git/hooks/pre-commit');
             }
-
-
 
         } catch (\Exception $ex) {
             $this->error($ex->getMessage());
