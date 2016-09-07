@@ -23,7 +23,7 @@ class Organization implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -41,7 +41,7 @@ class Organization implements IEnumerable
             $this->requested["organization"]["valore"] = $this->command->ask('Vendor name and git repository\'s organization');
             $this->requested["organization"]["valore-valido"]= true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

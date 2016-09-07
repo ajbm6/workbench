@@ -23,7 +23,7 @@ class GitAction implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -39,7 +39,7 @@ class GitAction implements IEnumerable
             $this->requested["gitaction"]["valore"] = $this->command->choice('What do you want do?', ['push', 'pull']);
             $this->requested["gitaction"]["valore-valido"]= true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

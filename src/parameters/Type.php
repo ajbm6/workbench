@@ -24,7 +24,7 @@ class Type implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -43,7 +43,7 @@ class Type implements IEnumerable
             $this->requested["type"]["valore"] = $this->command->choice('Project type?', ['laravel', 'normal','laravel_package','agnostic_package']);
             $this->requested["type"]["valore-valido"] = true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

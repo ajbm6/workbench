@@ -52,7 +52,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "28072016lara1";
+        $domain = "02092016lara1";
         $type = "laravel";
         $dirtype = "public";
         $git = "github";
@@ -64,7 +64,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         $sshhost='192.168.0.29';
         $sshuser='root';
         $sshpassword='padosoft2015';
-        $packagename='28072016lara1';
+        $packagename='02092016lara1';
         $packagedescr='Prova,prova,tre';
         $packagekeywords='prova,workbench,pacchetto';
 

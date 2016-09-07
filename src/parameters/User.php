@@ -23,7 +23,7 @@ class User implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -41,7 +41,7 @@ class User implements IEnumerable
             $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username');
             $this->requested["user"]["valore-valido"]= true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

@@ -23,7 +23,7 @@ class Packagename implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -50,7 +50,7 @@ class Packagename implements IEnumerable
             $this->requested["packagename"]["valore"] = str_replace([" ","."],"-",strtolower($this->requested["packagename"]["valore"]));
         }
 
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     public function prova()

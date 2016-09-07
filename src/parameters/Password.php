@@ -23,7 +23,7 @@ class Password implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -42,7 +42,7 @@ class Password implements IEnumerable
             $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
             $this->requested["password"]["valore-valido"]= true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

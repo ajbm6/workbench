@@ -25,7 +25,7 @@ class Sshhost
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -55,7 +55,7 @@ class Sshhost
         }
 
 
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
         return $this->requested["sshhost"]["valore-valido"];
 
     }

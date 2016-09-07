@@ -16,6 +16,7 @@ use Padosoft\HTTPClient\HttpHelper;
 use GitWrapper\GitWrapper;
 use phpseclib\Net\SSH2;
 use League\CommonMark\CommonMarkConverter;
+use Padosoft\Workbench\WorkbenchSettings;
 
 
 class Workbench extends Command
@@ -56,7 +57,8 @@ class Workbench extends Command
 The <info>workbench:new</info> ....
 EOF;
 
-    private $requested = array();
+
+    private $workbenchSettings;
 
     private $parameters = array();
 
@@ -67,6 +69,7 @@ EOF;
      */
     public function handle()
     {
+        $this->workbenchSettings = new WorkbenchSettings($this);
         $this->hardWork($this->argument(), $this->option());
     }
 
@@ -82,7 +85,7 @@ EOF;
         $this->createDomainFolder();
         $this->manageRepoGit();
         if($option["githookenable"]) $this->addHooks();
-        if(substr($this->requested["type"]['valore'],-7) != 'package' && $this->requested["sshhost"]["valore-valido"]) {
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package' && $this->workbenchSettings->requested["sshhost"]["valore-valido"]) {
             $this->createVirtualhost($option["silent"],$option["filehosts"]);
             if($this->option['filehosts']) {
                 $this->addToFileHosts();
@@ -91,77 +94,60 @@ EOF;
             $this->info("Creation complete");
         }
         //$this->apigeneration();
-        if(substr($this->requested["type"]['valore'],-7) == 'package') {
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
             $this->apigeneration();
         }
     }
 
-    private function prepare($val,$class)
-    {
-        $validVal=true;
-        $validClass=false;
-        $classwithnamespace = "Padosoft\\Workbench\\Parameters\\".ucfirst($class);
-        $myclass=null;
-        if(class_exists($classwithnamespace))
-        {
-            $validClass=true;
-            $myclass=new $classwithnamespace($this);
-            if(!$myclass::isValidValue($val))
-            {
-                $validVal=false;
-            }
-        }
 
-        $emptyDefault=false;
-        //$validDefault=false;
-        $validDefault=false;
-
-        $valDefault=Config::get('workbench.'.$myclass->getCostant("CONFIG"));
-
-        if(!isset($valDefault) || $valDefault==="" ) {
-            $emptyDefault=true;
-        }
-
-        if (!$emptyDefault && $validClass) {
-            $validDefault=$myclass::isValidValue($valDefault);
-        }
-
-        return array(
-            "valore"=>$val,
-            "valore-valido"=>$validVal,
-            "valore-default"=>$valDefault,
-            "valore-valido-default"=>$validDefault,
-            "valore-classe"=>$class,
-            "valore-default-valida"=>$validClass);
-
-    }
 
     private function validate($argument, $option)
     {
-        $this->requested["action"] = $this->prepare($argument["action"],"action");
-        $this->requested["domain"] = $this->prepare($argument["domain"],"domain");
-        $this->requested["type"] = $this->prepare($option["type"],"type");
-        $this->requested["dirtype"] = $this->prepare($option["dirtype"],"dirtype");
-        $this->requested["dir"] = $this->prepare('',"dir");
-        $this->requested["git"] = $this->prepare($option["git"],"git");
-        $this->requested["gitaction"] = $this->prepare(Parameters\GitAction::PUSH,"gitaction");
-        $this->requested["githookenable"] = $this->prepare($option["githookenable"],"githookenable");
-        $this->requested["user"] = $this->prepare($option["user"],"user");
-        $this->requested["password"] = $this->prepare($option["password"],"password");
-        $this->requested["email"] = $this->prepare($option["email"],"email");
-        $this->requested["organization"] = $this->prepare($option["organization"],"organization");
-        $this->requested["sshhost"] = $this->prepare($option["sshhost"],"sshhost");
-        $this->requested["sshuser"] = $this->prepare($option["sshuser"],"sshuser");
-        $this->requested["sshpassword"] = $this->prepare($option["sshpassword"],"sshpassword");
-        $this->requested["packagename"] = $this->prepare($option["packagename"],"packagename");
-        $this->requested["packagedescr"] = $this->prepare($option["packagedescr"],"packagedescr");
-        $this->requested["packagekeywords"] = $this->prepare($option["packagekeywords"],"packagekeywords");
+
+        //$this->workbenchSettings->requested["action"] =
+            $this->workbenchSettings->prepare($argument["action"],"action");
+        //$this->workbenchSettings->requested["domain"] =
+            $this->workbenchSettings->prepare($argument["domain"],"domain");
+        //$this->workbenchSettings->requested["type"] =
+            $this->workbenchSettings->prepare($option["type"],"type");
+        //$this->workbenchSettings->requested["dirtype"] =
+            $this->workbenchSettings->prepare($option["dirtype"],"dirtype");
+        //$this->workbenchSettings->requested["dir"] =
+            $this->workbenchSettings->prepare('',"dir");
+        //$this->workbenchSettings->requested["git"] =
+            $this->workbenchSettings->prepare($option["git"],"git");
+        //$this->workbenchSettings->requested["gitaction"] =
+            $this->workbenchSettings->prepare(Parameters\GitAction::PUSH,"gitaction");
+        //$this->workbenchSettings->requested["githookenable"] =
+            $this->workbenchSettings->prepare($option["githookenable"],"githookenable");
+        //$this->workbenchSettings->requested["user"] =
+            $this->workbenchSettings->prepare($option["user"],"user");
+        //$this->workbenchSettings->requested["password"] =
+            $this->workbenchSettings->prepare($option["password"],"password");
+        //$this->workbenchSettings->requested["email"] =
+            $this->workbenchSettings->prepare($option["email"],"email");
+        //$this->workbenchSettings->requested["organization"] =
+            $this->workbenchSettings->prepare($option["organization"],"organization");
+        //$this->workbenchSettings->requested["sshhost"] =
+            $this->workbenchSettings->prepare($option["sshhost"],"sshhost");
+        //$this->workbenchSettings->requested["sshuser"] =
+            $this->workbenchSettings->prepare($option["sshuser"],"sshuser");
+        //$this->workbenchSettings->requested["sshpassword"] =
+            $this->workbenchSettings->prepare($option["sshpassword"],"sshpassword");
+        //$this->workbenchSettings->requested["packagename"] =
+            $this->workbenchSettings->prepare($option["packagename"],"packagename");
+        //$this->workbenchSettings->requested["packagedescr"] =
+            $this->workbenchSettings->prepare($option["packagedescr"],"packagedescr");
+        //$this->workbenchSettings->requested["packagekeywords"] =
+            $this->workbenchSettings->prepare($option["packagekeywords"],"packagekeywords");
+
+
 
         /*foreach ($argument as $key => $value) {
-            $requested[$key] = $this->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
+            $requested[$key] = $this->workbenchSettings->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
         }
         foreach ($option as $key => $value) {
-            $requested[$key] = $this->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
+            $requested[$key] = $this->workbenchSettings->prepare($value,"Padosoft\\Workbench\\".ucfirst($key));
         }*/
     }
 
@@ -185,12 +171,12 @@ EOF;
 
 
 
-        if($this->requested["action"]["valore"]=="delete" && substr($this->requested["type"]['valore'],-7) == 'package') {
+        if($this->workbenchSettings->requested["action"]["valore"]=="delete" && substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
             $this->info("No action for delete a package");
             exit();
         }
 
-        if(substr($this->requested["type"]['valore'],-7) != 'package') {
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
             $sshhost = new Parameters\Sshhost($this);
             if($sshhost->read($silent)) {
                 $sshuser = new Parameters\Sshuser($this);
@@ -200,10 +186,10 @@ EOF;
             }
         }
 
-        if($this->requested["action"]["valore"]=="delete") {
-            $this->error("Attention the virtual host file of ".$this->requested["domain"]["valore"]." will be deleted.");
+        if($this->workbenchSettings->requested["action"]["valore"]=="delete") {
+            $this->error("Attention the virtual host file of ".$this->workbenchSettings->requested["domain"]["valore"]." will be deleted.");
             if(!$silent) {
-                $this->confirm("Delete the virtual host file of ".$this->requested["domain"]["valore"]."?");
+                $this->confirm("Delete the virtual host file of ".$this->workbenchSettings->requested["domain"]["valore"]."?");
             }
             $this->deleteVirtualHost($option["filehosts"]); //ToDo
             $this->info("Deleted complete");
@@ -252,50 +238,50 @@ EOF;
     {
         try {
             $gitWrapper = new GitWrapper();
-            if(substr($this->requested["type"]['valore'],-7) != 'package') {
-                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested['dir']['valore'].$this->requested['domain']['valore']."/www",[]));
+            if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']."/www",[]));
             }
-            if(substr($this->requested["type"]['valore'],-7) == 'package') {
-                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested['dir']['valore'].$this->requested['domain']['valore'],[]));
+            if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
+                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'],[]));
             }
-            //$gitWorkingCopy=$gitWrapper->init($this->requested['dir']['valore'].$this->requested['domain']['valore'],[]);
-            $gitWrapper->git("config --global user.name ".$this->requested['user']['valore']);
-            $gitWrapper->git("config --global user.email ".$this->requested['email']['valore']);
-            $gitWrapper->git("config --global user.password ".$this->requested['password']['valore']);
+            //$gitWorkingCopy=$gitWrapper->init($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'],[]);
+            $gitWrapper->git("config --global user.name ".$this->workbenchSettings->requested['user']['valore']);
+            $gitWrapper->git("config --global user.email ".$this->workbenchSettings->requested['email']['valore']);
+            $gitWrapper->git("config --global user.password ".$this->workbenchSettings->requested['password']['valore']);
             $gitWorkingCopy->add('.');
 
-            switch($this->requested['type']['valore']) {
+            switch($this->workbenchSettings->requested['type']['valore']) {
                 case Parameters\Type::AGNOSTIC_PACKAGE:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.agnostic_package').".git" );
+                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.agnostic_package').".git" );
                     $this->info("Downloading skeleton agnostic package...");
                     break;
                 case Parameters\Type::LARAVEL_PACKAGE:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel_package').".git" );
+                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel_package').".git" );
                     $this->info("Downloading skeleton laravel package...");
                     break;
                 case Parameters\Type::LARAVEL:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel').".git" );
+                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel').".git" );
                     $this->info("Downloading skeleton laravel project...");
                     break;
                 case Parameters\Type::NORMAL:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.normal').".git" );
+                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.normal').".git" );
                     //$this->info("Downloading skeleton normal project...");
                     break;
             }
-            if($this->requested['gitaction']['valore']==Parameters\GitAction::PULL) {
+            if($this->workbenchSettings->requested['gitaction']['valore']==Parameters\GitAction::PULL) {
                 $this->info("Donwloading repo...");
                 $gitWorkingCopy->removeRemote('origin');
-                $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".com/".$this->requested['organization']['valore']."/".$this->requested['packagename']['valore'].".git");
+                $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".com/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
             }
-            if($this->requested['type']['valore']!=Parameters\Type::NORMAL) {
+            if($this->workbenchSettings->requested['type']['valore']!=Parameters\Type::NORMAL) {
                 $gitWorkingCopy->pull('origin','master');
                 $this->info("Download complete.");
             }
 
-            if($upload && $this->requested['gitaction']['valore']==Parameters\GitAction::PUSH) {
+            if($upload && $this->workbenchSettings->requested['gitaction']['valore']==Parameters\GitAction::PUSH) {
                 $gitWorkingCopy->removeRemote('origin');
-                $extension = ($this->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
-                $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".". $extension ."/".$this->requested['organization']['valore']."/".$this->requested['packagename']['valore'].".git");
+                $extension = ($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
+                $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".". $extension ."/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
                 $this->substitute();
                 $gitWorkingCopy->add('.');
                 $gitWorkingCopy->commit("Substitute");
@@ -311,11 +297,11 @@ EOF;
                 exit();
             }
 
-            if(substr($this->requested["type"]['valore'],-7) != 'package') {
-                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
+            if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
             }
-            if(substr($this->requested["type"]['valore'],-7) == 'package') {
-                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'.git/hooks/pre-commit');
+            if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
+                File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'.git/hooks/pre-commit');
             }
 
 
@@ -335,49 +321,49 @@ EOF;
             exit();
         }
 
-        if(substr($this->requested["type"]['valore'],-7) != 'package') {
-            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'www/.git/hooks/pre-commit');
         }
-        if(substr($this->requested["type"]['valore'],-7) == 'package') {
-            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'.git/hooks/pre-commit');
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
+            File::copy($dir,\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'.git/hooks/pre-commit');
         }
     }
 
     private function createDomainFolder()
     {
-        if(File::exists($this->requested["dir"]['valore'].$this->requested["domain"]['valore'])){
+        if(File::exists($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore'])){
             $this->error("Domain directory exist.");
             exit();
         }
 
-        $result = File::makeDirectory($this->requested["dir"]['valore'].$this->requested["domain"]['valore'],493,true);
-        if(substr($this->requested["type"]['valore'],-7) != 'package') {
-            File::makeDirectory(Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'www/',493,true);
-            File::makeDirectory(Parameters\Dir::adjustPath($this->requested["dir"]['valore'].$this->requested["domain"]['valore']).'apache2_logs/',493,true);
+        $result = File::makeDirectory($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore'],493,true);
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+            File::makeDirectory(Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'www/',493,true);
+            File::makeDirectory(Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']).'apache2_logs/',493,true);
         }
 
-        if(substr($this->requested["type"]['valore'],-7) == 'package') {
-            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested["dirtype"]['valore'].'.doc').$this->requested["organization"]['valore']).$this->requested["domain"]['valore'],493,true);
-            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested["dirtype"]['valore'].'.doc').$this->requested["organization"]['valore']).$this->requested["domain"]['valore'].'/dev-master',493,true);
-            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested["dirtype"]['valore'].'.doc').$this->requested["organization"]['valore']).$this->requested["domain"]['valore'].'/resources',493,true);
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
+            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'],493,true);
+            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/dev-master',493,true);
+            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/resources',493,true);
         }
 
 
-        $this->info("Domain dir created at ".$this->requested["dir"]['valore'].$this->requested["domain"]['valore']);
+        $this->info("Domain dir created at ".$this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']);
     }
 
     private function checkRepoGithubExist()
     {
         $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
-        $response = $httphelper->sendGet("https://api.github.com/repos/". $this->requested["organization"]["valore"] ."/".$this->requested["packagename"]["valore"]);
+        $response = $httphelper->sendGet("https://api.github.com/repos/". $this->workbenchSettings->requested["organization"]["valore"] ."/".$this->workbenchSettings->requested["packagename"]["valore"]);
         return ($response->status_code==200 ? true : false);
     }    
     
     private function checkRepoBitbucketExist()
     {
         $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
-        //$response = $httphelper->sendGet("https://api.bitbucket.org/2.0/repositories/". $this->requested["organization"]['valore'] ."/".$this->requested["domain"]['valore']);
-        $response = $httphelper->sendGetWithAuth("https://api.bitbucket.org/2.0/repositories/". $this->requested["organization"]["valore"] ."/".$this->requested["packagename"]["valore"],[],[],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+        //$response = $httphelper->sendGet("https://api.bitbucket.org/2.0/repositories/". $this->workbenchSettings->requested["organization"]['valore'] ."/".$this->workbenchSettings->requested["domain"]['valore']);
+        $response = $httphelper->sendGetWithAuth("https://api.bitbucket.org/2.0/repositories/". $this->workbenchSettings->requested["organization"]["valore"] ."/".$this->workbenchSettings->requested["packagename"]["valore"],[],[],$this->workbenchSettings->requested["user"]["valore"],$this->workbenchSettings->requested["password"]["valore"]);
         return ($response->status_code==200 ? true : false);
     }
     
@@ -386,8 +372,8 @@ EOF;
         $response = new \Padosoft\HTTPClient\Response();
         try {
             $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
-            $response = $httphelper->sendPostJsonWithAuth("https://api.github.com/orgs/".$this->requested['organization']['valore']."/repos",['name'=>$this->requested["packagename"]["valore"]],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
-            $this->info("Created repo https://github.com/".$this->requested['organization']["valore"]."/".$this->requested["packagename"]["valore"]);
+            $response = $httphelper->sendPostJsonWithAuth("https://api.github.com/orgs/".$this->workbenchSettings->requested['organization']['valore']."/repos",['name'=>$this->workbenchSettings->requested["packagename"]["valore"]],$this->workbenchSettings->requested["user"]["valore"],$this->workbenchSettings->requested["password"]["valore"]);
+            $this->info("Created repo https://github.com/".$this->workbenchSettings->requested['organization']["valore"]."/".$this->workbenchSettings->requested["packagename"]["valore"]);
             if($response->status_code==422) {
                 $this->error("Repository esistente");
                 exit();
@@ -408,8 +394,8 @@ EOF;
         $response = new \Padosoft\HTTPClient\Response();
         try {
             $httphelper = new HttpHelper(new HTTPClient(new Client(),new RequestHelper()));
-            $response = $httphelper->sendPostJsonWithAuth("https://api.bitbucket.org/2.0/repositories/".$this->requested['organization']['valore']."/".$this->requested['packagename']['valore'],['scm'=>'git', 'is_private'=>'true', 'name'=>$this->requested["packagename"]["valore"]],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
-            $this->info("Created repo https://bitbucket.org/".$this->requested['organization']["valore"]."/".$this->requested["packagename"]["valore"]);
+            $response = $httphelper->sendPostJsonWithAuth("https://api.bitbucket.org/2.0/repositories/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'],['scm'=>'git', 'is_private'=>'true', 'name'=>$this->workbenchSettings->requested["packagename"]["valore"]],$this->workbenchSettings->requested["user"]["valore"],$this->workbenchSettings->requested["password"]["valore"]);
+            $this->info("Created repo https://bitbucket.org/".$this->workbenchSettings->requested['organization']["valore"]."/".$this->workbenchSettings->requested["packagename"]["valore"]);
             if($response->status_code==400) {
                 $this->error($response->body);
                 exit();
@@ -424,15 +410,15 @@ EOF;
     private function manageRepoGit()
     {
 
-        if($this->requested["git"]["valore"]==Parameters\Git::GITHUB) {
-            if ($this->requested["gitaction"]["valore"]==Parameters\GitAction::PUSH) {
+        if($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::GITHUB) {
+            if ($this->workbenchSettings->requested["gitaction"]["valore"]==Parameters\GitAction::PUSH) {
                 if($this->checkRepoGithubExist()) {
                     $this->error("Repo already exist!");
                     exit();
                 }
                 $this->createRepoGithub();
             }
-            if ($this->requested["gitaction"]["valore"]==Parameters\GitAction::PULL) {
+            if ($this->workbenchSettings->requested["gitaction"]["valore"]==Parameters\GitAction::PULL) {
                 if(!$this->checkRepoGithubExist()) {
                     $this->error("Repo not exist!");
                     exit();
@@ -442,16 +428,16 @@ EOF;
 
         }
 
-        if($this->requested["git"]["valore"]==Parameters\Git::BITBUCKET) {
+        if($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::BITBUCKET) {
 
-            if ($this->requested["gitaction"]["valore"]==Parameters\GitAction::PUSH) {
+            if ($this->workbenchSettings->requested["gitaction"]["valore"]==Parameters\GitAction::PUSH) {
                 if($this->checkRepoBitbucketExist()) {
                     $this->error("Repo already exist!");
                     exit();
                 }
                 $this->createRepoBitBucket();
             }
-            if ($this->requested["gitaction"]["valore"]==Parameters\GitAction::PULL) {
+            if ($this->workbenchSettings->requested["gitaction"]["valore"]==Parameters\GitAction::PULL) {
                 if(!$this->checkRepoBitbucketExist()) {
                     $this->error("Repo not exist!");
                     exit();
@@ -460,38 +446,38 @@ EOF;
         }
 
 
-        $this->createAndDownloadFromGit($this->requested["git"]["valore-valido"]);
+        $this->createAndDownloadFromGit($this->workbenchSettings->requested["git"]["valore-valido"]);
     }
 
     private function createVirtualhost(bool $silent,bool $filehosts)
     {
         $this->info("Creating virtualhost");
-        $apachedir=Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested['dirtype']['valore'].'.apache2'));
-        $rootdir=Parameters\Dir::adjustPath($apachedir.$this->requested['domain']['valore']);
+        $apachedir=Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested['dirtype']['valore'].'.apache2'));
+        $rootdir=Parameters\Dir::adjustPath($apachedir.$this->workbenchSettings->requested['domain']['valore']);
         $webdir=$rootdir.'www/';
 
-        if($this->requested['type']['valore']=='laravel') {
+        if($this->workbenchSettings->requested['type']['valore']=='laravel') {
             $webdir=$webdir.'public/';
         }
 
-        $ssh = new SSH2($this->requested['sshhost']['valore']);
-        if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['sshpassword']['valore'])) {
+        $ssh = new SSH2($this->workbenchSettings->requested['sshhost']['valore']);
+        if (!$ssh->login($this->workbenchSettings->requested['sshuser']['valore'], $this->workbenchSettings->requested['sshpassword']['valore'])) {
             if($silent) {
-                exit('SSH login failed at '.$this->requested['sshuser']['valore'].'@'.$this->requested['sshhost']['valore']);
+                exit('SSH login failed at '.$this->workbenchSettings->requested['sshuser']['valore'].'@'.$this->workbenchSettings->requested['sshhost']['valore']);
             }
-            exit('SSH login failed at '.$this->requested['sshuser']['valore'].'@'.$this->requested['sshhost']['valore']);
+            exit('SSH login failed at '.$this->workbenchSettings->requested['sshuser']['valore'].'@'.$this->workbenchSettings->requested['sshhost']['valore']);
         }
         //$ssh->read('/presente/',SSH2::READ_REGEX);
-        if($ssh->exec("if [ -e /etc/apache2/sites-available/" . $this->requested['domain']['valore'].".conf ]; then echo 'presente'; else echo 'assente'; fi;")=="presente\n") {
-            $this->error('File /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf exist');
-            exit('File /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf exist');
+        if($ssh->exec("if [ -e /etc/apache2/sites-available/" . $this->workbenchSettings->requested['domain']['valore'].".conf ]; then echo 'presente'; else echo 'assente'; fi;")=="presente\n") {
+            $this->error('File /etc/apache2/sites-available/'.$this->workbenchSettings->requested['domain']['valore'].'.conf exist');
+            exit('File /etc/apache2/sites-available/'.$this->workbenchSettings->requested['domain']['valore'].'.conf exist');
         }
 
         $virtualhost = "
 		<VirtualHost *:80>
-			ServerAdmin ".$this->requested['email']['valore']."
-			ServerName ".$this->requested['domain']['valore']."
-			ServerAlias ".$this->requested['domain']['valore']."
+			ServerAdmin ".$this->workbenchSettings->requested['email']['valore']."
+			ServerName ".$this->workbenchSettings->requested['domain']['valore']."
+			ServerAlias ".$this->workbenchSettings->requested['domain']['valore']."
 			DocumentRoot ".$webdir."
 			<Directory ".$webdir.">
 				Options Indexes FollowSymLinks MultiViews
@@ -503,8 +489,8 @@ EOF;
 			CustomLog ".$rootdir."apache2_logs/apache2-access.log combined
 		</VirtualHost>";
 
-        $ssh->exec('echo "'.$virtualhost.'" > /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf');
-        $ssh->exec('a2ensite '.$this->requested['domain']['valore']);
+        $ssh->exec('echo "'.$virtualhost.'" > /etc/apache2/sites-available/'.$this->workbenchSettings->requested['domain']['valore'].'.conf');
+        $ssh->exec('a2ensite '.$this->workbenchSettings->requested['domain']['valore']);
         $ssh->exec('/etc/init.d/apache2 reload');
         $this->info("Virtualhost created");
         if($filehosts) {
@@ -518,7 +504,7 @@ EOF;
         $this->info("Adding hosts in localhost");
         $output=$ssh->exec("grep -l '127.0.0.1[[:space:]]*provaasd.net' /etc/hosts");
         if($output=="") {
-            $ssh->exec('127.0.0.1	'.$this->requested['domain']['valore'].'>/etc/hosts');
+            $ssh->exec('127.0.0.1	'.$this->workbenchSettings->requested['domain']['valore'].'>/etc/hosts');
         }
         $this->info("Host added");
     }
@@ -526,7 +512,7 @@ EOF;
     private function removeToFileHosts(SSH2 $ssh)
     {
         $this->info("Remove from host");
-        $ssh->exec('sed -i "/'.$this->requested['domain']['valore'].'/d" /etc/hosts');
+        $ssh->exec('sed -i "/'.$this->workbenchSettings->requested['domain']['valore'].'/d" /etc/hosts');
         $this->info("Host removed");
     }
 
@@ -535,17 +521,17 @@ EOF;
     private function deleteVirtualHost($filehosts)
     {
         $this->info("Deleting virtualhost");
-        $this->error('Attenzione il virtual host di '.$this->requested['domain']['valore']+' verrà eliminato.');
+        $this->error('Attenzione il virtual host di '.$this->workbenchSettings->requested['domain']['valore']+' verrà eliminato.');
         $apachedir="/var/www/html/";
 
-        $ssh = new SSH2($this->requested['sshhost']['valore']); //ToDo
-        if (!$ssh->login($this->requested['sshuser']['valore'], $this->requested['sshpassword']['valore'])) {
-            exit('SSH login failed at '.$this->requested['sshuser']['valore'].'@'.$this->requested['sshuser']['valore']);
+        $ssh = new SSH2($this->workbenchSettings->requested['sshhost']['valore']); //ToDo
+        if (!$ssh->login($this->workbenchSettings->requested['sshuser']['valore'], $this->workbenchSettings->requested['sshpassword']['valore'])) {
+            exit('SSH login failed at '.$this->workbenchSettings->requested['sshuser']['valore'].'@'.$this->workbenchSettings->requested['sshuser']['valore']);
         }
 
-        $ssh->exec('a2dissite '.$this->requested['domain']['valore']);
+        $ssh->exec('a2dissite '.$this->workbenchSettings->requested['domain']['valore']);
         $ssh->exec('/etc/init.d/apache2 reload');
-        $ssh->exec('rm /etc/apache2/sites-available/'.$this->requested['domain']['valore'].'.conf');
+        $ssh->exec('rm /etc/apache2/sites-available/'.$this->workbenchSettings->requested['domain']['valore'].'.conf');
         $this->info("Virtualhost deleted");
         if($filehosts) {
             $this->removeToFileHosts($ssh);
@@ -560,10 +546,10 @@ EOF;
         $emailauthor = Config::get('workbench.substitute.emailauthor','helpdesk@padosoft.com');
         $siteauthor = Config::get('workbench.substitute.siteauthor','www.padosoft.com');
         $vendor = str_replace(" ","_", strtolower(Config::get('workbench.substitute.vendor','Padosoft')));
-        $packagename = $this->requested['packagename']['valore'];
-        $packagedescr = $this->requested['packagedescr']['valore'];
-        $packagekeywords = $this->requested['packagekeywords']['valore'];
-        $organization = $this->requested['organization']['valore'];
+        $packagename = $this->workbenchSettings->requested['packagename']['valore'];
+        $packagedescr = $this->workbenchSettings->requested['packagedescr']['valore'];
+        $packagekeywords = $this->workbenchSettings->requested['packagekeywords']['valore'];
+        $organization = $this->workbenchSettings->requested['organization']['valore'];
         
         $files = explode(",",Config::get('workbench.substitute.files'));
 
@@ -572,9 +558,9 @@ EOF;
             $fileandpath=$file;
             if(substr($file,0,1)!="/") {
 
-                $fileandpath=$this->requested['dir']['valore'].$this->requested['domain']['valore']."/".$file;
-                if(substr($this->requested["type"]['valore'],-7) != 'package') {
-                    $fileandpath=$this->requested['dir']['valore'].$this->requested['domain']['valore']."/www/".$file;
+                $fileandpath=$this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']."/".$file;
+                if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+                    $fileandpath=$this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']."/www/".$file;
                 }
             }
             try {
@@ -607,8 +593,8 @@ EOF;
 
     public function apigeneration()
     {
-        $source = $this->requested['dir']['valore'].$this->requested['domain']['valore'];
-        $destination = \Padosoft\Workbench\Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->requested['dirtype']['valore'].'.doc').$this->requested['organization']['valore']).$this->requested['domain']['valore'];
+        $source = $this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'];
+        $destination = \Padosoft\Workbench\Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested['dirtype']['valore'].'.doc').$this->workbenchSettings->requested['organization']['valore']).$this->workbenchSettings->requested['domain']['valore'];
         exec('C:/xampp/php/php.exe Y:/Public/common-dev-lib/apigen.phar generate --source '.$source.' --destination '.$destination.'/dev-master');
 
         File::copyDirectory($destination.'/dev-master/resources/', $destination.'/resources/');
@@ -618,11 +604,11 @@ EOF;
 
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy=$gitWrapper->init($destination,[]);
-        $gitWrapper->git("config --global user.name ".$this->requested['user']['valore']);
-        $gitWrapper->git("config --global user.email ".$this->requested['email']['valore']);
-        $gitWrapper->git("config --global user.password ".$this->requested['password']['valore']);
-        $extension = ($this->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
-        $gitWorkingCopy->addRemote('origin',"https://".$this->requested['user']['valore'].":".$this->requested['password']['valore']."@".$this->requested["git"]["valore"].".". $extension ."/".$this->requested['organization']['valore']."/".$this->requested['packagename']['valore'].".git" );
+        $gitWrapper->git("config --global user.name ".$this->workbenchSettings->requested['user']['valore']);
+        $gitWrapper->git("config --global user.email ".$this->workbenchSettings->requested['email']['valore']);
+        $gitWrapper->git("config --global user.password ".$this->workbenchSettings->requested['password']['valore']);
+        $extension = ($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
+        $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".". $extension ."/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git" );
         $gitWorkingCopy->checkoutNewBranch('gh-pages');
         $gitWorkingCopy->add('.');
         $gitWorkingCopy->commit('Workbench commit');
@@ -644,14 +630,14 @@ EOF;
         }
         File::copy($dir,$readmepathdestination);
         $index = file_get_contents($readmepathdestination);
-        $index = str_replace('@@@package_name', $this->requested['packagename']['valore'],$index);
+        $index = str_replace('@@@package_name', $this->workbenchSettings->requested['packagename']['valore'],$index);
         $readme = file_get_contents($readmepathsource);
         $converter = new CommonMarkConverter();
         $index = str_replace("@@@readme", $converter->convertToHtml($readme),$index);
         $documentation="<h1>API Documentation</h1>
-<p>Please see API documentation at http://".$this->requested['organization']['valore'].".github.io/".$this->requested['packagename']['valore']."</p>";
+<p>Please see API documentation at http://".$this->workbenchSettings->requested['organization']['valore'].".github.io/".$this->workbenchSettings->requested['packagename']['valore']."</p>";
         $documentation_mod = "<a name=api-documentation ></a>"."<h1>API Documentation</h1>
-<p>Please see API documentation at <a href ='http://".$this->requested['organization']['valore'].".github.io/".$this->requested['packagename']['valore']."'>".$this->requested['packagename']['valore']."</a></p>";
+<p>Please see API documentation at <a href ='http://".$this->workbenchSettings->requested['organization']['valore'].".github.io/".$this->workbenchSettings->requested['packagename']['valore']."'>".$this->workbenchSettings->requested['packagename']['valore']."</a></p>";
 
         $destination = File::dirname($readmepathdestination);
         $list = array_diff(File::directories($destination),array($destination.'\resources'));
@@ -659,7 +645,7 @@ EOF;
         $documentation_mod = $documentation_mod."<ul>";
         foreach ($list as $tag) {
             $tag = File::basename(\Padosoft\Workbench\Parameters\Dir::adjustPath($tag));
-            $documentation_mod = $documentation_mod."<li><a href = 'https://".$this->requested['organization']['valore'].".github.io/".$this->requested['packagename']['valore']."/".$tag."'>".$tag."</a></li>";
+            $documentation_mod = $documentation_mod."<li><a href = 'https://".$this->workbenchSettings->requested['organization']['valore'].".github.io/".$this->workbenchSettings->requested['packagename']['valore']."/".$tag."'>".$tag."</a></li>";
         }
         $documentation_mod = $documentation_mod."</ul>";
         $index = str_replace($documentation, $documentation_mod,$index);

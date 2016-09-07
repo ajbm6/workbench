@@ -22,7 +22,7 @@ class Githookenable implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -44,7 +44,7 @@ class Githookenable implements IEnumerable
             $this->requested["githookenable"]["valore-valido"]=true;
         }
         
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
         return $this->requested["githookenable"]["valore-valido"];
 
     }

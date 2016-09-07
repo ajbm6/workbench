@@ -23,7 +23,7 @@ class Packagekeywords implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -51,7 +51,7 @@ class Packagekeywords implements IEnumerable
             $this->requested["packagekeywords"]["valore"] = '"'. implode('","', explode(',',$this->requested["packagekeywords"]["valore"])).'"' ;
         }
 
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

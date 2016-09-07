@@ -23,7 +23,7 @@ class Packagedescr implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -46,7 +46,7 @@ class Packagedescr implements IEnumerable
             $this->requested["packagedescr"]["valore"] = $this->command->ask('Description of package.');
             $this->requested["packagedescr"]["valore-valido"]= true;
         }
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

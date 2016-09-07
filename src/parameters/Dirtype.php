@@ -28,7 +28,7 @@ class Dirtype implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
 
@@ -55,7 +55,7 @@ class Dirtype implements IEnumerable
             $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.diraccess.'.$dirtype.'.local'));
         }
         
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
     }
 
     private function exitWork($error)

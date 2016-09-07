@@ -22,7 +22,7 @@ class Git implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->requested;
+        $this->requested=$this->command->workbenchSettings->requested;
     }
 
     public function read($silent)
@@ -43,7 +43,7 @@ class Git implements IEnumerable
             $this->requested["git"]["valore-valido"]=true;
         }
         
-        $this->command->requested=$this->requested;
+        $this->command->workbenchSettings->requested=$this->requested;
         return $this->requested["git"]["valore-valido"];
 
     }
