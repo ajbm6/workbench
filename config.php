@@ -9,7 +9,7 @@ $iterator = Finder::create()
     ->files()
     ->exclude('Vendor')
     ->exclude('tests')
-    ->in($dir = '/src')
+    ->in($dir = __DIR__.'/src')
 ;
 
 $versions = GitVersionCollection::create($dir)
