@@ -13,7 +13,7 @@ $iterator = Finder::create()
 ;
 
 $versions = GitVersionCollection::create($dir)
-    ->addFromTags('^1.0')
+    ->addFromTags('1.0.*')
     ->add('master','master')
 ;
 
