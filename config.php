@@ -7,6 +7,8 @@ use Symfony\Component\Finder\Finder;
 
 $iterator = Finder::create()
     ->files()
+    ->exclude('Vendor')
+    ->exclude('tests')
     ->in($dir = 'Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/src')
 ;
 
@@ -21,6 +23,6 @@ return new Sami($iterator,array(
     'versions'             => $versions,
     'build_dir'            => 'Y:/build/%version%',
     'cache_dir'            => 'Y:/cache/%version%',
-    'default_opened_level' => 2,
+    'default_opened_level' => 1,
 ));
 
