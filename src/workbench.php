@@ -17,6 +17,7 @@ use GitWrapper\GitWrapper;
 use phpseclib\Net\SSH2;
 use League\CommonMark\CommonMarkConverter;
 use Padosoft\Workbench\WorkbenchSettings;
+use Padosoft\Workbench\WorkbenchApiGeneration;
 
 
 class Workbench extends Command
@@ -85,6 +86,7 @@ EOF;
         $this->createDomainFolder();
         $this->manageRepoGit();
         if($option["githookenable"]) $this->addHooks();
+
         if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package' && $this->workbenchSettings->requested["sshhost"]["valore-valido"]) {
             $this->createVirtualhost($option["silent"],$option["filehosts"]);
             if($this->option['filehosts']) {
@@ -93,9 +95,12 @@ EOF;
 
             $this->info("Creation complete");
         }
+
+        $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         //$this->apigeneration();
         if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
-            $this->apigeneration();
+
+            $apiSamiGeneration->apiSamiGeneration();
         }
     }
 
@@ -174,8 +179,6 @@ EOF;
         $organization = new Parameters\Organization($this);
         $organization->read($silent);
 
-
-
         $dirtype = new Parameters\Dirtype($this);
         $dirtype->read($silent);
 
@@ -196,7 +199,6 @@ EOF;
             //$organization = new Parameters\Organization($this);
             //$organization->read($silent);
         }
-
 
         $packagename = new Parameters\Packagename($this);
         $packagename->read($silent);
@@ -317,8 +319,8 @@ EOF;
 
         if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
             File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'],493,true);
-            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/dev-master',493,true);
-            File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/resources',493,true);
+            //File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/dev-master',493,true);
+            //File::makeDirectory(Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested["dirtype"]['valore'].'.doc').$this->workbenchSettings->requested["organization"]['valore']).$this->workbenchSettings->requested["domain"]['valore'].'/resources',493,true);
         }
 
 
@@ -523,7 +525,8 @@ EOF;
         $packagedescr = $this->workbenchSettings->requested['packagedescr']['valore'];
         $packagekeywords = $this->workbenchSettings->requested['packagekeywords']['valore'];
         $organization = $this->workbenchSettings->requested['organization']['valore'];
-        
+        $doc_destination = \Padosoft\Workbench\Parameters\Dir::adjustPath(Config::get('workbench.diraccess.'.$this->workbenchSettings->requested['dirtype']['valore'].'.doc').$this->workbenchSettings->requested['organization']['valore']).$this->workbenchSettings->requested['domain']['valore'];
+
         $files = explode(",",Config::get('workbench.substitute.files'));
 
         foreach($files as $file) {
@@ -553,7 +556,8 @@ EOF;
                 $str=str_replace("@@@namespacevendor", ucfirst($vendor),$str);
                 $str=str_replace("@@@namespacepackage_name", ucfirst(str_replace("-","", $packagename)),$str);
                 $str=str_replace("@@@providerpackage_name", ucfirst(str_replace("-","", $packagename)),$str);
-                
+                $str=str_replace("@@@doc_destination", $doc_destination,$str);
+
 
 
                 file_put_contents($fileandpath, $str);
@@ -563,7 +567,7 @@ EOF;
         }
         $this->info("Changing complete");
     }
-
+/*
     public function apigeneration()
     {
         $source = $this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'];
@@ -587,7 +591,7 @@ EOF;
         $gitWorkingCopy->commit('Workbench commit');
         $gitWorkingCopy->push('origin','gh-pages');
 
-    }
+    }*/
 
     public function transformReadmeMd($readmepathsource,$readmepathdestination) {
 
@@ -624,11 +628,8 @@ EOF;
         $index = str_replace($documentation, $documentation_mod,$index);
 
         file_put_contents($readmepathdestination, $index);
-        
-        
-        
-    }
 
+    }
 
     public function __get($property)
     {
@@ -643,10 +644,5 @@ EOF;
             $this->$property = $value;
         }
     }
-
-
-
-
-
 }
 

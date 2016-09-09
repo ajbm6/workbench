@@ -52,28 +52,28 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
-        $domain = "02092016lara1";
-        $type = "laravel";
+        $domain = "09092016lara1";
+        $type = "laravel_package";
         $dirtype = "public";
         $git = "github";
         $gitaction = "push";
         $user="alevento";
-        $password="129895ale";
+        $password=env('PWD_ALE_GITHUB');
         $email="alessandro.manneschi@gmail.com";
         $organization="b2msrl";
         $sshhost='192.168.0.29';
         $sshuser='root';
-        $sshpassword='padosoft2015';
-        $packagename='02092016lara1';
+        $sshpassword=env('PWD_ROOT_PADO');
+        $packagename='09092016lara1';
         $packagedescr='Prova,prova,tre';
         $packagekeywords='prova,workbench,pacchetto';
 
         /*$head = new HeaderHttpHelper();
         $head->headers__authorization__username='alevento';
-        $head->headers__authorization__password='129895ale';
+        $head->headers__authorization__password='';
         $head->json=['name'=>'cicciu'];
         $head->headers__content_type = 'application/json';
-        //$head->authorization=['alevento','129895ale'];
+        //$head->authorization=['alevento',''];
         //$head->name="ciccio";
         $client = new client;
         $req = new HttpHelper($client);

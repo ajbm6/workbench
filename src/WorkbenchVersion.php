@@ -9,6 +9,8 @@ use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitBranches;
 use File;
 use Padosoft\Io\DirHelper;
+use Padosoft\Workbench\WorkbenchApiGeneration;
+use Padosoft\Workbench\WorkbenchSettings;
 
 class WorkbenchVersion extends Command
 {
@@ -117,7 +119,21 @@ EOF;
 
         $this->line("Tagged");
 
+        $workbenchSettings = new WorkbenchSettings();
 
+
+            $workbenchSettings->prepare("workbench","domain");
+            $workbenchSettings->prepare("laravel_package","type");
+            $workbenchSettings->prepare("public","dirtype");
+            $workbenchSettings->prepare($this->BASE_PATH ,"dir");
+            $workbenchSettings->prepare("github","git");
+            $workbenchSettings->prepare("alevento","user");
+            $workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
+            $workbenchSettings->prepare("a@a.it","email");
+            $workbenchSettings->prepare("padosoft","organization");
+
+        $apiSamiGeneration = new WorkbenchApiGeneration($workbenchSettings,$this);
+        $apiSamiGeneration->apiSamiGeneration();
 
         //TODO
         //chiedere messaggio di commit*
@@ -130,12 +146,6 @@ EOF;
         //se si continua creare 2 copie del progetto, fare checkout di una delle 2 all'ultimo tag di versione
         //lanciare il confronto, evidenziare il tipo di cambiamento e suggerire la versione
         //chiedere se pushare e taggare con la nuova versione
-
-
-
-
-
-
 
     }
 
