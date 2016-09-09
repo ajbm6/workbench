@@ -34,6 +34,8 @@ EOF;
 
     private $parameters = array();
 
+    private $workbenchSettings;
+
     /**
      * Execute the console command.
      *
@@ -119,20 +121,20 @@ EOF;
 
         $this->line("Tagged");
 
-        $workbenchSettings = new WorkbenchSettings();
+        $this->workbenchSettings = new WorkbenchSettings();
 
 
-            $workbenchSettings->prepare("workbench","domain");
-            $workbenchSettings->prepare("laravel_package","type");
-            $workbenchSettings->prepare("public","dirtype");
-            $workbenchSettings->prepare($this->BASE_PATH ,"dir");
-            $workbenchSettings->prepare("github","git");
-            $workbenchSettings->prepare("alevento","user");
-            $workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
-            $workbenchSettings->prepare("a@a.it","email");
-            $workbenchSettings->prepare("padosoft","organization");
+        $this->workbenchSettings->prepare("workbench","domain");
+        $this->workbenchSettings->prepare("laravel_package","type");
+        $this->workbenchSettings->prepare("public","dirtype");
+        $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
+        $this->workbenchSettings->prepare("github","git");
+        $this->workbenchSettings->prepare("alevento","user");
+        $this->workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
+        $this->workbenchSettings->prepare("a@a.it","email");
+        $this->workbenchSettings->prepare("padosoft","organization");
 
-        $apiSamiGeneration = new WorkbenchApiGeneration($workbenchSettings,$this);
+        $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
 
         //TODO
@@ -260,7 +262,7 @@ EOF;
 
     public function pushOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
     {
-        return $gitWorkingCopy->push("https://alevento:129895ale@github.com/padosoft/workbench.git",$branch);
+        return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
 
     }
 
@@ -271,7 +273,7 @@ EOF;
 
     public function pushTagOriginActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
     {
-        return $gitWorkingCopy->pushTag($tag,"https://alevento:129895ale@github.com/padosoft/workbench.git");
+        return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
 
     }
 
