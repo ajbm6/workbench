@@ -57,7 +57,7 @@ EOF;
         }
         $this->BASE_PATH=\Padosoft\Workbench\Parameters\Dir::adjustPath($this->BASE_PATH);
         $this->domain = basename($this->BASE_PATH);
-        $this->ORGANIZATION_PATH = substr($this->BASE_PATH,0,strlen($this->BASE_PATH)-(strlen($this->domain)+1));
+        $this->ORGANIZATION_PATH = \Padosoft\Workbench\Parameters\Dir::adjustPath(substr($this->BASE_PATH,0,strlen($this->BASE_PATH)-(strlen($this->domain)+1)));
         $json = json_decode(file_get_contents($this->BASE_PATH."composer.json"),true);
         $this->organization = explode("/",$json["name"])[0];
         $this->packagename = explode("/",$json["name"])[1];
@@ -83,7 +83,7 @@ EOF;
         $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");
         $this->workbenchSettings->prepare($this->domain,"domain");
         $this->workbenchSettings->prepare("public","dirtype");
-        $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
+        $this->workbenchSettings->prepare($this->ORGANIZATION_PATH ,"dir");
         $this->workbenchSettings->prepare("github","git");
         $this->workbenchSettings->prepare($this->organization,"organization");
         $this->workbenchSettings->prepare($this->packagename,"packagename");
