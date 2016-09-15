@@ -53,6 +53,23 @@ EOF;
      */
     private function hardWork($argument, $option)
     {
+        $command = new Workbench();
+        $this->workbenchSettings = new WorkbenchSettings($command);
+        //$requested = $this->workbenchSettings->getRequested();
+
+        $command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
+
+        $this->workbenchSettings->prepare("workbench","domain");
+        $this->workbenchSettings->prepare("laravel_package","type");
+        $this->workbenchSettings->prepare("public","dirtype");
+        $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
+        $this->workbenchSettings->prepare("github","git");
+        $this->workbenchSettings->prepare("alevento","user");
+        $this->workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
+        $this->workbenchSettings->prepare("a@a.it","email");
+        $this->workbenchSettings->prepare("padosoft","organization");
+
+
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
@@ -121,18 +138,10 @@ EOF;
 
         $this->line("Tagged");
 
-        $this->workbenchSettings = new WorkbenchSettings();
 
 
-        $this->workbenchSettings->prepare("workbench","domain");
-        $this->workbenchSettings->prepare("laravel_package","type");
-        $this->workbenchSettings->prepare("public","dirtype");
-        $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
-        $this->workbenchSettings->prepare("github","git");
-        $this->workbenchSettings->prepare("alevento","user");
-        $this->workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
-        $this->workbenchSettings->prepare("a@a.it","email");
-        $this->workbenchSettings->prepare("padosoft","organization");
+
+
 
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
@@ -297,6 +306,29 @@ EOF;
         return $testo;
     }
 
+    public function setWorkbenchSettings($workbenchSettings)
+    {
+        $this->workbenchSettings=$workbenchSettings;
+    }
+
+    public function getWorkbenchSettings()
+    {
+        return $this->workbenchSettings;
+    }
+
+    public function __get($property)
+    {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+
+    public function __set($property, $value)
+    {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+    }
 
 }
 

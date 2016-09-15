@@ -24,7 +24,8 @@ class Domain implements IEnumerable
     public function __construct(Workbench $command)
     {
         $this->command=$command;
-        $this->requested=$this->command->workbenchSettings->requested;
+        $this->requested=$this->command->getWorkbenchSettings()->getRequested();
+        //$this->requested=$requested;
     }
 
 
@@ -38,7 +39,7 @@ class Domain implements IEnumerable
             $this->requested["domain"]["valore-valido"]= true;
         }
 
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

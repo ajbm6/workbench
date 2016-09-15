@@ -63,6 +63,15 @@ EOF;
 
     private $parameters = array();
 
+    function __construct() {
+        if(is_null($this->workbenchSettings) ){
+            $this->workbenchSettings = new WorkbenchSettings($this);
+        }
+        parent::__construct();
+    }
+
+
+
     /**
      * Execute the console command.
      *
@@ -70,7 +79,6 @@ EOF;
      */
     public function handle()
     {
-        $this->workbenchSettings = new WorkbenchSettings($this);
         $this->hardWork($this->argument(), $this->option());
     }
 
@@ -629,6 +637,16 @@ EOF;
 
         file_put_contents($readmepathdestination, $index);
 
+    }
+
+    public function setWorkbenchSettings($workbenchSettings)
+    {
+        $this->workbenchSettings=$workbenchSettings;
+    }
+
+    public function getWorkbenchSettings()
+    {
+        return $this->workbenchSettings;
     }
 
     public function __get($property)

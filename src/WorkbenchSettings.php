@@ -36,7 +36,7 @@ class WorkbenchSettings
     const PACKAGEDESCR = "packagedescr";
     const PACKAGEKEYWORDS = "packagekeywords";
 
-    public function __construct(Command $command){
+    public function __construct(Workbench $command){
         $this->command=$command;
     }
 
@@ -82,6 +82,15 @@ class WorkbenchSettings
 
     }
 
+    public function setRequested($requested)
+    {
+        $this->requested=$requested;
+    }
+
+    public function getRequested()
+    {
+        return $this->requested;
+    }
 
     public function __get($property)
     {
