@@ -42,7 +42,7 @@ class Password implements IEnumerable
             $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
             $this->requested["password"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

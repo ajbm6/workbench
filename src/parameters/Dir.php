@@ -50,8 +50,8 @@ class Dir implements IEnumerable
             $attemp++;
             if ($attemp== $attemps) return $this->command->error("Exit for invalid path");
         }
-        
-        $this->command->workbenchSettings->requested=$this->requested;
+
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

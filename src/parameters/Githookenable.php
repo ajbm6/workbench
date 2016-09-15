@@ -43,8 +43,8 @@ class Githookenable implements IEnumerable
             $this->requested["githookenable"]["valore"] = $this->command->confirm('Do you want add pre commit git hook?');
             $this->requested["githookenable"]["valore-valido"]=true;
         }
-        
-        $this->command->workbenchSettings->requested=$this->requested;
+
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
         return $this->requested["githookenable"]["valore-valido"];
 
     }

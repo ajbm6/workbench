@@ -27,10 +27,15 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
     public function testHardWorkCreateNoOk()
     {
         $dir="Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
+        $user="alevento";
+        $password=env('PWD_ALE_GITHUB');
+        $email="alessandro.manneschi@gmail.com";
 
         Artisan::call('workbench:version',[
-            'dir'=>$dir
-
+            'dir'=>$dir,
+            '--user'=>$user,
+            '--password'=>$password,
+            '--email'=>$email,
         ]);
 
     }

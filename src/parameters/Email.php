@@ -53,7 +53,7 @@ class Email implements IEnumerable
             if ($attemp== $attemps) return $this->command->error("Exit for invalid email");
         }
 
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

@@ -39,7 +39,7 @@ class GitAction implements IEnumerable
             $this->requested["gitaction"]["valore"] = $this->command->choice('What do you want do?', ['push', 'pull']);
             $this->requested["gitaction"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

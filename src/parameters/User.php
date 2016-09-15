@@ -41,7 +41,7 @@ class User implements IEnumerable
             $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username');
             $this->requested["user"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

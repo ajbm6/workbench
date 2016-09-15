@@ -51,7 +51,7 @@ class Packagekeywords implements IEnumerable
             $this->requested["packagekeywords"]["valore"] = '"'. implode('","', explode(',',$this->requested["packagekeywords"]["valore"])).'"' ;
         }
 
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

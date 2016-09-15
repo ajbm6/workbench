@@ -54,8 +54,8 @@ class Dirtype implements IEnumerable
         if(substr($this->requested["type"]['valore'],-7) != 'package') {
             $this->requested["dir"]["valore"]=Dir::adjustPath(Config::get('workbench.diraccess.'.$dirtype.'.local'));
         }
-        
-        $this->command->workbenchSettings->requested=$this->requested;
+
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

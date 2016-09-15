@@ -42,8 +42,8 @@ class Git implements IEnumerable
             $this->requested["git"]["valore"] = $this->command->choice('Github or Bitbucket?', ['github', 'bitbucket']);
             $this->requested["git"]["valore-valido"]=true;
         }
-        
-        $this->command->workbenchSettings->requested=$this->requested;
+
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
         return $this->requested["git"]["valore-valido"];
 
     }

@@ -41,7 +41,7 @@ class Organization implements IEnumerable
             $this->requested["organization"]["valore"] = $this->command->ask('Vendor name and git repository\'s organization');
             $this->requested["organization"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

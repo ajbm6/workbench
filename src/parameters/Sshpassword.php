@@ -42,7 +42,7 @@ class Sshpassword implements IEnumerable
             $this->requested["sshpassword"]["valore"] = $this->command->secret('SSH password');
             $this->requested["sshpassword"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

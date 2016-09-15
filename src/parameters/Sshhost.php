@@ -55,7 +55,7 @@ class Sshhost
         }
 
 
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
         return $this->requested["sshhost"]["valore-valido"];
 
     }

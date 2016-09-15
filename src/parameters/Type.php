@@ -43,7 +43,7 @@ class Type implements IEnumerable
             $this->requested["type"]["valore"] = $this->command->choice('Project type?', ['laravel', 'normal','laravel_package','agnostic_package']);
             $this->requested["type"]["valore-valido"] = true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

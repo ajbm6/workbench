@@ -50,7 +50,7 @@ class Packagename implements IEnumerable
             $this->requested["packagename"]["valore"] = str_replace([" ","."],"-",strtolower($this->requested["packagename"]["valore"]));
         }
 
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     public function prova()

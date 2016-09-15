@@ -41,7 +41,7 @@ class Sshuser implements IEnumerable
             $this->requested["sshuser"]["valore"] = $this->command->ask('SSH username');
             $this->requested["sshuser"]["valore-valido"]= true;
         }
-        $this->command->workbenchSettings->requested=$this->requested;
+        $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }
 
     private function exitWork($error)

@@ -20,7 +20,10 @@ class WorkbenchVersion extends Command
      * @var string
      */
     protected $signature = 'workbench:version
-                            {dir? : package dir}';
+                            {dir? : package dir}
+                            {--u|user= : git user}
+                            {--p|password= : git password}
+                            {--e|email= : git email}';
 
     /**
      * The console command description.
@@ -69,21 +72,34 @@ EOF;
      */
     private function hardWork($argument, $option)
     {
+
         $command = new Workbench();
         $this->workbenchSettings = new WorkbenchSettings($command);
-        //$requested = $this->workbenchSettings->getRequested();
 
-        $command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
 
+
+        $this->workbenchSettings->prepare($this->input->getOption("user"),"user");
+        $this->workbenchSettings->prepare($this->input->getOption("password"),"password");
+        $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");
         $this->workbenchSettings->prepare($this->domain,"domain");
         $this->workbenchSettings->prepare("public","dirtype");
         $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
         $this->workbenchSettings->prepare("github","git");
-        $this->workbenchSettings->prepare("","user");
-        $this->workbenchSettings->prepare("","password");
-        $this->workbenchSettings->prepare("","email");
         $this->workbenchSettings->prepare($this->organization,"organization");
         $this->workbenchSettings->prepare($this->packagename,"packagename");
+
+
+
+        $command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
+
+        $user = new Parameters\User($command);
+        $user->read(false);
+        $password = new Parameters\Password($command);
+        $password->read(false);
+        $email = new Parameters\Email($command);
+        $email->read(false);
+
+
 
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
@@ -102,7 +118,7 @@ EOF;
 
         $gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
-        $gitWrapper->git("config --global user.password 129895ale");
+
 
         //$messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
         //$this->line($this->formatColorRedText($messagepull));
