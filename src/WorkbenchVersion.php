@@ -68,7 +68,7 @@ EOF;
         $this->workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
         $this->workbenchSettings->prepare("a@a.it","email");
         $this->workbenchSettings->prepare("padosoft","organization");
-
+        $this->workbenchSettings->prepare("workbench","packagename");
 
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
