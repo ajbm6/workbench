@@ -21,8 +21,8 @@ return new Sami($iterator,array(
     'theme'                => 'default',
     'title'                => 'Workbench API',
     'versions'             => $versions,
-    'build_dir'            => 'Y:/build/%version%',
-    'cache_dir'            => 'Y:/cache/%version%',
+    'build_dir'            => 'Y:/Public/laravel-packages/www/doc/padosoft/workbench/build/%version%',
+    'cache_dir'            => 'Y:/Public/laravel-packages/www/doc/padosoft/workbench/cache/%version%',
     'default_opened_level' => 2,
 ));
 
