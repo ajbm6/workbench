@@ -26,10 +26,10 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
     /** @test */
     public function testHardWorkCreateNoOk()
     {
-
+        $dir="Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
 
         Artisan::call('workbench:version',[
-
+            'dir'=>$dir
 
         ]);
 

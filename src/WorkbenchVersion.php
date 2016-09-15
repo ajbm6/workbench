@@ -19,7 +19,8 @@ class WorkbenchVersion extends Command
      *
      * @var string
      */
-    protected $signature = 'workbench:version';
+    protected $signature = 'workbench:version
+                            {dir? : package dir}';
 
     /**
      * The console command description.
@@ -30,11 +31,14 @@ class WorkbenchVersion extends Command
 The <info>workbench:version</info> ....
 EOF;
 
-    private  $BASE_PATH = "Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
-
+    private $BASE_PATH;
+    private $ORGANIZATION_PATH;
     private $parameters = array();
-
+    private $domain;
+    private $organization;
+    private $packagename;
     private $workbenchSettings;
+    private $type;
 
     /**
      * Execute the console command.
@@ -43,6 +47,18 @@ EOF;
      */
     public function handle()
     {
+        $this->BASE_PATH=$this->argument("dir");
+        if(empty($this->argument("dir"))) {
+            $this->BASE_PATH=__DIR__;
+
+        }
+        $this->BASE_PATH=\Padosoft\Workbench\Parameters\Dir::adjustPath($this->BASE_PATH);
+        $this->domain = basename($this->BASE_PATH);
+        $this->ORGANIZATION_PATH = substr($this->BASE_PATH,0,strlen($this->BASE_PATH)-(strlen($this->domain)+1));
+        $json = json_decode(file_get_contents($this->BASE_PATH."composer.json"),true);
+        $this->organization = explode("/",$json["name"])[0];
+        $this->packagename = explode("/",$json["name"])[1];
+        $this->type = (in_array("public",explode("/",strtolower($this->BASE_PATH)))?"public":"private");
 
         $this->hardWork($this->argument(), $this->option());
     }
@@ -59,16 +75,15 @@ EOF;
 
         $command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
 
-        $this->workbenchSettings->prepare("workbench","domain");
-        $this->workbenchSettings->prepare("laravel_package","type");
+        $this->workbenchSettings->prepare($this->domain,"domain");
         $this->workbenchSettings->prepare("public","dirtype");
         $this->workbenchSettings->prepare($this->BASE_PATH ,"dir");
         $this->workbenchSettings->prepare("github","git");
-        $this->workbenchSettings->prepare("alevento","user");
-        $this->workbenchSettings->prepare(env('PWD_ALE_GITHUB'),"password");
-        $this->workbenchSettings->prepare("a@a.it","email");
-        $this->workbenchSettings->prepare("padosoft","organization");
-        $this->workbenchSettings->prepare("workbench","packagename");
+        $this->workbenchSettings->prepare("","user");
+        $this->workbenchSettings->prepare("","password");
+        $this->workbenchSettings->prepare("","email");
+        $this->workbenchSettings->prepare($this->organization,"organization");
+        $this->workbenchSettings->prepare($this->packagename,"packagename");
 
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
