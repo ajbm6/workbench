@@ -7,7 +7,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
-//use phpseclib\Net\SSH2;
+use Illuminate\Console\Command;
 use Validator;
 use Config;
 
@@ -22,7 +22,7 @@ class Sshhost
         Enumerable::isValidValue as isValidValueTrait;
     }
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;

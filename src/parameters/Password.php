@@ -8,6 +8,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
+use Illuminate\Console\Command;
 
 class Password implements IEnumerable
 {
@@ -20,7 +21,7 @@ class Password implements IEnumerable
     private $command;
     private $requested;
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;
@@ -39,6 +40,7 @@ class Password implements IEnumerable
         }
 
         if(!$silent && !$this->requested["password"]["valore-valido"]){
+
             $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
             $this->requested["password"]["valore-valido"]= true;
         }

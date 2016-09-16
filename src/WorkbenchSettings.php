@@ -36,7 +36,7 @@ class WorkbenchSettings
     const PACKAGEDESCR = "packagedescr";
     const PACKAGEKEYWORDS = "packagekeywords";
 
-    public function __construct(Workbench $command){
+    public function __construct(Command $command){
         $this->command=$command;
     }
 

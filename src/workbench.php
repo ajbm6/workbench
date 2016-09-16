@@ -63,12 +63,12 @@ EOF;
 
     private $parameters = array();
 
-    function __construct() {
+    /*function __construct() {
         if(is_null($this->workbenchSettings) ){
             $this->workbenchSettings = new WorkbenchSettings($this);
         }
         parent::__construct();
-    }
+    }*/
 
 
 
@@ -79,6 +79,9 @@ EOF;
      */
     public function handle()
     {
+        if(is_null($this->workbenchSettings) ){
+            $this->workbenchSettings = new WorkbenchSettings($this);
+        }
         $this->hardWork($this->argument(), $this->option());
     }
 
@@ -88,6 +91,7 @@ EOF;
      */
     private function hardWork($argument, $option)
     {
+
 
         $this->readParameters($option, $argument);
 
@@ -622,11 +626,17 @@ EOF;
 
     public function getWorkbenchSettings()
     {
+        if(is_null($this->workbenchSettings) ){
+            $this->workbenchSettings = new WorkbenchSettings($this);
+        }
         return $this->workbenchSettings;
     }
 
     public function __get($property)
     {
+        if(is_null($this->workbenchSettings) ){
+            $this->workbenchSettings = new WorkbenchSettings($this);
+        }
         if (property_exists($this, $property)) {
             return $this->$property;
         }

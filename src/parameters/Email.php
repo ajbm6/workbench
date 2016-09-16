@@ -7,6 +7,7 @@ namespace Padosoft\Workbench\Parameters;
 
 
 use Padosoft\Workbench\Workbench;
+use Illuminate\Console\Command;
 use Padosoft\Workbench\Traits\Enumerable;
 use Validator;
 use Config;
@@ -22,7 +23,7 @@ class Email implements IEnumerable
     private $command;
     private $requested;
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;
@@ -46,6 +47,7 @@ class Email implements IEnumerable
 
         while(!$silent && (!$this->requested["email"]["valore-valido"] || empty($this->requested["email"]["valore"])) && $attemp<$attemps){
             $this->command->error("This email '" .$this->requested["email"]["valore"]. "' is not valid");
+
             $this->requested["email"]["valore"] = $this->command->ask('The email associated to git repository',
                 ($this->requested["email"]["valore-valido-default"]?$this->requested["email"]["valore-default"]:$this->requested["email"]["valore"]));
             $this->requested["email"]["valore-valido"] = Email::isValidValue($this->requested["email"]["valore"]);

@@ -8,6 +8,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
+use Illuminate\Console\Command;
 
 class User implements IEnumerable
 {
@@ -20,7 +21,7 @@ class User implements IEnumerable
     private $command;
     private $requested;
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;
@@ -38,6 +39,7 @@ class User implements IEnumerable
             $this->requested["user"]["valore-valido"]= true;
         }
         if(!$this->requested["user"]["valore-valido"]){
+
             $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username');
             $this->requested["user"]["valore-valido"]= true;
         }

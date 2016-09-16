@@ -8,6 +8,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
+use Illuminate\Console\Command;
 
 class Sshpassword implements IEnumerable
 {
@@ -20,7 +21,7 @@ class Sshpassword implements IEnumerable
 
     const CONFIG = "ssh.password";
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;

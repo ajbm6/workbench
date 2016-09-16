@@ -7,7 +7,7 @@ namespace Padosoft\Workbench\Parameters;
 
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
-
+use Illuminate\Console\Command;
 
 class GitAction implements IEnumerable
 {
@@ -20,7 +20,7 @@ class GitAction implements IEnumerable
     private $command;
     private $requested;
 
-    public function __construct(Workbench $command)
+    public function __construct(Command $command)
     {
         $this->command=$command;
         $this->requested=$this->command->workbenchSettings->requested;

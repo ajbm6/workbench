@@ -73,7 +73,7 @@ EOF;
     private function hardWork($argument, $option)
     {
 
-        $command = new Workbench();
+        $command = $this;
         $this->workbenchSettings = new WorkbenchSettings($command);
 
 
@@ -90,7 +90,7 @@ EOF;
 
 
 
-        $command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
+        //$command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
 
         $user = new Parameters\User($command);
         $user->read(false);
