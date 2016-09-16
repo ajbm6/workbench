@@ -305,7 +305,9 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details
 If you discover any security related issues, please email  instead of using the issue tracker.
 
 # API Documentation
-Please see API documentation at http://padosoft.github.io/workbench
+
+Please see API documentation at http://@@@organization.github.io/@@@package-name
+- [master](http://@@@organization.github.io/@@@package-name/master/build/)
 
 # Credits
 
