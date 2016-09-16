@@ -222,7 +222,7 @@ Per la modalità silent devono essere completi i campi in workbench.php
 
 Parametri nel config workbench.php
 
-<?php
+
 return [
     'action' => env(
         'WORKBENCH_ACTION',
@@ -263,7 +263,6 @@ return [
         'user' => env('WORKBENCH_GIT_USER', ''),
         'password' => env('WORKBENCH_GIT_PASSWORD', ''),
         'email' => env('WORKBENCH_GIT_EMAIL', ''),
-
     ],
     'organization' => env('WORKBENCH_GIT_GITHUB_ORGANIZATION', 'padosoft'),
     'ssh' => [
