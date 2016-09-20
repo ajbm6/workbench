@@ -8,7 +8,7 @@
 
 namespace Padosoft\Workbench;
 
-
+use Illuminate\Console\Command;
 
 class WorkbenchChangelog
 {
