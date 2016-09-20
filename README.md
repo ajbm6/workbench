@@ -305,8 +305,8 @@ If you discover any security related issues, please email  instead of using the 
 
 # API Documentation
 
-Please see API documentation at http://@@@organization.github.io/@@@package_name
-- [master](http://@@@organization.github.io/@@@package-name/master/build/)
+Please see API documentation at [http://@@@organization.github.io/@@@package_name](http://@@@organization.github.io/@@@package_name)
+- [master](http://@@@organization.github.io/@@@package_name/build/master/)
 
 # Credits
 

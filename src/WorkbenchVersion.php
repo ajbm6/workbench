@@ -76,8 +76,6 @@ EOF;
         $command = $this;
         $this->workbenchSettings = new WorkbenchSettings($command);
 
-
-
         $this->workbenchSettings->prepare($this->input->getOption("user"),"user");
         $this->workbenchSettings->prepare($this->input->getOption("password"),"password");
         $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");
@@ -88,8 +86,6 @@ EOF;
         $this->workbenchSettings->prepare($this->organization,"organization");
         $this->workbenchSettings->prepare($this->packagename,"packagename");
 
-
-
         //$command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
 
         $user = new Parameters\User($command);
@@ -98,8 +94,6 @@ EOF;
         $password->read(false);
         $email = new Parameters\Email($command);
         $email->read(false);
-
-
 
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
@@ -177,6 +171,9 @@ EOF;
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
 
+        $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
+
+        $changelog->question();
         //TODO
         //chiedere messaggio di commit*
         //commit del progetto*
