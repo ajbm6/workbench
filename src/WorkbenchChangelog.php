@@ -82,12 +82,30 @@ class WorkbenchChangelog
             case 'Exit.':
                 break;
         }
+        return $this;
+    }
+
+    public function writeChangeLog($fileLog,$branche)
+    {
+        $file=\Padosoft\Workbench\Parameters\Dir::adjustPath($fileLog);
+        $changeLog = file_get_contents($fileLog);
+
+        $toAddToFile="###";
+
+        foreach($this->changes['added'] as $change) {
+
+        }
+
 
     }
 
+
+
+
+
     public function getChanges()
     {
-        return $this->changes();
+        return $this->changes;
     }
 
 }

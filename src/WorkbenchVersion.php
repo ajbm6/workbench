@@ -64,7 +64,7 @@ EOF;
         $this->packagename = explode("/",$json["name"])[1];
         $this->type = (in_array("public",explode("/",strtolower($this->BASE_PATH)))?"public":"private");
 
-        $this->hardWork($this->argument(), $this->option());
+        $this->hardWork2($this->argument(), $this->option());
     }
 
     /**
@@ -194,12 +194,20 @@ EOF;
     {
         $command = $this;
         $this->workbenchSettings = new WorkbenchSettings($command);
-
+        $this->workbenchSettings->prepare($this->input->getOption("user"),"user");
+        $this->workbenchSettings->prepare($this->input->getOption("password"),"password");
+        $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");
+        $this->workbenchSettings->prepare($this->domain,"domain");
+        $this->workbenchSettings->prepare("public","dirtype");
+        $this->workbenchSettings->prepare($this->ORGANIZATION_PATH ,"dir");
+        $this->workbenchSettings->prepare("github","git");
+        $this->workbenchSettings->prepare($this->organization,"organization");
+        $this->workbenchSettings->prepare($this->packagename,"packagename");
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
 
-        $changelog->question();
-        $changes = $changelog->getChanges();
+        $changelog->question()->getChanges();
+
     }
 
 
