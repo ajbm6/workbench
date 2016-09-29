@@ -23,7 +23,8 @@ class WorkbenchVersion extends Command
                             {dir? : package dir}
                             {--u|user= : git user}
                             {--p|password= : git password}
-                            {--e|email= : git email}';
+                            {--e|email= : git email}
+                            {--s|silent : no questions}';
 
     /**
      * The console command description.
@@ -86,7 +87,7 @@ EOF;
         $this->workbenchSettings->prepare($this->organization,"organization");
         $this->workbenchSettings->prepare($this->packagename,"packagename");
 
-        //$command->getWorkbenchSettings()->setRequested($this->workbenchSettings->getRequested());
+
 
         $user = new Parameters\User($command);
         $user->read(false);
@@ -98,7 +99,7 @@ EOF;
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
-        $branches = $this->getListBranches($gitWorkingCopy);
+        //$branches = $this->getListBranches($gitWorkingCopy);
         $activebranch = $this->getActiveBranch($gitWrapper);
 
         $message="Test package";
@@ -174,6 +175,7 @@ EOF;
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
 
         $changelog->question();
+        $changes = $changelog->getChanges();
         //TODO
         //chiedere messaggio di commit*
         //commit del progetto*
@@ -187,6 +189,20 @@ EOF;
         //chiedere se pushare e taggare con la nuova versione
 
     }
+
+    private function hardWork2($argument, $option)
+    {
+        $command = $this;
+        $this->workbenchSettings = new WorkbenchSettings($command);
+
+
+        $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
+
+        $changelog->question();
+        $changes = $changelog->getChanges();
+    }
+
+
 
     public function runSemVer()
     {
