@@ -169,6 +169,8 @@ EOF;
         $changelog->question()->getChanges();
         $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
+        $gitWrapper->git("add .");
+        $this->addAndCommit($gitWorkingCopy,"Changelog updated");
 
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch?")) {
