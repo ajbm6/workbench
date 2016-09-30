@@ -85,22 +85,31 @@ class WorkbenchChangelog
         return $this;
     }
 
-    public function writeChangeLog($fileLog,$branche)
+    public function writeChangeLog($fileLog,$tag)
     {
         $file=\Padosoft\Workbench\Parameters\Dir::adjustPath($fileLog);
         $changeLog = file_get_contents($fileLog);
 
-        $toAddToFile="###";
+        $toSubstitute= "# Changelog\r\n\r\nAll Notable changes to ".$this->workbenchSettings->getRequested()['packagename']['valore']." will be documented in this file\r\n\r\n";
 
-        foreach($this->changes['added'] as $change) {
+        $toAddToFile = $toSubstitute."## ".$tag." - ".date("Y-m-d")."\r\n";
+
+        foreach ($this->changes as $key => $values) {
+            if(count($this->changes[$key])) {
+                $toAddToFile = $toAddToFile."\r\n";
+                $toAddToFile = $toAddToFile."### ".ucfirst($key)."\r\n";
+            }
+
+            foreach($this->changes[$key] as $change) {
+                $toAddToFile = $toAddToFile."- ".$change."\r\n";
+            }
 
         }
-
+        $toAddToFile = $toAddToFile."\r\n";
+        $newChangeLog=str_replace($toSubstitute,$toAddToFile, $changeLog);
+        file_put_contents($fileLog,$newChangeLog);
 
     }
-
-
-
 
 
     public function getChanges()

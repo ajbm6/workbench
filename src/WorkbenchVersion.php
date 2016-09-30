@@ -51,6 +51,9 @@ EOF;
      */
     public function handle()
     {
+
+
+
         $this->BASE_PATH=$this->argument("dir");
         if(empty($this->argument("dir"))) {
             $this->BASE_PATH=__DIR__;
@@ -64,7 +67,7 @@ EOF;
         $this->packagename = explode("/",$json["name"])[1];
         $this->type = (in_array("public",explode("/",strtolower($this->BASE_PATH)))?"public":"private");
 
-        $this->hardWork2($this->argument(), $this->option());
+        $this->hardWork($this->argument(), $this->option());
     }
 
     /**
@@ -99,13 +102,23 @@ EOF;
         $gitWrapper = new GitWrapper();
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
+
+        $gitWorkingCopy->remote("update");
+        $commitControl = $gitWorkingCopy->status("-uno");
+
+        preg_match('(Your branch is ahead|Your branch is up-to-date)',$commitControl,$matches);
+        if(count($matches)==0) {
+            echo "The local commit isn't update with remote commit";
+            exit();
+        }
+        $this->line($matches[0]);
         //$branches = $this->getListBranches($gitWorkingCopy);
         $activebranch = $this->getActiveBranch($gitWrapper);
 
-        $message="Test package";
-        /*do {
+        //$message="Test package";
+        do {
             $message = $this->ask("Commit message");
-        } while ($message == "");*/
+        } while ($message == "");
 
         $this->info("Active branch is ".$activebranch);
         $gitWrapper->git("add .");
@@ -133,8 +146,7 @@ EOF;
         $semVerVersion = $this->semVerAnalisys($output);
         $this->line("Suggested semantic versioning change: ". $semVerVersion);
 
-        switch ($semVerVersion)
-            {
+        switch ($semVerVersion) {
             case "MAJOR";
                 $tagVersion[0] = $tagVersion[0] +1;
                 $tagVersion[1] = 0;
@@ -153,20 +165,22 @@ EOF;
             }
 
         $this->line("Suggested TAG: ". implode(".",$tagVersion));
-
-        $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
-
-        $this->line("Active branch pushed on origin");
-
-        $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
-
-        $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
-
-        $this->line("Tagged");
+        $pushed=false;
+        if ($this->confirm("Do you want push the active branch?")) {
+            $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
+            $this->line("Active branch pushed on origin");
+            $pushed=true;
+        }
 
 
+        if ($this->confirm("Do you want tag the active branch?")) {
+            $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+        }
 
-
+        if ($pushed) {
+            $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+            $this->line("Tagged");
+        }
 
 
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
@@ -174,8 +188,9 @@ EOF;
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
 
-        $changelog->question();
-        $changes = $changelog->getChanges();
+        $changelog->question()->getChanges();
+        $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
+
         //TODO
         //chiedere messaggio di commit*
         //commit del progetto*
@@ -207,7 +222,7 @@ EOF;
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
 
         $changelog->question()->getChanges();
-
+        $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md","1.1.0");
     }
 
 
