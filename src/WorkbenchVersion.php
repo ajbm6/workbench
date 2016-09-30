@@ -112,7 +112,7 @@ EOF;
             exit();
         }
         $this->line($matches[0]);
-        //$branches = $this->getListBranches($gitWorkingCopy);
+
         $activebranch = $this->getActiveBranch($gitWrapper);
 
         //$message="Test package";
@@ -122,7 +122,7 @@ EOF;
 
         $this->info("Active branch is ".$activebranch);
         $gitWrapper->git("add .");
-        $this->line( $this->addAndCommit($gitWorkingCopy,$message));
+        $this->addAndCommit($gitWorkingCopy,$message);
 
         $gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
