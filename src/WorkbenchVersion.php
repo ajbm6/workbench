@@ -128,12 +128,8 @@ EOF;
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
 
 
-        //$messagepull = $this->pullOriginActiveBranch($gitWorkingCopy,$activebranch);
-        //$this->line($this->formatColorRedText($messagepull));
-        /*if(!$this->ask("Do you want continue pushing and tagging project?","y"))
-        {
-            return;
-        }*/
+
+
         $this->line("Last tag version is ". $this->getLastTagVersion($gitWrapper));
 
         //$tagVersion = array("0","0","0");
@@ -165,31 +161,43 @@ EOF;
             }
 
         $this->line("Suggested TAG: ". implode(".",$tagVersion));
-        $pushed=false;
+
+
+        $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
+        $changelog->question()->getChanges();
+        $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
+
+
+        $tagged=false;
+        if ($this->confirm("Do you want tag the active branch?")) {
+            $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+            $tagged=true;
+        }
+
         if ($this->confirm("Do you want push the active branch?")) {
             $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
             $this->line("Active branch pushed on origin");
-            $pushed=true;
+            if($tagged) {
+                $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+                $this->line("Tagged");
+            }
+
+
         }
 
 
-        if ($this->confirm("Do you want tag the active branch?")) {
-            $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
-        }
 
+        /*
         if ($pushed) {
             $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
             $this->line("Tagged");
-        }
+        }*/
 
 
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
 
-        $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
 
-        $changelog->question()->getChanges();
-        $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
         //TODO
         //chiedere messaggio di commit*
@@ -205,25 +213,7 @@ EOF;
 
     }
 
-    private function hardWork2($argument, $option)
-    {
-        $command = $this;
-        $this->workbenchSettings = new WorkbenchSettings($command);
-        $this->workbenchSettings->prepare($this->input->getOption("user"),"user");
-        $this->workbenchSettings->prepare($this->input->getOption("password"),"password");
-        $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");
-        $this->workbenchSettings->prepare($this->domain,"domain");
-        $this->workbenchSettings->prepare("public","dirtype");
-        $this->workbenchSettings->prepare($this->ORGANIZATION_PATH ,"dir");
-        $this->workbenchSettings->prepare("github","git");
-        $this->workbenchSettings->prepare($this->organization,"organization");
-        $this->workbenchSettings->prepare($this->packagename,"packagename");
 
-        $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
-
-        $changelog->question()->getChanges();
-        $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md","1.1.0");
-    }
 
 
 
