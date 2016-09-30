@@ -124,6 +124,8 @@ EOF;
         $gitWrapper->git("add .");
         $this->addAndCommit($gitWorkingCopy,$message);
 
+        exit();
+
         $gitWrapper->git("config --global user.name alevento");
         $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
 
