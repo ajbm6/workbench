@@ -232,7 +232,9 @@ EOF;
 
     }
 
-
+    public function dummy($goofy)    {
+        echo 'pippo';
+    }
 
 
 
