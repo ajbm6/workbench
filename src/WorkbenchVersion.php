@@ -349,6 +349,7 @@ EOF;
             return;
         }*/
         try {
+            //$gitWorkingCopy->commit('Commit', array('m' => $message));
             $gitWorkingCopy->commit($message);
         }
         catch (\Exception $e) {
