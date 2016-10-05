@@ -336,7 +336,7 @@ EOF;
 
     public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
     {
-
+        /*
         try {
             $output = $gitWorkingCopy->status(array("porcelain"=>true));
         }
@@ -347,9 +347,15 @@ EOF;
         if($output=="")
         {
             return;
+        }*/
+        try {
+            $gitWorkingCopy->commit($message);
+        }
+        catch (\Exception $e) {
+            //$output = "";
         }
 
-        return $gitWorkingCopy->commit($message)->getStatus();
+        //return $gitWorkingCopy->commit($message)->getStatus();
     }
 
     public function pushOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
