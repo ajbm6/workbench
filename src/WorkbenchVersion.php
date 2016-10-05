@@ -136,8 +136,8 @@ EOF;
 
 
 
-        $gitWrapper->git("config --global user.name alevento");
-        $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
+        //$gitWrapper->git("config --global user.name alevento");
+        //$gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
 
 
 
@@ -189,7 +189,14 @@ EOF;
 
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch?")) {
-            $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+
+            try {
+                $gitWrapper->git("tag ".implode(".",$tagVersion),$this->BASE_PATH);
+            }
+            catch (\Exception $e) {
+
+            }
+            //$this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
             $tagged=true;
         }
 
