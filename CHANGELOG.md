@@ -7,6 +7,17 @@ All Notable changes to workbench will be documented in this file
 ### Added
 - Added changelog question
 
+### Fixed
+- Fixed semver output
+
+### Changed
+- Added output file semver
+
+## 1.0.0 - 2016-10-05
+
+### Added
+- Added changelog question
+
 ### Changed
 - Changed output semver
 
