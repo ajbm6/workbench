@@ -199,7 +199,7 @@ EOF;
             //$this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
             $tagged=true;
         }
-
+        exit();
         if ($this->confirm("Do you want push the active branch?")) {
             $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
             $this->line("Active branch pushed on origin");
