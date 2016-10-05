@@ -52,6 +52,9 @@ EOF;
     public function handle()
     {
 
+        $gitWrapper = new GitWrapper();
+
+
 
 
         $this->BASE_PATH=$this->argument("dir");
@@ -100,6 +103,7 @@ EOF;
         $email->read(false);
 
         $gitWrapper = new GitWrapper();
+
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
 
