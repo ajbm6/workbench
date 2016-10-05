@@ -54,8 +54,14 @@ EOF;
 
         $gitWrapper = new GitWrapper();
 
-
-
+        /*
+        try {
+            $output = $gitWrapper->git("rev-parse --quiet --verify gh-pages","Y:/Public/laravel-packages/www/doc/padosoft/workbench");
+        }
+        catch (\Exception $e) {
+            $output = "";
+            //dd($e->getMessage() ."\r\n". $e->getTraceAsString());
+        }*/
 
         $this->BASE_PATH=$this->argument("dir");
         if(empty($this->argument("dir"))) {
