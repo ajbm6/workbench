@@ -335,12 +335,19 @@ EOF;
 
     public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
     {
-        $output = $gitWorkingCopy->status(array("porcelain"=>true));
+
+        try {
+            $output = $gitWorkingCopy->status(array("porcelain"=>true));
+        }
+        catch (\Exception $e) {
+            $output = "";
+        }
+
         if($output=="")
         {
             return;
         }
-        //$gitWorkingCopy->add("/.");
+
         return $gitWorkingCopy->commit($message)->getStatus();
     }
 
