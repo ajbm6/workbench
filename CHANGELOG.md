@@ -6,6 +6,15 @@ All Notable changes to workbench will be documented in this file
 
 ### Added
 - Added changelog question
+- Added output semver file
+
+### Fixed
+- Fixed output semver
+
+## 1.0.0 - 2016-10-05
+
+### Added
+- Added changelog question
 
 ### Fixed
 - Fixed semver output
