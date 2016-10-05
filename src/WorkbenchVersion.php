@@ -140,10 +140,11 @@ EOF;
         $this->createSemverCopyFolder($gitWrapper);
         //$output = array();
         $output = $this->runSemVer();
-        $this->line("Semver output will be saved in ".sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt");
+
+        $this->line(implode("\r\n",$output));
+        $this->warn("Semver output will be saved in ".sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt");
 
         file_put_contents(sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt",implode("\r\n",$output));
-        $this->line(implode("\r\n",$output));
         $semVerVersion = $this->semVerAnalisys($output);
         $this->info("Suggested semantic versioning change: ". $semVerVersion);
 
@@ -165,7 +166,7 @@ EOF;
             break;
             }
 
-        $this->line("Suggested TAG: ". implode(".",$tagVersion));
+        $this->error("Suggested TAG: ". implode(".",$tagVersion));
 
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
