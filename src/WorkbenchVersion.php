@@ -140,10 +140,12 @@ EOF;
         $this->createSemverCopyFolder($gitWrapper);
         //$output = array();
         $output = $this->runSemVer();
-        file_put_contents("semver_output.txt",implode("\r\n",$output));
+        $this->line("Semver output will be saved in ".sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt");
+
+        file_put_contents(sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt",implode("\r\n",$output));
         $this->line(implode("\r\n",$output));
         $semVerVersion = $this->semVerAnalisys($output);
-        $this->line("Suggested semantic versioning change: ". $semVerVersion);
+        $this->info("Suggested semantic versioning change: ". $semVerVersion);
 
         switch ($semVerVersion) {
             case "MAJOR";
