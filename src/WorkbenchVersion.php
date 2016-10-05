@@ -222,7 +222,7 @@ EOF;
 
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
-
+        sleep(5);
 
 
         //TODO
