@@ -191,12 +191,12 @@ EOF;
         if ($this->confirm("Do you want tag the active branch?")) {
 
             try {
-                $gitWrapper->git("tag ".implode(".",$tagVersion),$this->BASE_PATH);
+                $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
             }
             catch (\Exception $e) {
 
             }
-            //$this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+            //
             $tagged=true;
         }
 
@@ -210,7 +210,7 @@ EOF;
 
 
         }
-        exit();
+
 
 
         /*
