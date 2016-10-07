@@ -68,7 +68,7 @@ EOF;
             throw new Exception('Unable to find the Php executable.');
         }
 
-        $gitWrapper = new GitWrapper();
+        //$gitWrapper = new GitWrapper();
 
         /*
         try {
@@ -124,9 +124,9 @@ EOF;
         $email = new Parameters\Email($command);
         $email->read(false);
 
-        $gitWrapper = new GitWrapper();
+        //$gitWrapper = new GitWrapper();
 
-        $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
+        //$gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
         $gitSimpleWrapper = new GitSimpleWrapper($this->BASE_PATH,null);
         $gitSimpleWrapper->git("remote update");
@@ -170,7 +170,7 @@ EOF;
         //$tagVersion = array("0","0","0");
 
         $tagVersion = $this->getLastTagVersionArray($gitSimpleWrapper);
-        $this->createSemverCopyFolder($gitWrapper);
+        $this->createSemverCopyFolder($gitSimpleWrapper);
         //$output = array();
         $output = $this->runSemVer();
 
@@ -206,15 +206,15 @@ EOF;
         $changelog->question()->getChanges();
         $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
-        $gitWrapper->git("add .");
-
-        $gitWorkingCopy->commit("Changelog updated");
+        $gitSimpleWrapper->git("add .");
+        $gitSimpleWrapper->git("commit -m Changelog updated");
+        //$gitWorkingCopy->commit("Changelog updated");
 
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch?")) {
 
             try {
-                $this->tagActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+                $this->tagActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
             }
             catch (\Exception $e) {
 
@@ -224,10 +224,10 @@ EOF;
         }
 
         if ($this->confirm("Do you want push the active branch?")) {
-            $this->pushOriginActiveBranch($gitWorkingCopy,$activebranch);
+            $this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch);
             $this->line("Active branch pushed on origin");
             if($tagged) {
-                $this->pushTagOriginActiveBranch($gitWorkingCopy,implode(".",$tagVersion));
+                $this->pushTagOriginActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
                 $this->line("Tagged");
             }
 
@@ -271,7 +271,7 @@ EOF;
     public function runSemVer()
     {
         $output = array();
-        $rawoutput = exec('C:/xampp/php/php.exe Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
+        $rawoutput = exec($this->phpBinary.' Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
 
         return $output;
 
@@ -281,13 +281,6 @@ EOF;
     {
         $positionVersion = strpos($output[2],":")+2;
         return substr($output[2],$positionVersion,strlen($output[2])-$positionVersion);
-    }
-
-    public function getListBranches(GitWorkingCopy $gitWorkingCopy)
-    {
-        $gitbranches = new GitBranches($gitWorkingCopy);
-        $branches = array();
-        return $gitbranches->fetchBranches();
     }
 
     public function getActiveBranch(GitSimpleWrapper $gitSimpleWrapper)
@@ -320,7 +313,7 @@ EOF;
         return $tags[count($tags)-1];
     }
 
-    public function createSemverCopyFolder(GitWrapper $gitWrapper)
+    public function createSemverCopyFolder(GitSimpleWrapper $gitSimpleWrapper)
     {
         if(File::exists("y:/semver/original/"))
         {
@@ -352,17 +345,21 @@ EOF;
         $this->line('finito copia');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
         //File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
-        $lastTagVersion = $this->getLastTagVersion($gitWrapper);
+        $lastTagVersion = $this->getLastTagVersion($gitSimpleWrapper);
 
-        $gitWorkingCopySemver = $gitWrapper->workingCopy("y:/semver/oldversion/");
-        return $this->checkoutToTagVersion($lastTagVersion,$gitWorkingCopySemver);
+        //$gitWorkingCopySemver = $gitSimpleWrapper->workingCopy("y:/semver/oldversion/");
+        $workingDirectory = $gitSimpleWrapper->getWorkingDirectory();
+        $gitSimpleWrapper->setWorkingDirectory("y:/semver/oldversion/");
+        $output = $this->checkoutToTagVersion($lastTagVersion,$gitSimpleWrapper);
+        $gitSimpleWrapper->setWorkingDirectory($workingDirectory);
+        return $output;
 
 
     }
 
-    public function checkoutToTagVersion($version,GitWorkingCopy $gitWorkingCopySemver)
+    public function checkoutToTagVersion($version,GitSimpleWrapper $gitSimpleWrapper)
     {
-        return $gitWorkingCopySemver->checkout($version);
+        return $gitSimpleWrapper->git("checkout ".$version);
 
     }
 
@@ -380,31 +377,31 @@ EOF;
         //return $gitWorkingCopy->commit($message)->getStatus();
     }
 
-    public function pushOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
+    public function pushOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $branch)
     {
-        return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
-
+        //return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$branch);
     }
 
-    public function tagActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
+    public function tagActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
-        return $gitWorkingCopy->tag($tag);
+        return $gitSimpleWrapper->git("tag ".$tag);
     }
 
-    public function pushTagOriginActiveBranch(GitWorkingCopy $gitWorkingCopy, $tag)
+    public function pushTagOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
-        return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
-
+        //return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$tag );
     }
 
-    public function pullOriginMaster(GitWorkingCopy $gitWorkingCopy)
+    public function pullOriginMaster(GitSimpleWrapper $gitSimpleWrapper)
     {
-        return $gitWorkingCopy->pull('origin','master');
+        return $gitSimpleWrapper->git("pull origin waster");
     }
 
-    public function pullOriginActiveBranch(GitWorkingCopy $gitWorkingCopy,$branch)
+    public function pullOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper,$branch)
     {
-        return $gitWorkingCopy->pull("origin",$branch);
+        return $gitSimpleWrapper->git("pull origin ".$branch);
 
     }
 
