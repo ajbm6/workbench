@@ -5,6 +5,11 @@ All Notable changes to workbench will be documented in this file
 ## 1.0.0 - 2016-10-07
 
 ### Added
+- Added chengelog question
+
+## 1.0.0 - 2016-10-07
+
+### Added
 - Added changelog question
 
 ## 1.0.0 - 2016-10-07
