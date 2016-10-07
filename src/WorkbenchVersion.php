@@ -207,7 +207,7 @@ EOF;
         $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
         $gitSimpleWrapper->git("add .");
-        $gitSimpleWrapper->git("commit -m Changelog updated");
+        $gitSimpleWrapper->git('commit -m "Changelog updated"');
         //$gitWorkingCopy->commit("Changelog updated");
 
         $tagged=false;
@@ -368,7 +368,7 @@ EOF;
 
         try {
             //$gitWorkingCopy->commit('Commit', array('m' => $message));
-            $gitSimpleWrapper->git("commit -m ".$message);
+            $gitSimpleWrapper->git('commit -m "'.$message.'"');
         }
         catch (\Exception $e) {
             //$output = "";
