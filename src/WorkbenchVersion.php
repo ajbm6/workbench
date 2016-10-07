@@ -438,5 +438,9 @@ EOF;
         }
     }
 
+    public function pippo()
+    {
+        return 0;
+    }
 }
 
