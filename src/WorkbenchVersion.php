@@ -46,6 +46,7 @@ EOF;
     private $type;
     private $phpBinary;
     private $gitBinary;
+    private $DEBUG = true;
 
     /**
      * Execute the console command.
@@ -127,12 +128,16 @@ EOF;
 
         $gitWorkingCopy = $gitWrapper->workingCopy($this->BASE_PATH);
 
+        $gitSimpleWrapper = new GitSimpleWrapper($this->BASE_PATH,null);
+        $gitSimpleWrapper->git("remote update");
 
-        $gitWorkingCopy->remote("update");
-        $commitControl = $gitWorkingCopy->status("-uno");
+        //$gitWorkingCopy->remote("update");
+        //$commitControl = $gitWorkingCopy->status("-uno");
 
+        $commitControl="";
         try  {
-            exec($this->gitBinary." -C ".$this->BASE_PATH." status -uno 2>&1", $output, $returned_val);
+            $output =  $gitSimpleWrapper->git("status -uno");
+            (is_array($output) ? $commitControl = implode("\r\n",$output):$commitControl=$output);
         }
         catch (\Exception $e)  {
             echo $e->getMessage();
@@ -145,30 +150,26 @@ EOF;
         }
         $this->line($matches[0]);
 
-        $activebranch = $this->getActiveBranch($gitWrapper);
+        $activebranch = $this->getActiveBranch($gitSimpleWrapper);
 
         //$message="Test package";
-        do {
-            $message = $this->ask("Commit message");
-        } while ($message == "");
-
+        $message = "DEBUG";
+        if(!$this->DEBUG) {
+            do {
+                $message = $this->ask("Commit message");
+            } while ($message == "");
+        }
         $this->info("Active branch is ".$activebranch);
-        $gitWrapper->git("add .");
-        $this->addAndCommit($gitWorkingCopy,$message);
+        $gitSimpleWrapper->git("add .");
+        $this->addAndCommit($gitSimpleWrapper,$message);
 
 
 
-        //$gitWrapper->git("config --global user.name alevento");
-        //$gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
-
-
-
-
-        $this->line("Last tag version is ". $this->getLastTagVersion($gitWrapper));
+        $this->line("Last tag version is ". $this->getLastTagVersion($gitSimpleWrapper));
 
         //$tagVersion = array("0","0","0");
 
-        $tagVersion = $this->getLastTagVersionArray($gitWrapper);
+        $tagVersion = $this->getLastTagVersionArray($gitSimpleWrapper);
         $this->createSemverCopyFolder($gitWrapper);
         //$output = array();
         $output = $this->runSemVer();
@@ -206,7 +207,7 @@ EOF;
         $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
         $gitWrapper->git("add .");
-        //$this->addAndCommit($gitWorkingCopy,"Changelog updated");
+
         $gitWorkingCopy->commit("Changelog updated");
 
         $tagged=false;
@@ -289,16 +290,16 @@ EOF;
         return $gitbranches->fetchBranches();
     }
 
-    public function getActiveBranch(GitWrapper $gitWrapper)
+    public function getActiveBranch(GitSimpleWrapper $gitSimpleWrapper)
     {
-        $status=$gitWrapper->git("status");
-        return substr($status,10,strpos($status,"\n")-10);
+        $status=$gitSimpleWrapper->git("status");
+        return substr($status[0],10,strlen($status[0])-10);
     }
 
-    public function getLastTagVersionArray(GitWrapper $gitWrapper)
+    public function getLastTagVersionArray(GitSimpleWrapper $gitSimpleWrapper)
     {
 
-        $lastlocaltag = $this->getLastTagVersion($gitWrapper);
+        $lastlocaltag = $this->getLastTagVersion($gitSimpleWrapper);
 
         if(starts_with($lastlocaltag,"v")) {
             $lastlocaltag = str_replace("\n","",substr($lastlocaltag,1));
@@ -307,16 +308,16 @@ EOF;
 
     }
 
-    public function getLastTagVersion(GitWrapper $gitWrapper)
+    public function getLastTagVersion(GitSimpleWrapper $gitSimpleWrapper)
     {
-        $tags=$gitWrapper->git("tag");
+        $tags=$gitSimpleWrapper->git("tag");
         $lastlocaltag = "";
         if($tags == "") {
             return;
         }
 
-        return  trim(preg_replace('/\s\s+/', '', $gitWrapper->git("describe --abbrev=0 --tags")));
-
+        //return  trim(preg_replace('/\s\s+/', '', $gitSimpleWrapper->git("describe --abbrev=0 --tags")));
+        return tags[count(tags)-1];
     }
 
     public function createSemverCopyFolder(GitWrapper $gitWrapper)
@@ -365,23 +366,12 @@ EOF;
 
     }
 
-    public function addAndCommit(GitWorkingCopy $gitWorkingCopy, $message)
+    public function addAndCommit(GitSimpleWrapper $gitSimpleWrapper, $message)
     {
-        /*
-        try {
-            $output = $gitWorkingCopy->status(array("porcelain"=>true));
-        }
-        catch (\Exception $e) {
-            $output = "";
-        }
 
-        if($output=="")
-        {
-            return;
-        }*/
         try {
             //$gitWorkingCopy->commit('Commit', array('m' => $message));
-            $gitWorkingCopy->commit($message);
+            $gitSimpleWrapper->git("commit -m ".$message);
         }
         catch (\Exception $e) {
             //$output = "";

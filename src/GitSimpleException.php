@@ -8,8 +8,7 @@
 
 namespace Padosoft\Workbench;
 
-
-class GitSimpleException
-{
-
-}
+/**
+ * Base class for exceptions thrown by the Git library.
+ */
+class GitSimpleException extends \RuntimeException { }
