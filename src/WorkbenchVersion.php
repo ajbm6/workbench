@@ -311,13 +311,13 @@ EOF;
     public function getLastTagVersion(GitSimpleWrapper $gitSimpleWrapper)
     {
         $tags=$gitSimpleWrapper->git("tag");
-        $lastlocaltag = "";
+        //$lastlocaltag = "";
         if($tags == "") {
             return;
         }
 
         //return  trim(preg_replace('/\s\s+/', '', $gitSimpleWrapper->git("describe --abbrev=0 --tags")));
-        return tags[count(tags)-1];
+        return $tags[count($tags)-1];
     }
 
     public function createSemverCopyFolder(GitWrapper $gitWrapper)
