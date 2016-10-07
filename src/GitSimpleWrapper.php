@@ -40,7 +40,7 @@ class GitSimpleWrapper
         exec($this->gitBinary." -C ".$this->workingDirectory." $command 2>&1", $output, $returned_val);
 
         if ($returned_val > 0){
-            throw new GitSimpleException("Error in ".$this->gitBinary." -C ".$this->workingDirectory." $command 2>&1");
+            throw new GitSimpleException(explode("\r\n",$output));
         }else{
             return $output;
         }
