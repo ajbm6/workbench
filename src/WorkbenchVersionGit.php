@@ -11,6 +11,7 @@ use File;
 use Padosoft\Io\DirHelper;
 use Padosoft\Workbench\WorkbenchApiGeneration;
 use Padosoft\Workbench\WorkbenchSettings;
+use Symfony\Component\Process\ExecutableFinder;
 
 class WorkbenchVersion extends Command
 {
@@ -43,6 +44,8 @@ EOF;
     private $packagename;
     private $workbenchSettings;
     private $type;
+    private $phpBinary;
+    private $gitBinary;
 
     /**
      * Execute the console command.
@@ -51,6 +54,18 @@ EOF;
      */
     public function handle()
     {
+
+
+        $finder = new ExecutableFinder();
+        $this->gitBinary = '"'.str_replace("\\","/",$finder->find('git')).'"';
+        if (!$this->gitBinary) {
+            throw new GitException('Unable to find the Git executable.');
+        }
+
+        $this->phpBinary = '"'.str_replace("\\","/",$finder->find('php')).'"';
+        if (!$this->phpBinary) {
+            throw new Exception('Unable to find the Php executable.');
+        }
 
         $gitWrapper = new GitWrapper();
 
@@ -115,6 +130,13 @@ EOF;
 
         $gitWorkingCopy->remote("update");
         $commitControl = $gitWorkingCopy->status("-uno");
+
+        try  {
+            exec($this->gitBinary." -C ".$this->BASE_PATH." status -uno 2>&1", $output, $returned_val);
+        }
+        catch (\Exception $e)  {
+            echo $e->getMessage();
+        }
 
         preg_match('(Your branch is ahead|Your branch is up-to-date)',$commitControl,$matches);
         if(count($matches)==0) {
