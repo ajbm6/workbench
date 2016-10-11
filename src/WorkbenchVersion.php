@@ -446,6 +446,7 @@ EOF;
 
     public function validateTAG($tag)
     {
+        $this->line($tag);
         $tagArray=explode(".",$tag);
         $this->line(count($tag));
         if(count($tagArray)!=3) {
