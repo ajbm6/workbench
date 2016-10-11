@@ -447,16 +447,20 @@ EOF;
     public function validateTAG($tag)
     {
         $tagArray=explode(".",$tag);
+        $this->line(count($tag));
         if(count($tag)!=3) {
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[0])) {
+            $this->line("0");
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[1])) {
+            $this->line("1");
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[2])) {
+            $this->line("2");
             return false;
         }
         return true;
