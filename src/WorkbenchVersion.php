@@ -181,6 +181,7 @@ EOF;
         $this->info("Suggested semantic versioning change: ". $semVerVersion);
 
         $color = "";
+        $tagVersionOriginal=$tagVersion;
         switch ($semVerVersion) {
             case "MAJOR";
                 $tagVersion[0] = $tagVersion[0] +1;
@@ -217,7 +218,7 @@ EOF;
             if($isValid) {
                 $typedTagVersioneArray=explode(".",$typedTagVersion);
                 $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
-                $tagValue=$tagVersion[0]*pow(10, 12)+$tagVersion[1]*pow(10, 8)+$tagVersion[2]*pow(10, 4);
+                $tagValue=$tagVersionOriginal[0]*pow(10, 12)+$tagVersionOriginal[1]*pow(10, 8)+$tagVersionOriginal[2]*pow(10, 4);
                 $this->info($tagValueTyped);
                 $this->info($tagValue);
                 if($tagValueTyped<=$tagValue) {
