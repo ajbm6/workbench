@@ -448,7 +448,7 @@ EOF;
     {
         $tagArray=explode(".",$tag);
         $this->line(count($tag));
-        if(count($tag)!=3) {
+        if(count($tagArray)!=3) {
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[0])) {
