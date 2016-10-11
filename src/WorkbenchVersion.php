@@ -213,11 +213,21 @@ EOF;
         do  {
             $typedTagVersion = $this->ask("Type the TAG you want to use, the correct format is '#.#.#'",implode(".",$tagVersion));
             $isValid = $this->validateTAG($typedTagVersion);
-            if($isValid)  {
+            $typedTagVersioneArray=array();
+            if($isValid) {
                 $typedTagVersioneArray=explode(".",$typedTagVersion);
+                $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
+                $tagValue=$tagVersion[0]*pow(10, 12)+$tagVersion[1]*pow(10, 8)+$tagVersion[2]*pow(10, 4);
+                if($tagValueTyped<=$tagValue) {
+                    $this->error("Type a tag with a value greater than the previous");
+                    $isValid=false;
+                }
+            }
+            if($isValid)  {
+
                 $tagVersion[0]=$typedTagVersioneArray[0];
-                $tagVersion[1]=$typedTagVersioneArray[0];
-                $tagVersion[2]=$typedTagVersioneArray[0];
+                $tagVersion[1]=$typedTagVersioneArray[1];
+                $tagVersion[2]=$typedTagVersioneArray[2];
             }
         } while(!$isValid);
 
@@ -448,20 +458,17 @@ EOF;
     {
         $this->line($tag);
         $tagArray=explode(".",$tag);
-        $this->line(count($tag));
+
         if(count($tagArray)!=3) {
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[0])) {
-            $this->line("0");
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[1])) {
-            $this->line("1");
             return false;
         }
         if(!isIntegerPositiveOrZero($tagArray[2])) {
-            $this->line("2");
             return false;
         }
         return true;
