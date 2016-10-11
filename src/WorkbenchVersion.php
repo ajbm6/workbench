@@ -219,8 +219,6 @@ EOF;
                 $typedTagVersioneArray=explode(".",$typedTagVersion);
                 $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
                 $tagValue=$tagVersionOriginal[0]*pow(10, 12)+$tagVersionOriginal[1]*pow(10, 8)+$tagVersionOriginal[2]*pow(10, 4);
-                $this->info($tagValueTyped);
-                $this->info($tagValue);
                 if($tagValueTyped<=$tagValue) {
                     $this->error("Type a tag with a value greater than the previous.");
                     $isValid=false;

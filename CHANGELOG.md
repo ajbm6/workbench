@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.0.2 - 2016-10-11
+
+### Added
+- Added requested for TAG
+
 ## 2.0.1 - 2016-10-07
 
 ## 2.0.0 - 2016-10-07
