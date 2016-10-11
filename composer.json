@@ -17,6 +17,7 @@
         "jketelaar/bitbucket": "dev-master",
         "padosoft/test": "0.*",
         "padosoft/httpclient": "0.*",
+        "padosoft/support": "1.*",
         "cpliakas/git-wrapper": "^1.7"
     },
     "autoload": {

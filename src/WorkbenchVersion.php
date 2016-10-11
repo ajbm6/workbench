@@ -12,6 +12,7 @@ use Padosoft\Io\DirHelper;
 use Padosoft\Workbench\WorkbenchApiGeneration;
 use Padosoft\Workbench\WorkbenchSettings;
 use Symfony\Component\Process\ExecutableFinder;
+use Padosoft\Support;
 
 class WorkbenchVersion extends Command
 {
@@ -167,8 +168,6 @@ EOF;
 
         $this->line("Last tag version is ". $this->getLastTagVersion($gitSimpleWrapper));
 
-        //$tagVersion = array("0","0","0");
-
         $tagVersion = $this->getLastTagVersionArray($gitSimpleWrapper);
         $this->createSemverCopyFolder($gitSimpleWrapper);
         //$output = array();
@@ -181,25 +180,46 @@ EOF;
         $semVerVersion = $this->semVerAnalisys($output);
         $this->info("Suggested semantic versioning change: ". $semVerVersion);
 
+        $color = "";
         switch ($semVerVersion) {
             case "MAJOR";
                 $tagVersion[0] = $tagVersion[0] +1;
                 $tagVersion[1] = 0;
                 $tagVersion[2] = 0;
+                $color = "red";
                 break;
             case "MINOR";
                 $tagVersion[1] = $tagVersion[1] +1;
                 $tagVersion[2] = 0;
+                $color = "yellow";
                 break;
             case "PATCH";
                 $tagVersion[2] = $tagVersion[2] +1;
+                $color = "yellow";
                 break;
             default:
                 return;
             break;
             }
 
-        $this->error("Suggested TAG: ". implode(".",$tagVersion));
+        if($color == "red") {
+            $this->error("Suggested TAG: ". implode(".",$tagVersion));
+        }
+
+        if($color == "yellow") {
+            $this->info("Suggested TAG: ". implode(".",$tagVersion));
+        }
+
+        do  {
+            $typedTagVersion = $this->ask("Type the TAG you want to use, the correct format is '#.#.#'",implode(".",$tagVersion));
+            $isValid = $this->validateTAG($typedTagVersion);
+            if($isValid)  {
+                $typedTagVersioneArray=explode(".",$typedTagVersion);
+                $tagVersion[0]=$typedTagVersioneArray[0];
+                $tagVersion[1]=$typedTagVersioneArray[0];
+                $tagVersion[2]=$typedTagVersioneArray[0];
+            }
+        } while(!$isValid);
 
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
@@ -211,7 +231,7 @@ EOF;
         //$gitWorkingCopy->commit("Changelog updated");
 
         $tagged=false;
-        if ($this->confirm("Do you want tag the active branch?")) {
+        if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?")) {
 
             try {
                 $this->tagActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
@@ -424,6 +444,24 @@ EOF;
         return $this->workbenchSettings;
     }
 
+    public function validateTAG($tag)
+    {
+        $tagArray=explode(".",$tag);
+        if(count($tag)!=3) {
+            return false;
+        }
+        if(!isIntegerPositiveOrZero($tagArray[0])) {
+            return false;
+        }
+        if(!isIntegerPositiveOrZero($tagArray[1])) {
+            return false;
+        }
+        if(!isIntegerPositiveOrZero($tagArray[2])) {
+            return false;
+        }
+        return true;
+    }
+
     public function __get($property)
     {
         if (property_exists($this, $property)) {
@@ -438,9 +476,6 @@ EOF;
         }
     }
 
-    public function pippo()
-    {
-        return 0;
-    }
+
 }
 
