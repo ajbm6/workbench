@@ -219,7 +219,7 @@ EOF;
                 $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
                 $tagValue=$tagVersion[0]*pow(10, 12)+$tagVersion[1]*pow(10, 8)+$tagVersion[2]*pow(10, 4);
                 if($tagValueTyped<=$tagValue) {
-                    $this->error("Type a tag with a value greater than the previous");
+                    $this->error("Type a tag with a value greater than the previous.");
                     $isValid=false;
                 }
             }
@@ -229,6 +229,10 @@ EOF;
                 $tagVersion[1]=$typedTagVersioneArray[1];
                 $tagVersion[2]=$typedTagVersioneArray[2];
             }
+            if(!$isValid)  {
+                $this->error("Invalid value!");
+            }
+
         } while(!$isValid);
 
 
