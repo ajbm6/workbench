@@ -218,6 +218,8 @@ EOF;
                 $typedTagVersioneArray=explode(".",$typedTagVersion);
                 $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
                 $tagValue=$tagVersion[0]*pow(10, 12)+$tagVersion[1]*pow(10, 8)+$tagVersion[2]*pow(10, 4);
+                $this->info($tagValueTyped);
+                $this->info($tagValue);
                 if($tagValueTyped<=$tagValue) {
                     $this->error("Type a tag with a value greater than the previous.");
                     $isValid=false;
@@ -367,7 +369,7 @@ EOF;
             File::makeDirectory("y:/semver/oldversion/",493,true);
         }
 
-        $this->line('inizio copia');
+        $this->line('Start copy');
 
         $dir = new \DirectoryIterator($this->BASE_PATH);
         $file = new \FilesystemIterator($this->BASE_PATH);
@@ -376,7 +378,7 @@ EOF;
         DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"]);
         DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"]);
 
-        $this->line('finito copia');
+        $this->line('End copy');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
         //File::copyDirectory($this->BASE_PATH,"y:/semver/oldversion/");
         $lastTagVersion = $this->getLastTagVersion($gitSimpleWrapper);
