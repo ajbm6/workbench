@@ -252,7 +252,7 @@ EOF;
 
 
         $tagged=false;
-        if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?")) {
+        if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?",true)) {
 
             try {
                 $this->tagActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
@@ -264,7 +264,7 @@ EOF;
             $tagged=true;
         }
 
-        if ($this->confirm("Do you want push the active branch?")) {
+        if ($this->confirm("Do you want push the active branch?",true)) {
             $this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch);
             $this->line("Active branch pushed on origin");
             if($tagged) {
