@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.3 - 2016-10-12
+
+### Changed
+- Changed default in question for tagging and pushing
+
 ## 2.1.2 - 2016-10-12
 
 ### Fixed
