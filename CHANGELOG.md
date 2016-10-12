@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.4 - 2016-10-12
+
+### Fixed
+- Fixed github api url for releases
+
 ## 2.1.3 - 2016-10-12
 
 ### Changed
