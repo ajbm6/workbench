@@ -272,7 +272,7 @@ EOF;
                 $this->line("Tagged");
             }
 
-            $toAddToFile= implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
+            $toAddToFile="###". implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
             foreach ($changelogChanges as $key => $values) {
                 if(count($changelogChanges[$key])) {
                     $toAddToFile = $toAddToFile."\r\n";
