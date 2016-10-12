@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.0 - 2016-10-12
+
+### Added
+- Added releases for github
+
 ## 2.0.2 - 2016-10-11
 
 ### Added
