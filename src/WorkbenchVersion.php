@@ -8,11 +8,17 @@ use GitWrapper\GitWrapper;
 use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitBranches;
 use File;
+use League\CLImate\TerminalObject\Dynamic\Padding;
+use Padosoft\HTTPClient\HTTPClient;
+use Padosoft\HTTPClient\HttpHelperFacade;
+use Padosoft\HTTPClient\RequestHelper;
 use Padosoft\Io\DirHelper;
 use Padosoft\Workbench\WorkbenchApiGeneration;
 use Padosoft\Workbench\WorkbenchSettings;
 use Symfony\Component\Process\ExecutableFinder;
 use Padosoft\Support;
+use Padosoft\HTTPClient\HttpHelper;
+
 
 class WorkbenchVersion extends Command
 {
@@ -238,7 +244,7 @@ EOF;
 
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
-        $changelog->question()->getChanges();
+        $changelogChanges = $changelog->question()->getChanges();
         $changelog->writeChangeLog($this->BASE_PATH."CHANGELOG.md",implode(".",$tagVersion));
 
         $gitSimpleWrapper->git("add .");
@@ -266,6 +272,30 @@ EOF;
                 $this->line("Tagged");
             }
 
+            $toAddToFile= implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
+            foreach ($changelogChanges as $key => $values) {
+                if(count($changelogChanges[$key])) {
+                    $toAddToFile = $toAddToFile."\r\n";
+                    $toAddToFile = $toAddToFile."### ".ucfirst($key)."\r\n";
+                }
+
+                foreach($changelogChanges[$key] as $change) {
+                    $toAddToFile = $toAddToFile."- ".$change."\r\n";
+                }
+
+            }
+
+            $json = [
+                "tag_name"=>implode(".",$tagVersion),
+                "target_commitish"=>$activebranch,
+                "name"=>implode(".",$tagVersion),
+                "body"=>$toAddToFile,
+                "draft"=> false,
+                "prerelease"=>false
+            ];
+
+            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/repos/padosoft/workbench/releases",$json,$this->workbenchSettings->getRequested()["user"]["valore"],$this->workbenchSettings->getRequested()["password"]["valore"]);
+            $response->psr7response;
 
         }
 
@@ -280,7 +310,9 @@ EOF;
 
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
-        sleep(5);
+
+
+
 
 
         //TODO
@@ -297,9 +329,7 @@ EOF;
 
     }
 
-    public function dummy($goofy)    {
-        echo 'pippo';
-    }
+
 
 
 
