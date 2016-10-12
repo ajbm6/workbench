@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.1 - 2016-10-12
+
+### Fixed
+- Fixed font size in github realeses description
+
 ## 2.1.0 - 2016-10-12
 
 ### Added
