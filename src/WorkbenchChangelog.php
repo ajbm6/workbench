@@ -17,18 +17,17 @@ class WorkbenchChangelog
     private $command;
     private $changes=array();
 
+    /**
+     * WorkbenchChangelog constructor.
+     * @param WorkbenchSettings $workbenchSettings
+     * @param Command $command
+     */
     public function __construct(WorkbenchSettings $workbenchSettings, Command $command){
         $this->workbenchSettings = $workbenchSettings;
         $this->command = $command;
     }
 
-    /*
-     *  Added for new features.
-        Changed for changes in existing functionality.
-        Deprecated for once-stable features removed in upcoming releases.
-        Removed for deprecated features removed in this release.
-        Fixed for any bug fixes.
-        Security to invite users to upgrade in case of vulnerabilities.
+    /**
      *
      */
     public function composeChangelog()
@@ -42,6 +41,9 @@ class WorkbenchChangelog
 
     }
 
+    /**
+     * @return $this
+     */
     public function question()
     {
         $choice = $this->command->choice('What do you want to add?',[
@@ -85,6 +87,10 @@ class WorkbenchChangelog
         return $this;
     }
 
+    /**
+     * @param $fileLog
+     * @param $tag
+     */
     public function writeChangeLog($fileLog,$tag)
     {
         $file=\Padosoft\Workbench\Parameters\Dir::adjustPath($fileLog);
@@ -111,7 +117,9 @@ class WorkbenchChangelog
 
     }
 
-
+    /**
+     * @return array
+     */
     public function getChanges()
     {
         return $this->changes;

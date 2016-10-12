@@ -16,6 +16,11 @@ class GitSimpleWrapper
     private $gitBinary;
     private $workingDirectory;
 
+    /**
+     * GitSimpleWrapper constructor.
+     * @param null $workingDirectory
+     * @param null $gitBinary
+     */
     public function __construct($workingDirectory = null , $gitBinary = null)
     {
         $this->workingDirectory =$workingDirectory;
@@ -35,12 +40,21 @@ class GitSimpleWrapper
 
     }
 
+    /**
+     * @param $command
+     * @return mixed
+     */
     public function git($command)
     {
         exec($this->gitBinary." -C ".$this->workingDirectory." $command 2>&1", $output, $returned_val);
+        $matches=-1;
+        if(substr($command,0,6)=="commit"){
+            preg_match('(Your branch is ahead|Your branch is up-to-date)',implode("\r\n",$output),$matches);
+        }
 
-        if ($returned_val > 0){
-            throw new GitSimpleException(explode("\r\n",$output));
+        if ($returned_val > 0 && $matches==0 ){
+
+            throw new GitSimpleException(implode("\r\n",$output));
         }else{
             return $output;
         }

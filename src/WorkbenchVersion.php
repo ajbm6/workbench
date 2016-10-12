@@ -249,7 +249,7 @@ EOF;
 
         $gitSimpleWrapper->git("add .");
         $gitSimpleWrapper->git('commit -m "Changelog updated"');
-        //$gitWorkingCopy->commit("Changelog updated");
+
 
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?")) {
@@ -272,7 +272,7 @@ EOF;
                 $this->line("Tagged");
             }
 
-            $toAddToFile="###". implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
+            $toAddToFile="## ". implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
             foreach ($changelogChanges as $key => $values) {
                 if(count($changelogChanges[$key])) {
                     $toAddToFile = $toAddToFile."\r\n";
@@ -330,9 +330,9 @@ EOF;
     }
 
 
-
-
-
+    /**
+     * @return array
+     */
     public function runSemVer()
     {
         $output = array();
@@ -342,18 +342,30 @@ EOF;
 
     }
 
+    /**
+     * @param array $output
+     * @return string
+     */
     public function semVerAnalisys(array $output)
     {
         $positionVersion = strpos($output[2],":")+2;
         return substr($output[2],$positionVersion,strlen($output[2])-$positionVersion);
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @return string
+     */
     public function getActiveBranch(GitSimpleWrapper $gitSimpleWrapper)
     {
         $status=$gitSimpleWrapper->git("status");
         return substr($status[0],10,strlen($status[0])-10);
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @return array
+     */
     public function getLastTagVersionArray(GitSimpleWrapper $gitSimpleWrapper)
     {
 
@@ -366,6 +378,9 @@ EOF;
 
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     */
     public function getLastTagVersion(GitSimpleWrapper $gitSimpleWrapper)
     {
         $tags=$gitSimpleWrapper->git("tag");
@@ -378,6 +393,10 @@ EOF;
         return $tags[count($tags)-1];
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @return mixed
+     */
     public function createSemverCopyFolder(GitSimpleWrapper $gitSimpleWrapper)
     {
         if(File::exists("y:/semver/original/"))
@@ -422,12 +441,21 @@ EOF;
 
     }
 
+    /**
+     * @param $version
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @return mixed
+     */
     public function checkoutToTagVersion($version,GitSimpleWrapper $gitSimpleWrapper)
     {
         return $gitSimpleWrapper->git("checkout ".$version);
 
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @param $message
+     */
     public function addAndCommit(GitSimpleWrapper $gitSimpleWrapper, $message)
     {
 
@@ -442,34 +470,62 @@ EOF;
         //return $gitWorkingCopy->commit($message)->getStatus();
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @param $branch
+     * @return mixed
+     */
     public function pushOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $branch)
     {
         //return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
         return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$branch);
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @param $tag
+     * @return mixed
+     */
     public function tagActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
         return $gitSimpleWrapper->git("tag ".$tag);
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @param $tag
+     * @return mixed
+     */
     public function pushTagOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
         //return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
         return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$tag );
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @return mixed
+     */
     public function pullOriginMaster(GitSimpleWrapper $gitSimpleWrapper)
     {
         return $gitSimpleWrapper->git("pull origin waster");
     }
 
+    /**
+     * @param GitSimpleWrapper $gitSimpleWrapper
+     * @param $branch
+     * @return mixed
+     */
     public function pullOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper,$branch)
     {
         return $gitSimpleWrapper->git("pull origin ".$branch);
 
     }
 
+    /**
+     * @param $testo
+     * @return mixed
+     */
     public function formatColorRedText($testo)
     {
         $testo = str_replace("fail","<error>fail</error>",$testo);
@@ -479,16 +535,26 @@ EOF;
         return $testo;
     }
 
+    /**
+     * @param $workbenchSettings
+     */
     public function setWorkbenchSettings($workbenchSettings)
     {
         $this->workbenchSettings=$workbenchSettings;
     }
 
+    /**
+     * @return mixed
+     */
     public function getWorkbenchSettings()
     {
         return $this->workbenchSettings;
     }
 
+    /**
+     * @param $tag
+     * @return bool
+     */
     public function validateTAG($tag)
     {
         $this->line($tag);
@@ -509,6 +575,10 @@ EOF;
         return true;
     }
 
+    /**
+     * @param $property
+     * @return mixed
+     */
     public function __get($property)
     {
         if (property_exists($this, $property)) {
@@ -516,6 +586,10 @@ EOF;
         }
     }
 
+    /**
+     * @param $property
+     * @param $value
+     */
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) {

@@ -15,11 +15,19 @@ class WorkbenchCopyThread extends \Thread
     private $origin;
     private $dest;
 
+    /**
+     * WorkbenchCopyThread constructor.
+     * @param $origin
+     * @param $dest
+     */
     public function __construct($origin,$dest){
         $this->origin=$origin;
         $this->dest=$dest;
     }
 
+    /**
+     *
+     */
     public function run(){
         File::copyDirectory($this->origin,$this->dest);
     }
