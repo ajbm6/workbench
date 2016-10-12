@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.2 - 2016-10-12
+
+### Fixed
+- Fixed GitSimpleWrapper::git for message commit
+
 ## 2.1.1 - 2016-10-12
 
 ### Fixed
