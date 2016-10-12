@@ -294,7 +294,7 @@ EOF;
                 "prerelease"=>false
             ];
 
-            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/repos/padosoft/workbench/releases",$json,$this->workbenchSettings->getRequested()["user"]["valore"],$this->workbenchSettings->getRequested()["password"]["valore"]);
+            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/repos/".$this->organization."/".$this->packagename."/releases",$json,$this->workbenchSettings->getRequested()["user"]["valore"],$this->workbenchSettings->getRequested()["password"]["valore"]);
             $response->psr7response;
 
         }
