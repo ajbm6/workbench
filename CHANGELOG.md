@@ -2,6 +2,8 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.6 - 2016-10-20
+
 ## 2.1.5 - 2016-10-20
 
 ## 2.1.4 - 2016-10-12
