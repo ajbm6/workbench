@@ -337,7 +337,7 @@ EOF;
     {
         $output = array();
         $rawoutput = exec($this->phpBinary.' Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
-
+        //TODO metti nel config il phar  del semver e le cartelle per original e oldversione
         return $output;
 
     }
