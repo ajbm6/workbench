@@ -53,7 +53,7 @@ EOF;
     private $type;
     private $phpBinary;
     private $gitBinary;
-    private $DEBUG = true;
+    private $DEBUG = false;
 
     /**
      * Execute the console command.
@@ -149,13 +149,13 @@ EOF;
         catch (\Exception $e)  {
             echo $e->getMessage();
         }
-
-        preg_match('(Your branch is ahead|Your branch is up-to-date)',$commitControl,$matches);
+        $this->info($commitControl);
+        preg_match("(Your branch is ahead|Your branch is up-to-date|Changes not staged for commit|nothing to commit)",$commitControl,$matches);
         if(count($matches)==0) {
             echo "The local commit isn't update with remote commit";
             exit();
         }
-        $this->line($matches[0]);
+        $this->info($matches[0]);
 
         $activebranch = $this->getActiveBranch($gitSimpleWrapper);
 
@@ -171,50 +171,61 @@ EOF;
         $this->addAndCommit($gitSimpleWrapper,$message);
 
 
+        $lastTag= $this->getLastTagVersion($gitSimpleWrapper);
+        $this->line("Last tag version is ". $lastTag);
 
-        $this->line("Last tag version is ". $this->getLastTagVersion($gitSimpleWrapper));
+        $tagVersionOriginal[0] = 0;
+        $tagVersionOriginal[1] = 0;
+        $tagVersionOriginal[2] = 0;
 
-        $tagVersion = $this->getLastTagVersionArray($gitSimpleWrapper);
-        $this->createSemverCopyFolder($gitSimpleWrapper);
-        //$output = array();
-        $output = $this->runSemVer();
+        $tagVersion[0] = 0;
+        $tagVersion[1] = 0;
+        $tagVersion[2] = 1;
 
-        $this->line(implode("\r\n",$output));
-        $this->warn("Semver output will be saved in ".sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt");
+        if($lastTag!="0.0.0") {
 
-        file_put_contents(sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt",implode("\r\n",$output));
-        $semVerVersion = $this->semVerAnalisys($output);
-        $this->info("Suggested semantic versioning change: ". $semVerVersion);
+            $tagVersion = $this->getLastTagVersionArray($gitSimpleWrapper);
+            $this->createSemverCopyFolder($gitSimpleWrapper);
+            //$output = array();
+            $output = $this->runSemVer();
 
-        $color = "";
-        $tagVersionOriginal=$tagVersion;
-        switch ($semVerVersion) {
-            case "MAJOR";
-                $tagVersion[0] = $tagVersion[0] +1;
-                $tagVersion[1] = 0;
-                $tagVersion[2] = 0;
-                $color = "red";
+            $this->line(implode("\r\n",$output));
+            $this->warn("Semver output will be saved in ".sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt");
+
+            file_put_contents(sys_get_temp_dir()."/semver_output".date("Y-m-d").".txt",implode("\r\n",$output));
+            $semVerVersion = $this->semVerAnalisys($output);
+            $this->info("Suggested semantic versioning change: ". $semVerVersion);
+
+            $color = "";
+            $tagVersionOriginal=$tagVersion;
+            switch ($semVerVersion) {
+                case "MAJOR";
+                    $tagVersion[0] = $tagVersion[0] +1;
+                    $tagVersion[1] = 0;
+                    $tagVersion[2] = 0;
+                    $color = "red";
+                    break;
+                case "MINOR";
+                    $tagVersion[1] = $tagVersion[1] +1;
+                    $tagVersion[2] = 0;
+                    $color = "yellow";
+                    break;
+                case "PATCH";
+                    $tagVersion[2] = $tagVersion[2] +1;
+                    $color = "yellow";
+                    break;
+                default:
+                    return;
                 break;
-            case "MINOR";
-                $tagVersion[1] = $tagVersion[1] +1;
-                $tagVersion[2] = 0;
-                $color = "yellow";
-                break;
-            case "PATCH";
-                $tagVersion[2] = $tagVersion[2] +1;
-                $color = "yellow";
-                break;
-            default:
-                return;
-            break;
+                }
+
+            if($color == "red") {
+                $this->error("Suggested TAG: ". implode(".",$tagVersion));
             }
 
-        if($color == "red") {
-            $this->error("Suggested TAG: ". implode(".",$tagVersion));
-        }
-
-        if($color == "yellow") {
-            $this->info("Suggested TAG: ". implode(".",$tagVersion));
+            if($color == "yellow") {
+                $this->info("Suggested TAG: ". implode(".",$tagVersion));
+            }
         }
 
         do  {
@@ -385,8 +396,9 @@ EOF;
     {
         $tags=$gitSimpleWrapper->git("tag");
         //$lastlocaltag = "";
-        if($tags == "") {
-            return;
+
+        if(empty($tags)) {
+            return "0.0.0";
         }
 
         //return  trim(preg_replace('/\s\s+/', '', $gitSimpleWrapper->git("describe --abbrev=0 --tags")));

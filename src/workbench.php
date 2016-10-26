@@ -114,6 +114,9 @@ EOF;
 
             $apiSamiGeneration->apiSamiGeneration();
         }
+
+        $this->enableTravis();
+    
     }
 
 
@@ -630,6 +633,34 @@ EOF;
             $this->workbenchSettings = new WorkbenchSettings($this);
         }
         return $this->workbenchSettings;
+    }
+
+    public function enableTravis()
+    {
+        if($this->workbenchSettings->requested["user"]["valore"]=="") {
+            return;
+        }
+
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+            return;
+        }
+
+        $dir=Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']);
+
+        if(!File::exists($dir.".travis.yml")) {
+              return;
+        }
+
+        if(!$this->ask("Do you want enable Travis?","Yes") ) {
+            return;
+        }
+        //echo "cd ".$dir." && travis login --org -u ".$this->workbenchSettings->requested["user"]["valore"]. " -g ".Config::get('workbench.github_token')." 2>&1";
+
+        exec("cd ".$dir." && travis login --org -u ".$this->workbenchSettings->requested["user"]["valore"]. " -g ".Config::get('workbench.github_token')." 2>&1", $output, $returned_val);
+        $this->line(implode("\r\n",$output));
+        exec("cd ".$dir." && travis enable 2>&1", $output, $returned_val);
+        $this->line(implode("\r\n",$output));
+
     }
 
     public function __get($property)

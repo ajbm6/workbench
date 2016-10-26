@@ -30,17 +30,6 @@ class GitBranchTest extends \Padosoft\LaravelTest\TestBase
         $source = 'Y:/Public/laravel-packages/www/packages/b2msrl/package27052016_44';
         $destination = 'Y:/Public/laravel-packages/www/doc/b2msrl/package27052016_44';
 
-        /*$gitWrapper = new GitWrapper();
-        $gitWorkingCopy=$gitWrapper->init($destination,[]);
-        $gitWrapper->git("config --global user.name alevento");
-        $gitWrapper->git("config --global user.email alessandro.manneschi@gmail.com");
-        $gitWrapper->git("config --global user.password 129895ale");
-        $gitWorkingCopy->addRemote('origin',"https://alevento:129895ale@github.com/b2msrl/package27052016_44.git" );
-        $gitWorkingCopy->checkoutNewBranch('gh-pages');
-        $gitWorkingCopy->add('.');
-        $gitWorkingCopy->commit('My commit message');
-        $gitWorkingCopy->push('origin','gh-pages');*/
-
         $readmepathsource = \Padosoft\Workbench\Parameters\Dir::adjustPath($source).'readme.md';
         $readmepathdestination = \Padosoft\Workbench\Parameters\Dir::adjustPath($destination).'index.html';
 

@@ -205,12 +205,12 @@ php artisan workbench:new create laravelsite -t laravel -d public -g github -u a
 
 Creazione package Laravel
 
-Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create laravelpackage -t laravel_package -d public -g github -u alevento -p129895ale -e ale@mail.it -o b2msrl --packagename=laravelpackage --packagedescr=descr --packagekeywords=descr
+Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create laravelpackage -t laravel_package -d public -g github -u user -p********** -e ale@mail.it -o b2msrl --packagename=laravelpackage --packagedescr=descr --packagekeywords=descr
 
 
 Creazione package Agnostic
 
-Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create agnosticpackage -t agnostic_package -d public -g github -u alevento -p129895ale -e ale@mail.it -o b2msrl --packagename=agnosticpackage --packagedescr=descr --packagekeywords=descr
+Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create agnosticpackage -t agnostic_package -d public -g github -u user -p******** -e ale@mail.it -o b2msrl --packagename=agnosticpackage --packagedescr=descr --packagekeywords=descr
 
 
 Creazione in modalità silent
