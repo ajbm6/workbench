@@ -242,14 +242,7 @@ EOF;
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?",true)) {
 
-            try {
-                $this->tagActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
-            }
-            catch (\Exception $e) {
 
-            }
-            //
-            $tagged=true;
 
 
             do  {
@@ -276,6 +269,17 @@ EOF;
                 }
 
             } while(!$isValid);
+
+
+            try {
+                $this->tagActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
+            }
+            catch (\Exception $e) {
+
+            }
+            //
+            $tagged=true;
+
         }
 
         if ($this->confirm("Do you want push the active branch?",true)) {
@@ -283,33 +287,36 @@ EOF;
             $this->line("Active branch pushed on origin");
             if($tagged) {
                 $this->pushTagOriginActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
+                $toAddToFile="## ". implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
+                foreach ($changelogChanges as $key => $values) {
+                    if(count($changelogChanges[$key])) {
+                        $toAddToFile = $toAddToFile."\r\n";
+                        $toAddToFile = $toAddToFile."### ".ucfirst($key)."\r\n";
+                    }
+
+                    foreach($changelogChanges[$key] as $change) {
+                        $toAddToFile = $toAddToFile."- ".$change."\r\n";
+                    }
+
+                }
+                $json = [
+                    "tag_name"=>implode(".",$tagVersion),
+                    "target_commitish"=>$activebranch,
+                    "name"=>implode(".",$tagVersion),
+                    "body"=>$toAddToFile,
+                    "draft"=> false,
+                    "prerelease"=>false
+                ];
+
+                $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/repos/".$this->organization."/".$this->packagename."/releases",$json,$this->workbenchSettings->getRequested()["user"]["valore"],$this->workbenchSettings->getRequested()["password"]["valore"]);
+                $response->psr7response;
                 $this->line("Tagged");
             }
 
-            $toAddToFile="## ". implode(".",$tagVersion)." - ".date("Y-m-d")."\r\n";
-            foreach ($changelogChanges as $key => $values) {
-                if(count($changelogChanges[$key])) {
-                    $toAddToFile = $toAddToFile."\r\n";
-                    $toAddToFile = $toAddToFile."### ".ucfirst($key)."\r\n";
-                }
 
-                foreach($changelogChanges[$key] as $change) {
-                    $toAddToFile = $toAddToFile."- ".$change."\r\n";
-                }
 
-            }
 
-            $json = [
-                "tag_name"=>implode(".",$tagVersion),
-                "target_commitish"=>$activebranch,
-                "name"=>implode(".",$tagVersion),
-                "body"=>$toAddToFile,
-                "draft"=> false,
-                "prerelease"=>false
-            ];
 
-            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/repos/".$this->organization."/".$this->packagename."/releases",$json,$this->workbenchSettings->getRequested()["user"]["valore"],$this->workbenchSettings->getRequested()["password"]["valore"]);
-            $response->psr7response;
 
         }
 
@@ -590,10 +597,6 @@ EOF;
         return true;
     }
 
-
-    public function dummy () {
-        echo 'pippo';
-    }
 
     /**
      * @param $property
