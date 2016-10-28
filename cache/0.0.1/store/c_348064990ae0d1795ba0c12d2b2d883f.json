@@ -1,0 +1,516 @@
+{
+    "name": "Padosoft\\Workbench\\WorkbenchVersion",
+    "line": 13,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchVersion.php",
+    "relative_file": null,
+    "hash": "2e0f228167dfedf21dbbcb74618a3aeb44bd7af4",
+    "parent": "Illuminate\\Console\\Command",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Command": "Illuminate\\Console\\Command",
+        "GitWrapper": "GitWrapper\\GitWrapper",
+        "GitWorkingCopy": "GitWrapper\\GitWorkingCopy",
+        "GitBranches": "GitWrapper\\GitBranches",
+        "File": "File"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "handle": {
+            "name": "handle",
+            "line": 40,
+            "short_desc": "Execute the console command.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "runSemVer": {
+            "name": "runSemVer",
+            "line": 133,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "semVerAnalisys": {
+            "name": "semVerAnalisys",
+            "line": 142,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "output": {
+                    "name": "output",
+                    "line": 142,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getListBranches": {
+            "name": "getListBranches",
+            "line": 148,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 148,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getActiveBranch": {
+            "name": "getActiveBranch",
+            "line": 155,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWrapper": {
+                    "name": "gitWrapper",
+                    "line": 155,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWrapper",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWrapper",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getLastTagVersionArray": {
+            "name": "getLastTagVersionArray",
+            "line": 161,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWrapper": {
+                    "name": "gitWrapper",
+                    "line": 161,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWrapper",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWrapper",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getLastTagVersion": {
+            "name": "getLastTagVersion",
+            "line": 173,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWrapper": {
+                    "name": "gitWrapper",
+                    "line": 173,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWrapper",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWrapper",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "createSemverCopyFolder": {
+            "name": "createSemverCopyFolder",
+            "line": 185,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWrapper": {
+                    "name": "gitWrapper",
+                    "line": 185,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWrapper",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWrapper",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "checkoutToTagVersion": {
+            "name": "checkoutToTagVersion",
+            "line": 216,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "version": {
+                    "name": "version",
+                    "line": 216,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "gitWorkingCopySemver": {
+                    "name": "gitWorkingCopySemver",
+                    "line": 216,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "addAndCommit": {
+            "name": "addAndCommit",
+            "line": 221,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 221,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "message": {
+                    "name": "message",
+                    "line": 221,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "pushOriginActiveBranch": {
+            "name": "pushOriginActiveBranch",
+            "line": 232,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 232,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "branch": {
+                    "name": "branch",
+                    "line": 232,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "pushTagOriginActiveBranch": {
+            "name": "pushTagOriginActiveBranch",
+            "line": 238,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "tag": {
+                    "name": "tag",
+                    "line": 238,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 238,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "pullOriginMaster": {
+            "name": "pullOriginMaster",
+            "line": 244,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 244,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "pullOriginActiveBranch": {
+            "name": "pullOriginActiveBranch",
+            "line": 249,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "gitWorkingCopy": {
+                    "name": "gitWorkingCopy",
+                    "line": 249,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\GitWrapper\\GitWorkingCopy",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "GitWrapper\\GitWorkingCopy",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "branch": {
+                    "name": "branch",
+                    "line": 249,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "formatColorRedText": {
+            "name": "formatColorRedText",
+            "line": 255,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "testo": {
+                    "name": "testo",
+                    "line": 255,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,136 @@
+{
+    "name": "Padosoft\\Workbench\\Parameters\\Dirtype",
+    "line": 16,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench\\Parameters",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\parameters\\Dirtype.php",
+    "relative_file": null,
+    "hash": "4f519f69703dc69c5b448a04fd77424ec0b3530d",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Workbench": "Padosoft\\Workbench\\Workbench",
+        "Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable",
+        "Command": "Illuminate\\Console\\Command",
+        "File": "File",
+        "Config": "Config"
+    },
+    "errors": [],
+    "interfaces": {
+        "Padosoft\\Workbench\\Parameters\\IEnumerable": "Padosoft\\Workbench\\Parameters\\IEnumerable"
+    },
+    "traits": {
+        "Padosoft\\Workbench\\Traits\\Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 29,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "command": {
+                    "name": "command",
+                    "line": 29,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Illuminate\\Console\\Command",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Illuminate\\Console\\Command",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "read": {
+            "name": "read",
+            "line": 37,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "silent": {
+                    "name": "silent",
+                    "line": 37,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "isValidValue": {
+            "name": "isValidValue",
+            "line": 68,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "valore": {
+                    "name": "valore",
+                    "line": 68,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "PUB": {
+            "name": "PUB",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PRIV": {
+            "name": "PRIV",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "CONFIG": {
+            "name": "CONFIG",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

@@ -1,0 +1,127 @@
+{
+    "name": "Padosoft\\Workbench\\Parameters\\Githookenable",
+    "line": 11,
+    "short_desc": "Class Git",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Padosoft\\Workbench"
+            ]
+        ]
+    },
+    "namespace": "Padosoft\\Workbench\\Parameters",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\parameters\\Githookenable.php",
+    "relative_file": null,
+    "hash": "f82f29f406f9b53dfbacdb663369205e124d8fda",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Workbench": "Padosoft\\Workbench\\Workbench",
+        "Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable"
+    },
+    "errors": [],
+    "interfaces": {
+        "Padosoft\\Workbench\\Parameters\\IEnumerable": "Padosoft\\Workbench\\Parameters\\IEnumerable"
+    },
+    "traits": {
+        "Padosoft\\Workbench\\Traits\\Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "command": {
+                    "name": "command",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Padosoft\\Workbench\\Workbench",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Padosoft\\Workbench\\Workbench",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "read": {
+            "name": "read",
+            "line": 28,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "silent": {
+                    "name": "silent",
+                    "line": 28,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "isValidValue": {
+            "name": "isValidValue",
+            "line": 52,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "9",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "valore": {
+                    "name": "valore",
+                    "line": 52,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "CONFIG": {
+            "name": "CONFIG",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

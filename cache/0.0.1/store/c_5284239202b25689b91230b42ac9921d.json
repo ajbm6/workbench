@@ -1,0 +1,119 @@
+{
+    "name": "Padosoft\\Workbench\\Parameters\\Type",
+    "line": 11,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench\\Parameters",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\parameters\\Type.php",
+    "relative_file": null,
+    "hash": "9c374f6f9ef547c842b39e49cef7715a5b7b98d0",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Workbench": "Padosoft\\Workbench\\Workbench",
+        "Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable"
+    },
+    "errors": [],
+    "interfaces": {
+        "Padosoft\\Workbench\\Parameters\\IEnumerable": "Padosoft\\Workbench\\Parameters\\IEnumerable"
+    },
+    "traits": {
+        "Padosoft\\Workbench\\Traits\\Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable"
+    },
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "command": {
+                    "name": "command",
+                    "line": 24,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Padosoft\\Workbench\\Workbench",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Padosoft\\Workbench\\Workbench",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "read": {
+            "name": "read",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "silent": {
+                    "name": "silent",
+                    "line": 30,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "LARAVEL": {
+            "name": "LARAVEL",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "NORMAL": {
+            "name": "NORMAL",
+            "line": 16,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "LARAVEL_PACKAGE": {
+            "name": "LARAVEL_PACKAGE",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "AGNOSTIC_PACKAGE": {
+            "name": "AGNOSTIC_PACKAGE",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "CONFIG": {
+            "name": "CONFIG",
+            "line": 19,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}
