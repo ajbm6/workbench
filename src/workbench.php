@@ -706,10 +706,7 @@ EOF;
 
     }
 
-    public function dummy()
-    {
-        echo 'pii';
-    }
+
     public function __get($property)
     {
         if(is_null($this->workbenchSettings) ){

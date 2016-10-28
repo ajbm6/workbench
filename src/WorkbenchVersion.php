@@ -228,30 +228,7 @@ EOF;
             }
         }
 
-        do  {
-            $typedTagVersion = $this->ask("Type the TAG you want to use, the correct format is '#.#.#'",implode(".",$tagVersion));
-            $isValid = $this->validateTAG($typedTagVersion);
-            $typedTagVersioneArray=array();
-            if($isValid) {
-                $typedTagVersioneArray=explode(".",$typedTagVersion);
-                $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
-                $tagValue=$tagVersionOriginal[0]*pow(10, 12)+$tagVersionOriginal[1]*pow(10, 8)+$tagVersionOriginal[2]*pow(10, 4);
-                if($tagValueTyped<=$tagValue) {
-                    $this->error("Type a tag with a value greater than the previous.");
-                    $isValid=false;
-                }
-            }
-            if($isValid)  {
 
-                $tagVersion[0]=$typedTagVersioneArray[0];
-                $tagVersion[1]=$typedTagVersioneArray[1];
-                $tagVersion[2]=$typedTagVersioneArray[2];
-            }
-            if(!$isValid)  {
-                $this->error("Invalid value!");
-            }
-
-        } while(!$isValid);
 
 
         $changelog = new \Padosoft\Workbench\WorkbenchChangelog($this->workbenchSettings,$this);
@@ -273,6 +250,32 @@ EOF;
             }
             //
             $tagged=true;
+
+
+            do  {
+                $typedTagVersion = $this->ask("Type the TAG you want to use, the correct format is '#.#.#'",implode(".",$tagVersion));
+                $isValid = $this->validateTAG($typedTagVersion);
+                $typedTagVersioneArray=array();
+                if($isValid) {
+                    $typedTagVersioneArray=explode(".",$typedTagVersion);
+                    $tagValueTyped=$typedTagVersioneArray[0]*pow(10, 12)+$typedTagVersioneArray[1]*pow(10, 8)+$typedTagVersioneArray[2]*pow(10, 4);
+                    $tagValue=$tagVersionOriginal[0]*pow(10, 12)+$tagVersionOriginal[1]*pow(10, 8)+$tagVersionOriginal[2]*pow(10, 4);
+                    if($tagValueTyped<=$tagValue) {
+                        $this->error("Type a tag with a value greater than the previous.");
+                        $isValid=false;
+                    }
+                }
+                if($isValid)  {
+
+                    $tagVersion[0]=$typedTagVersioneArray[0];
+                    $tagVersion[1]=$typedTagVersioneArray[1];
+                    $tagVersion[2]=$typedTagVersioneArray[2];
+                }
+                if(!$isValid)  {
+                    $this->error("Invalid value!");
+                }
+
+            } while(!$isValid);
         }
 
         if ($this->confirm("Do you want push the active branch?",true)) {
