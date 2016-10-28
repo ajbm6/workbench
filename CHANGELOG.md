@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.1.7 - 2016-10-28
+
+### Fixed
+- Fixed error in doc generation
+
 ## 2.1.6 - 2016-10-20
 
 ## 2.1.5 - 2016-10-20
