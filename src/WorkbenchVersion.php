@@ -590,6 +590,11 @@ EOF;
         return true;
     }
 
+
+    public function dummy () {
+        echo 'pippo';
+    }
+
     /**
      * @param $property
      * @return mixed
