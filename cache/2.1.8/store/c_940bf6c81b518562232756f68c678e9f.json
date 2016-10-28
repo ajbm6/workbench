@@ -1,26 +1,20 @@
 {
-    "name": "Padosoft\\Workbench\\WorkbenchApiGeneration",
-    "line": 19,
+    "name": "Padosoft\\Workbench\\WorkbenchChangelog",
+    "line": 13,
     "short_desc": "",
     "long_desc": "",
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchApiGeneration.php",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchChangelog.php",
     "relative_file": null,
-    "hash": "299617e61eb790e135e785abc23193ee2ad49e6a",
+    "hash": "bbc34a3e24f0410b3dfcdce126a04e479399b3d8",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
     "is_interface": false,
     "aliases": {
-        "WorkbenchSettings": "Padosoft\\Workbench\\WorkbenchSettings",
-        "Command": "Illuminate\\Console\\Command",
-        "File": "File",
-        "Config": "Config",
-        "CommonMarkConverter": "League\\CommonMark\\CommonMarkConverter",
-        "GitWrapper": "GitWrapper\\GitWrapper",
-        "ExecutableFinder": "Symfony\\Component\\Process\\ExecutableFinder"
+        "Command": "Illuminate\\Console\\Command"
     },
     "errors": [],
     "interfaces": [],
@@ -29,9 +23,9 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 32,
-            "short_desc": "* WorkbenchApiGeneration constructor.",
-            "long_desc": "* @param \\Padosoft\\Workbench\\WorkbenchSettings $workbenchSettings\n     * @param Command $command",
+            "line": 25,
+            "short_desc": "WorkbenchChangelog constructor.",
+            "long_desc": "",
             "hint": null,
             "hint_desc": null,
             "tags": [],
@@ -42,8 +36,8 @@
             "parameters": {
                 "workbenchSettings": {
                     "name": "workbenchSettings",
-                    "line": 32,
-                    "short_desc": null,
+                    "line": 25,
+                    "short_desc": "",
                     "long_desc": null,
                     "hint": [
                         [
@@ -58,8 +52,8 @@
                 },
                 "command": {
                     "name": "command",
-                    "line": 32,
-                    "short_desc": null,
+                    "line": 25,
+                    "short_desc": "",
                     "long_desc": null,
                     "hint": [
                         [
@@ -74,10 +68,10 @@
                 }
             }
         },
-        "apigeneration": {
-            "name": "apigeneration",
-            "line": 54,
-            "short_desc": "*",
+        "composeChangelog": {
+            "name": "composeChangelog",
+            "line": 33,
+            "short_desc": "",
             "long_desc": "",
             "hint": null,
             "hint_desc": null,
@@ -88,13 +82,18 @@
             "errors": [],
             "parameters": []
         },
-        "apiSamiGeneration": {
-            "name": "apiSamiGeneration",
-            "line": 83,
-            "short_desc": "*",
+        "question": {
+            "name": "question",
+            "line": 47,
+            "short_desc": "",
             "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
+            "hint": [
+                [
+                    "Padosoft\\Workbench\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
             "tags": [],
             "modifiers": "1",
             "is_by_ref": "",
@@ -102,10 +101,10 @@
             "errors": [],
             "parameters": []
         },
-        "transformReadmeMd": {
-            "name": "transformReadmeMd",
-            "line": 168,
-            "short_desc": "* @param $readmepathsource\n     * @param $readmepathdestination",
+        "writeChangeLog": {
+            "name": "writeChangeLog",
+            "line": 94,
+            "short_desc": "",
             "long_desc": "",
             "hint": null,
             "hint_desc": null,
@@ -115,23 +114,23 @@
             "exceptions": [],
             "errors": [],
             "parameters": {
-                "readmepathsource": {
-                    "name": "readmepathsource",
-                    "line": 168,
-                    "short_desc": null,
+                "fileLog": {
+                    "name": "fileLog",
+                    "line": 94,
+                    "short_desc": "",
                     "long_desc": null,
-                    "hint": null,
+                    "hint": [],
                     "tags": [],
                     "modifiers": "",
                     "default": null,
                     "is_by_ref": false
                 },
-                "readmepathdestination": {
-                    "name": "readmepathdestination",
-                    "line": 168,
-                    "short_desc": null,
+                "tag": {
+                    "name": "tag",
+                    "line": 94,
+                    "short_desc": "",
                     "long_desc": null,
-                    "hint": null,
+                    "hint": [],
                     "tags": [],
                     "modifiers": "",
                     "default": null,
@@ -139,13 +138,18 @@
                 }
             }
         },
-        "dummy": {
-            "name": "dummy",
-            "line": 205,
+        "getChanges": {
+            "name": "getChanges",
+            "line": 123,
             "short_desc": "",
             "long_desc": "",
-            "hint": null,
-            "hint_desc": null,
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
             "tags": [],
             "modifiers": "1",
             "is_by_ref": "",
