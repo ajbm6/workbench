@@ -39,7 +39,7 @@ class Git implements IEnumerable
             $this->requested["git"]["valore-valido"]= true;
         }
 
-        if(!$silent && !$this->requested["git"]["valore-valido"] && $this->command->confirm('Do you want add to git repository?')){
+        if(!$silent && !$this->requested["git"]["valore-valido"] && $this->command->confirm('Do you want add to git repository?',"yes")){
             $this->requested["git"]["valore"] = $this->command->choice('Github or Bitbucket?', ['github', 'bitbucket']);
             $this->requested["git"]["valore-valido"]=true;
         }

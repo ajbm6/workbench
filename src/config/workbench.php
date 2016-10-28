@@ -68,4 +68,5 @@ return [
     ),
     'common_dev_lib_path' => env( 'WORKBENCH_PHP_PATH','Y:/Public/common-dev-lib'),
     'github_token' => env( 'WORKBENCH_GITHUB_TOKEN',''),
+    'scrutinizer_token' => env( 'WORKBENCH_SCRUTINIZER_TOKEN',''),
 ];

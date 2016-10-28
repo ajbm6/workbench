@@ -49,7 +49,6 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
     }*/
 
     /** @test */
-    /*
     public function testHardWorkCreateNoOk()
     {
         $action = "create";
@@ -83,8 +82,7 @@ class WorkbenchTest extends \Padosoft\LaravelTest\TestBase
         //https://api.bitbucket.org/2.0/repositories/${team}/${repo}
         //$cmd=Mockery::mock('Padosoft\Workbench\Workbench');
         //$cmd->shouldReceive('ask')->with('Ale');
-/*
-Artisan::call('workbench:new',[
+        Artisan::call('workbench:new',[
             'action'=>$action,
             'domain'=>$domain,
             //'--silent'
@@ -108,14 +106,7 @@ Artisan::call('workbench:new',[
 
         ]);
 
-
-    }*/
-
-    /**test
-     *
-     */
-    public function testDummy() {
-        $this->assertTrue(true);
     }
+
 
 }

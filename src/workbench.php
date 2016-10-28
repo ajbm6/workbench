@@ -13,6 +13,7 @@ use Padosoft\HTTPClient\HTTPClient;
 use Padosoft\HTTPClient\RequestHelper;
 use Padosoft\HTTPClient\Response;
 use Padosoft\HTTPClient\HttpHelper;
+use Padosoft\HTTPClient\HttpHelperFacade;
 use GitWrapper\GitWrapper;
 use phpseclib\Net\SSH2;
 use League\CommonMark\CommonMarkConverter;
@@ -116,7 +117,7 @@ EOF;
         }
 
         $this->enableTravis();
-    
+        $this->enableScrutinizer();
     }
 
 
@@ -660,6 +661,48 @@ EOF;
         $this->line(implode("\r\n",$output));
         exec("cd ".$dir." && travis enable 2>&1", $output, $returned_val);
         $this->line(implode("\r\n",$output));
+
+    }
+
+    public function enableScrutinizer()
+    {
+
+        if($this->workbenchSettings->requested["user"]["valore"]=="") {
+            return;
+        }
+
+        if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
+            return;
+        }
+
+        $dir=Parameters\Dir::adjustPath($this->workbenchSettings->requested["dir"]['valore'].$this->workbenchSettings->requested["domain"]['valore']);
+
+        if(!File::exists($dir.".scrutinizer.yml")) {
+            return;
+        }
+
+        if(!$this->ask("Do you want enable Scrutinizer?","Yes") ) {
+            return;
+        }
+
+        $getParam = array();
+        $postParam = array();
+        $postParam["name"] = $this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'];
+        $postParam["organization"] = $this->workbenchSettings->requested['organization']['valore'];
+
+        $response = HttpHelperFacade::sendPostJsonWithAuth("https://scrutinizer-ci.com/api/repositories/g?access_token=".Config::get('workbench.scrutinizer_token'),$postParam,"","");
+
+        if($response->status_code=="201")
+        {
+            $this->info("Status code: ".$response->status_code);
+        }
+        if($response->status_code!="201")
+        {
+            $this->error("Attention!! Status code: ".$response->status_code);
+        }
+
+        $this->warn($response->body);
+
 
     }
 

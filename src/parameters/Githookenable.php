@@ -41,7 +41,7 @@ class Githookenable implements IEnumerable
         }
 
         if(!$silent && !$this->requested["githookenable"]["valore"] ){
-            $this->requested["githookenable"]["valore"] = $this->command->confirm('Do you want add pre commit git hook?');
+            $this->requested["githookenable"]["valore"] = $this->command->confirm('Do you want add pre commit git hook?','yes');
             $this->requested["githookenable"]["valore-valido"]=true;
         }
 
