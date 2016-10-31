@@ -241,10 +241,6 @@ EOF;
 
         $tagged=false;
         if ($this->confirm("Do you want tag the active branch with tag ".implode(".",$tagVersion)."?",true)) {
-
-
-
-
             do  {
                 $typedTagVersion = $this->ask("Type the TAG you want to use, the correct format is '#.#.#'",implode(".",$tagVersion));
                 $isValid = $this->validateTAG($typedTagVersion);
