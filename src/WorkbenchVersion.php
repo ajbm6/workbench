@@ -8,6 +8,7 @@ use GitWrapper\GitWrapper;
 use GitWrapper\GitWorkingCopy;
 use GitWrapper\GitBranches;
 use File;
+use Config;
 use League\CLImate\TerminalObject\Dynamic\Padding;
 use Padosoft\HTTPClient\HTTPClient;
 use Padosoft\HTTPClient\HttpHelperFacade;
@@ -279,7 +280,7 @@ EOF;
         }
 
         if ($this->confirm("Do you want push the active branch?",true)) {
-            $this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch);
+            $this->line($this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch));
             $this->line("Active branch pushed on origin");
             if($tagged) {
                 $this->pushTagOriginActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));
@@ -353,7 +354,7 @@ EOF;
     public function runSemVer()
     {
         $output = array();
-        $rawoutput = exec($this->phpBinary.' Y:/Public/common-dev-lib/php-semver-checker.phar compare y:/semver/oldversion y:/semver/original',$output);
+        $rawoutput = exec($this->phpBinary.' '.Config::get('workbench.common_dev_lib_path').'/php-semver-checker.phar compare'.sys_get_temp_dir().'/semver/oldversion '.sys_get_temp_dir().'/semver/original',$output);
         //TODO metti nel config il phar  del semver e le cartelle per original e oldversione
         return $output;
 
@@ -417,22 +418,22 @@ EOF;
      */
     public function createSemverCopyFolder(GitSimpleWrapper $gitSimpleWrapper)
     {
-        if(File::exists("y:/semver/original/"))
+        if(File::exists(sys_get_temp_dir()."/semver/original/"))
         {
-            File::deleteDirectory("y:/semver/original/");
+            File::deleteDirectory(sys_get_temp_dir()."/semver/original/");
         }
-        if(File::exists("y:/semver/oldversion/"))
+        if(File::exists(sys_get_temp_dir()."/semver/oldversion/"))
         {
-            File::deleteDirectory("y:/semver/oldversion/");
+            File::deleteDirectory(sys_get_temp_dir()."/semver/oldversion/");
         }
 
-        if(!File::exists("y:/semver/original/"))
+        if(!File::exists(sys_get_temp_dir()."/semver/original/"))
         {
-            File::makeDirectory("y:/semver/original/",493,true);
+            File::makeDirectory(sys_get_temp_dir()."/semver/original/",493,true);
         }
-        if(!File::exists("y:/semver/oldversion/"))
+        if(!File::exists(sys_get_temp_dir()."/semver/oldversion/"))
         {
-            File::makeDirectory("y:/semver/oldversion/",493,true);
+            File::makeDirectory(sys_get_temp_dir()."/semver/oldversion/",493,true);
         }
 
         $this->line('Start copy');
@@ -441,8 +442,8 @@ EOF;
         $file = new \FilesystemIterator($this->BASE_PATH);
 
 
-        DirHelper::copy($this->BASE_PATH,"y:/semver/original/",[$this->BASE_PATH."vendor"]);
-        DirHelper::copy($this->BASE_PATH,"y:/semver/oldversion/",[$this->BASE_PATH."vendor"]);
+        DirHelper::copy($this->BASE_PATH,sys_get_temp_dir()."/semver/original/",[$this->BASE_PATH."vendor"]);
+        DirHelper::copy($this->BASE_PATH,sys_get_temp_dir()."/semver/oldversion/",[$this->BASE_PATH."vendor"]);
 
         $this->line('End copy');
         //File::copyDirectory($this->BASE_PATH,"y:/semver/original/");
@@ -451,7 +452,7 @@ EOF;
 
         //$gitWorkingCopySemver = $gitSimpleWrapper->workingCopy("y:/semver/oldversion/");
         $workingDirectory = $gitSimpleWrapper->getWorkingDirectory();
-        $gitSimpleWrapper->setWorkingDirectory("y:/semver/oldversion/");
+        $gitSimpleWrapper->setWorkingDirectory(sys_get_temp_dir()."/semver/oldversion/");
         $output = $this->checkoutToTagVersion($lastTagVersion,$gitSimpleWrapper);
         $gitSimpleWrapper->setWorkingDirectory($workingDirectory);
         return $output;
@@ -496,7 +497,7 @@ EOF;
     public function pushOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $branch)
     {
         //return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
-        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$branch);
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$branch);
     }
 
     /**
@@ -517,7 +518,7 @@ EOF;
     public function pushTagOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
         //return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
-        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git ".$tag );
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$tag );
     }
 
     /**

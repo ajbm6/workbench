@@ -20,7 +20,9 @@ class WorkbenchServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__.'/config/workbench.php' => config_path('workbench.php'),
+        ], 'config');
     }
 
     /**
@@ -43,6 +45,13 @@ class WorkbenchServiceProvider extends ServiceProvider
             }
         );
         $this->commands('command.workbench:version');
+
+        $this->app['command.workbench:doc'] = $this->app->share(
+            function ($app) {
+                return new WorkbenchDoc();
+            }
+        );
+        $this->commands('command.workbench:doc');
     }
 
     /**
@@ -52,6 +61,6 @@ class WorkbenchServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['command.workbench:version','command.workbench:version'];
+        return ['command.workbench:new','command.workbench:version','command.workbench:doc'];
     }
 }
