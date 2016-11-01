@@ -8,7 +8,7 @@
     "namespace": "Padosoft\\Workbench",
     "file": "Z:\\TEMP\\workbench\/src\\WorkbenchApiGeneration.php",
     "relative_file": null,
-    "hash": "d3de23a992c32b98a83faf8661172e186af26a81",
+    "hash": "8d6ca900ca05c1b90d565735ac60171cf0e67b46",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -29,7 +29,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 32,
+            "line": 33,
             "short_desc": "* WorkbenchApiGeneration constructor.",
             "long_desc": "* @param \\Padosoft\\Workbench\\WorkbenchSettings $workbenchSettings\n     * @param Command $command",
             "hint": null,
@@ -42,7 +42,7 @@
             "parameters": {
                 "workbenchSettings": {
                     "name": "workbenchSettings",
-                    "line": 32,
+                    "line": 33,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -58,7 +58,7 @@
                 },
                 "command": {
                     "name": "command",
-                    "line": 32,
+                    "line": 33,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -76,7 +76,7 @@
         },
         "apigeneration": {
             "name": "apigeneration",
-            "line": 54,
+            "line": 60,
             "short_desc": "*",
             "long_desc": "",
             "hint": null,
@@ -90,7 +90,7 @@
         },
         "apiSamiGeneration": {
             "name": "apiSamiGeneration",
-            "line": 83,
+            "line": 89,
             "short_desc": "*",
             "long_desc": "",
             "hint": null,
@@ -104,7 +104,7 @@
         },
         "transformReadmeMd": {
             "name": "transformReadmeMd",
-            "line": 181,
+            "line": 189,
             "short_desc": "* @param $readmepathsource\n     * @param $readmepathdestination",
             "long_desc": "",
             "hint": null,
@@ -117,7 +117,7 @@
             "parameters": {
                 "readmepathsource": {
                     "name": "readmepathsource",
-                    "line": 181,
+                    "line": 189,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -128,7 +128,7 @@
                 },
                 "readmepathdestination": {
                     "name": "readmepathdestination",
-                    "line": 181,
+                    "line": 189,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -141,7 +141,7 @@
         },
         "dummy": {
             "name": "dummy",
-            "line": 218,
+            "line": 226,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
