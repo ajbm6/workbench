@@ -6,9 +6,9 @@
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchServiceProvider.php",
+    "file": "Z:\\TEMP\\workbench\/src\\WorkbenchServiceProvider.php",
     "relative_file": null,
-    "hash": "91bb7a28a5a34052acb73ad0de5a9a141e261f2e",
+    "hash": "3620d0f95714d8b3fde7802f7bf7cf70ade9bcbc",
     "parent": "Illuminate\\Support\\ServiceProvider",
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -42,7 +42,7 @@
         },
         "register": {
             "name": "register",
-            "line": 31,
+            "line": 33,
             "short_desc": "Register the service provider.",
             "long_desc": "",
             "hint": [
@@ -61,7 +61,7 @@
         },
         "provides": {
             "name": "provides",
-            "line": 53,
+            "line": 62,
             "short_desc": "Get the services provided by the provider.",
             "long_desc": "",
             "hint": [

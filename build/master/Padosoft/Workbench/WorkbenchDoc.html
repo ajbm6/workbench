@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Padosoft\Workbench\WorkbenchServiceProvider | Workbench API</title>
+    <title>Padosoft\Workbench\WorkbenchDoc | Workbench API</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
@@ -19,7 +19,7 @@
     
     </head>
 
-    <body id="class" data-name="class:Padosoft_Workbench_WorkbenchServiceProvider" data-root-path="../../">
+    <body id="class" data-name="class:Padosoft_Workbench_WorkbenchDoc" data-root-path="../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -89,20 +89,20 @@
                                                             <li><a href="../../Padosoft.html">Padosoft</a></li>
                                         <li><a href="../../Padosoft/Workbench.html">Workbench</a></li>
     
-                <li>WorkbenchServiceProvider</li>
+                <li>WorkbenchDoc</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
         <h1>
-            WorkbenchServiceProvider
+            WorkbenchDoc
                 
         </h1>
     </div>
 
     <p>    class
-    <strong>WorkbenchServiceProvider</strong>        extends <abbr title="Illuminate\Support\ServiceProvider">ServiceProvider</abbr>
+    <strong>WorkbenchDoc</strong>        extends <abbr title="Illuminate\Console\Command">Command</abbr>
 </p>
 
         
@@ -117,32 +117,56 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    void
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_boot">boot</a>()
+                    <a href="#method_handle">handle</a>()
         
-                                            <p>Bootstrap the application events.</p>                </div>
+                                            <p>Execute the console command.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    void
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_register">register</a>()
+                    <a href="#method_setWorkbenchSettings">setWorkbenchSettings</a>($workbenchSettings)
         
-                                            <p>Register the service provider.</p>                </div>
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    array
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_provides">provides</a>()
+                    <a href="#method_getWorkbenchSettings">getWorkbenchSettings</a>()
         
-                                            <p>Get the services provided by the provider.</p>                </div>
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___get">__get</a>($property)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___set">__set</a>($property, $value)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -152,10 +176,10 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method_boot">
-        <div class="location">at line         line 21</div>
-        <code>                    void
-    <strong>boot</strong>()
+                    <h3 id="method_handle">
+        <div class="location">at line         line 69</div>
+        <code>                    mixed
+    <strong>handle</strong>()
         </code>
     </h3>
     <div class="details">
@@ -163,14 +187,14 @@
     
 
                     <div class="method-description">
-                                    <p>Bootstrap the application events.</p>                                </div>
+                                    <p>Execute the console command.</p>                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>void</td>
+            <td>mixed</td>
             <td></td>
         </tr>
     </table>
@@ -182,25 +206,52 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_register">
-        <div class="location">at line         line 33</div>
-        <code>                    void
-    <strong>register</strong>()
+                    <h3 id="method_setWorkbenchSettings">
+        <div class="location">at line         line 139</div>
+        <code>                    
+    <strong>setWorkbenchSettings</strong>($workbenchSettings)
         </code>
     </h3>
     <div class="details">
             
     
 
-                    <div class="method-description">
-                                    <p>Register the service provider.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$workbenchSettings</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getWorkbenchSettings">
+        <div class="location">at line         line 147</div>
+        <code>                    mixed
+    <strong>getWorkbenchSettings</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>void</td>
+            <td>mixed</td>
             <td></td>
         </tr>
     </table>
@@ -212,29 +263,71 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_provides">
-        <div class="location">at line         line 62</div>
-        <code>                    array
-    <strong>provides</strong>()
+                    <h3 id="method___get">
+        <div class="location">at line         line 157</div>
+        <code>                    mixed
+    <strong>__get</strong>($property)
         </code>
     </h3>
     <div class="details">
             
     
 
-                    <div class="method-description">
-                                    <p>Get the services provided by the provider.</p>                                </div>
                 <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$property</td>
+                <td></td>
+            </tr>
+            </table>
+
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>array</td>
+            <td>mixed</td>
             <td></td>
         </tr>
     </table>
 
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___set">
+        <div class="location">at line         line 168</div>
+        <code>                    
+    <strong>__set</strong>($property, $value)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$property</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$value</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
             
             
                     </div>

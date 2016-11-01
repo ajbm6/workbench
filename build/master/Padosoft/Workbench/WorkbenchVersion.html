@@ -26,7 +26,7 @@
                     <form action="#" method="GET">
                 <select id="version-switcher" name="version">
                                             <option value="../../../0.0.1/index.html">0.0.1</option>
-                                            <option value="../../../1.0.0/index.html" selected>1.0.0</option>
+                                            <option value="../../../1.0.0/index.html">1.0.0</option>
                                             <option value="../../../2.0.0/index.html">2.0.0</option>
                                             <option value="../../../2.0.1/index.html">2.0.1</option>
                                             <option value="../../../2.0.2/index.html">2.0.2</option>
@@ -36,7 +36,14 @@
                                             <option value="../../../2.1.3/index.html">2.1.3</option>
                                             <option value="../../../2.1.4/index.html">2.1.4</option>
                                             <option value="../../../2.1.5/index.html">2.1.5</option>
-                                            <option value="../../../master/index.html">master</option>
+                                            <option value="../../../2.1.6/index.html">2.1.6</option>
+                                            <option value="../../../2.1.7/index.html">2.1.7</option>
+                                            <option value="../../../2.1.8/index.html">2.1.8</option>
+                                            <option value="../../../2.1.9/index.html">2.1.9</option>
+                                            <option value="../../../3.0.0/index.html">3.0.0</option>
+                                            <option value="../../../4.0.0/index.html">4.0.0</option>
+                                            <option value="../../../4.0.1/index.html">4.0.1</option>
+                                            <option value="../../../master/index.html" selected>master</option>
                                     </select>
             </form>
                 <form id="search-form" action="../../search.html" method="GET">
@@ -120,18 +127,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_dummy">dummy</a>($goofy)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
+                    array
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_runSemVer">runSemVer</a>()
@@ -142,7 +138,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    string
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_semVerAnalisys">semVerAnalisys</a>(array $output)
@@ -153,10 +149,21 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getListBranches">getListBranches</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy)
+                    <a href="#method_getActiveBranch">getActiveBranch</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLastTagVersionArray">getLastTagVersionArray</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -167,7 +174,29 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getActiveBranch">getActiveBranch</a>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+                    <a href="#method_getLastTagVersion">getLastTagVersion</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createSemverCopyFolder">createSemverCopyFolder</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkoutToTagVersion">checkoutToTagVersion</a>($version, <a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -178,7 +207,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getLastTagVersionArray">getLastTagVersionArray</a>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+                    <a href="#method_addAndCommit">addAndCommit</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $message)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -186,10 +215,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getLastTagVersion">getLastTagVersion</a>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+                    <a href="#method_pushOriginActiveBranch">pushOriginActiveBranch</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $branch)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -197,10 +226,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_createSemverCopyFolder">createSemverCopyFolder</a>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+                    <a href="#method_tagActiveBranch">tagActiveBranch</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $tag)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -208,10 +237,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_checkoutToTagVersion">checkoutToTagVersion</a>($version, <abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopySemver)
+                    <a href="#method_pushTagOriginActiveBranch">pushTagOriginActiveBranch</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $tag)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -219,10 +248,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addAndCommit">addAndCommit</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $message)
+                    <a href="#method_pullOriginMaster">pullOriginMaster</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -230,10 +259,10 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_pushOriginActiveBranch">pushOriginActiveBranch</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $branch)
+                    <a href="#method_pullOriginActiveBranch">pullOriginActiveBranch</a>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $branch)
         
                                             <p class="no-description">No description</p>
                                     </div>
@@ -241,51 +270,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_tagActiveBranch">tagActiveBranch</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $tag)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_pushTagOriginActiveBranch">pushTagOriginActiveBranch</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $tag)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_pullOriginMaster">pullOriginMaster</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_pullOriginActiveBranch">pullOriginActiveBranch</a>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $branch)
-        
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_formatColorRedText">formatColorRedText</a>($testo)
@@ -307,7 +292,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    mixed
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getWorkbenchSettings">getWorkbenchSettings</a>()
@@ -318,7 +303,18 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_validateTAG">validateTAG</a>($tag)
+        
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method___get">__get</a>($property)
@@ -346,7 +342,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_handle">
-        <div class="location">at line         line 55</div>
+        <div class="location">at line         line 64</div>
         <code>                    mixed
     <strong>handle</strong>()
         </code>
@@ -375,38 +371,9 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_dummy">
-        <div class="location">at line         line 264</div>
-        <code>                    
-    <strong>dummy</strong>($goofy)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td></td>
-                <td>$goofy</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_runSemVer">
-        <div class="location">at line         line 270</div>
-        <code>                    
+        <div class="location">at line         line 354</div>
+        <code>                    array
     <strong>runSemVer</strong>()
         </code>
     </h3>
@@ -416,6 +383,15 @@
 
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -424,8 +400,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_semVerAnalisys">
-        <div class="location">at line         line 279</div>
-        <code>                    
+        <div class="location">at line         line 367</div>
+        <code>                    string
     <strong>semVerAnalisys</strong>(array $output)
         </code>
     </h3>
@@ -445,35 +421,15 @@
             </table>
 
             
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getListBranches">
-        <div class="location">at line         line 285</div>
-        <code>                    
-    <strong>getListBranches</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                <div class="tags">
-                            <h4>Parameters</h4>
+                            <h4>Return Value</h4>
 
                     <table class="table table-condensed">
-                    <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
-                <td></td>
-            </tr>
-            </table>
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
 
-            
             
             
                     </div>
@@ -482,9 +438,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getActiveBranch">
-        <div class="location">at line         line 292</div>
-        <code>                    
-    <strong>getActiveBranch</strong>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+        <div class="location">at line         line 377</div>
+        <code>                    string
+    <strong>getActiveBranch</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -496,13 +452,22 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWrapper">GitWrapper</abbr></td>
-                <td>$gitWrapper</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -511,9 +476,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLastTagVersionArray">
-        <div class="location">at line         line 298</div>
-        <code>                    
-    <strong>getLastTagVersionArray</strong>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+        <div class="location">at line         line 387</div>
+        <code>                    array
+    <strong>getLastTagVersionArray</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -525,13 +490,22 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWrapper">GitWrapper</abbr></td>
-                <td>$gitWrapper</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -540,9 +514,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLastTagVersion">
-        <div class="location">at line         line 310</div>
+        <div class="location">at line         line 402</div>
         <code>                    
-    <strong>getLastTagVersion</strong>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+    <strong>getLastTagVersion</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -554,8 +528,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWrapper">GitWrapper</abbr></td>
-                <td>$gitWrapper</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
@@ -569,9 +543,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_createSemverCopyFolder">
-        <div class="location">at line         line 322</div>
-        <code>                    
-    <strong>createSemverCopyFolder</strong>(<abbr title="GitWrapper\GitWrapper">GitWrapper</abbr> $gitWrapper)
+        <div class="location">at line         line 419</div>
+        <code>                    mixed
+    <strong>createSemverCopyFolder</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -583,13 +557,22 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWrapper">GitWrapper</abbr></td>
-                <td>$gitWrapper</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -598,9 +581,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_checkoutToTagVersion">
-        <div class="location">at line         line 362</div>
-        <code>                    
-    <strong>checkoutToTagVersion</strong>($version, <abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopySemver)
+        <div class="location">at line         line 468</div>
+        <code>                    mixed
+    <strong>checkoutToTagVersion</strong>($version, <a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -617,13 +600,22 @@
                 <td></td>
             </tr>
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopySemver</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -632,9 +624,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addAndCommit">
-        <div class="location">at line         line 368</div>
+        <div class="location">at line         line 478</div>
         <code>                    
-    <strong>addAndCommit</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $message)
+    <strong>addAndCommit</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $message)
         </code>
     </h3>
     <div class="details">
@@ -646,8 +638,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
                     <tr>
@@ -666,9 +658,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_pushOriginActiveBranch">
-        <div class="location">at line         line 393</div>
-        <code>                    
-    <strong>pushOriginActiveBranch</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $branch)
+        <div class="location">at line         line 497</div>
+        <code>                    mixed
+    <strong>pushOriginActiveBranch</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $branch)
         </code>
     </h3>
     <div class="details">
@@ -680,8 +672,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
                     <tr>
@@ -692,6 +684,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -700,9 +701,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_tagActiveBranch">
-        <div class="location">at line         line 399</div>
-        <code>                    
-    <strong>tagActiveBranch</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $tag)
+        <div class="location">at line         line 508</div>
+        <code>                    mixed
+    <strong>tagActiveBranch</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $tag)
         </code>
     </h3>
     <div class="details">
@@ -714,8 +715,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
                     <tr>
@@ -726,6 +727,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -734,9 +744,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_pushTagOriginActiveBranch">
-        <div class="location">at line         line 404</div>
-        <code>                    
-    <strong>pushTagOriginActiveBranch</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $tag)
+        <div class="location">at line         line 518</div>
+        <code>                    mixed
+    <strong>pushTagOriginActiveBranch</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $tag)
         </code>
     </h3>
     <div class="details">
@@ -748,8 +758,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
                     <tr>
@@ -760,6 +770,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -768,9 +787,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_pullOriginMaster">
-        <div class="location">at line         line 410</div>
-        <code>                    
-    <strong>pullOriginMaster</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy)
+        <div class="location">at line         line 528</div>
+        <code>                    mixed
+    <strong>pullOriginMaster</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper)
         </code>
     </h3>
     <div class="details">
@@ -782,13 +801,22 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -797,9 +825,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_pullOriginActiveBranch">
-        <div class="location">at line         line 415</div>
-        <code>                    
-    <strong>pullOriginActiveBranch</strong>(<abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr> $gitWorkingCopy, $branch)
+        <div class="location">at line         line 538</div>
+        <code>                    mixed
+    <strong>pullOriginActiveBranch</strong>(<a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a> $gitSimpleWrapper, $branch)
         </code>
     </h3>
     <div class="details">
@@ -811,8 +839,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="GitWrapper\GitWorkingCopy">GitWorkingCopy</abbr></td>
-                <td>$gitWorkingCopy</td>
+                <td><a href="../../Padosoft/Workbench/GitSimpleWrapper.html"><abbr title="Padosoft\Workbench\GitSimpleWrapper">GitSimpleWrapper</abbr></a></td>
+                <td>$gitSimpleWrapper</td>
                 <td></td>
             </tr>
                     <tr>
@@ -823,6 +851,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -831,8 +868,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_formatColorRedText">
-        <div class="location">at line         line 421</div>
-        <code>                    
+        <div class="location">at line         line 548</div>
+        <code>                    mixed
     <strong>formatColorRedText</strong>($testo)
         </code>
     </h3>
@@ -852,6 +889,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -860,7 +906,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setWorkbenchSettings">
-        <div class="location">at line         line 430</div>
+        <div class="location">at line         line 560</div>
         <code>                    
     <strong>setWorkbenchSettings</strong>($workbenchSettings)
         </code>
@@ -889,8 +935,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getWorkbenchSettings">
-        <div class="location">at line         line 435</div>
-        <code>                    
+        <div class="location">at line         line 568</div>
+        <code>                    mixed
     <strong>getWorkbenchSettings</strong>()
         </code>
     </h3>
@@ -900,6 +946,53 @@
 
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_validateTAG">
+        <div class="location">at line         line 577</div>
+        <code>                    bool
+    <strong>validateTAG</strong>($tag)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$tag</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -908,8 +1001,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___get">
-        <div class="location">at line         line 440</div>
-        <code>                    
+        <div class="location">at line         line 602</div>
+        <code>                    mixed
     <strong>__get</strong>($property)
         </code>
     </h3>
@@ -929,6 +1022,15 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -937,7 +1039,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___set">
-        <div class="location">at line         line 447</div>
+        <div class="location">at line         line 613</div>
         <code>                    
     <strong>__set</strong>($property, $value)
         </code>

@@ -6,9 +6,9 @@
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchApiGeneration.php",
+    "file": "Z:\\TEMP\\workbench\/src\\WorkbenchApiGeneration.php",
     "relative_file": null,
-    "hash": "9ba0cec3fa8ee21c030b471499af79b12880ee2f",
+    "hash": "7cc287e43952c8aeeed6c8b8fdafb8b70ddd90a7",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -104,7 +104,7 @@
         },
         "transformReadmeMd": {
             "name": "transformReadmeMd",
-            "line": 172,
+            "line": 181,
             "short_desc": "* @param $readmepathsource\n     * @param $readmepathdestination",
             "long_desc": "",
             "hint": null,
@@ -117,7 +117,7 @@
             "parameters": {
                 "readmepathsource": {
                     "name": "readmepathsource",
-                    "line": 172,
+                    "line": 181,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -128,7 +128,7 @@
                 },
                 "readmepathdestination": {
                     "name": "readmepathdestination",
-                    "line": 172,
+                    "line": 181,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -141,7 +141,7 @@
         },
         "dummy": {
             "name": "dummy",
-            "line": 209,
+            "line": 218,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
