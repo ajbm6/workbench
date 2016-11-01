@@ -66,7 +66,10 @@ return [
     'php_path' => env( 'WORKBENCH_PHP_PATH',
         'C:/xampp/php/php.exe'
     ),
-    'common_dev_lib_path' => env( 'WORKBENCH_PHP_PATH','Y:/Public/common-dev-lib'),
+    'git_path' => env( 'WORKBENCH_GIT_PATH',
+        'C:/Program Files/Git/bin/git.exe'
+    ),
+    'common_dev_lib_path' => env( 'WORKBENCH_PHP_PATH','C:/xampp/common-dev-lib'),
     'github_token' => env( 'WORKBENCH_GITHUB_TOKEN',''),
     'scrutinizer_token' => env( 'WORKBENCH_SCRUTINIZER_TOKEN',''),
 ];
