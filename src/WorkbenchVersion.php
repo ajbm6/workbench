@@ -354,7 +354,7 @@ EOF;
     public function runSemVer()
     {
         $output = array();
-        $rawoutput = exec($this->phpBinary.' '.Config::get('workbench.common_dev_lib_path').'/php-semver-checker.phar compare'.sys_get_temp_dir().'/semver/oldversion '.sys_get_temp_dir().'/semver/original',$output);
+        $rawoutput = exec($this->phpBinary.' '.Config::get('workbench.common_dev_lib_path').'/php-semver-checker.phar compare '.sys_get_temp_dir().'/semver/oldversion '.sys_get_temp_dir().'/semver/original',$output);
         //TODO metti nel config il phar  del semver e le cartelle per original e oldversione
         return $output;
 
