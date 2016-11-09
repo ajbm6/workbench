@@ -6,9 +6,9 @@
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\workbench.php",
+    "file": "Z:\\TEMP\\workbench\/src\\workbench.php",
     "relative_file": null,
-    "hash": "fdb274f2bca77d85bc8684f463e978d809715fbf",
+    "hash": "5834b741781181559b3307560e3640a249496430",
     "parent": "Illuminate\\Console\\Command",
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -57,7 +57,7 @@
         },
         "transformReadmeMd": {
             "name": "transformReadmeMd",
-            "line": 588,
+            "line": 590,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -70,7 +70,7 @@
             "parameters": {
                 "readmepathsource": {
                     "name": "readmepathsource",
-                    "line": 588,
+                    "line": 590,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -81,7 +81,7 @@
                 },
                 "readmepathdestination": {
                     "name": "readmepathdestination",
-                    "line": 588,
+                    "line": 590,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -94,7 +94,7 @@
         },
         "setWorkbenchSettings": {
             "name": "setWorkbenchSettings",
-            "line": 626,
+            "line": 628,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -107,7 +107,7 @@
             "parameters": {
                 "workbenchSettings": {
                     "name": "workbenchSettings",
-                    "line": 626,
+                    "line": 628,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -120,7 +120,7 @@
         },
         "getWorkbenchSettings": {
             "name": "getWorkbenchSettings",
-            "line": 631,
+            "line": 633,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -134,7 +134,7 @@
         },
         "enableTravis": {
             "name": "enableTravis",
-            "line": 639,
+            "line": 641,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -148,7 +148,7 @@
         },
         "enableScrutinizer": {
             "name": "enableScrutinizer",
-            "line": 667,
+            "line": 669,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -162,7 +162,7 @@
         },
         "__get": {
             "name": "__get",
-            "line": 710,
+            "line": 712,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -175,7 +175,7 @@
             "parameters": {
                 "property": {
                     "name": "property",
-                    "line": 710,
+                    "line": 712,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -188,7 +188,7 @@
         },
         "__set": {
             "name": "__set",
-            "line": 720,
+            "line": 722,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -201,7 +201,7 @@
             "parameters": {
                 "property": {
                     "name": "property",
-                    "line": 720,
+                    "line": 722,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -212,7 +212,7 @@
                 },
                 "value": {
                     "name": "value",
-                    "line": 720,
+                    "line": 722,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,

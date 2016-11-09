@@ -1,14 +1,14 @@
 {
     "name": "Padosoft\\Workbench\\Parameters\\Password",
-    "line": 13,
+    "line": 14,
     "short_desc": "",
     "long_desc": "",
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench\\Parameters",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\parameters\\Password.php",
+    "file": "Z:\\TEMP\\workbench\/src\\parameters\\Password.php",
     "relative_file": null,
-    "hash": "1fb1ce0cdab095b2efc0ab663cea309d51a91049",
+    "hash": "e599188a6ee755522ccdbb55110d82fb6ff9cfd4",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -16,7 +16,8 @@
     "aliases": {
         "Workbench": "Padosoft\\Workbench\\Workbench",
         "Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable",
-        "Command": "Illuminate\\Console\\Command"
+        "Command": "Illuminate\\Console\\Command",
+        "HttpHelperFacade": "Padosoft\\HTTPClient\\HttpHelperFacade"
     },
     "errors": [],
     "interfaces": {
@@ -29,7 +30,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 24,
+            "line": 25,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -42,7 +43,7 @@
             "parameters": {
                 "command": {
                     "name": "command",
-                    "line": 24,
+                    "line": 25,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -60,7 +61,7 @@
         },
         "read": {
             "name": "read",
-            "line": 30,
+            "line": 31,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -73,7 +74,7 @@
             "parameters": {
                 "silent": {
                     "name": "silent",
-                    "line": 30,
+                    "line": 31,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -86,7 +87,7 @@
         },
         "isValidValue": {
             "name": "isValidValue",
-            "line": 56,
+            "line": 62,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -99,7 +100,7 @@
             "parameters": {
                 "valore": {
                     "name": "valore",
-                    "line": 56,
+                    "line": 62,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -109,12 +110,26 @@
                     "is_by_ref": false
                 }
             }
+        },
+        "testPassword": {
+            "name": "testPassword",
+            "line": 71,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
         }
     },
     "constants": {
         "CONFIG": {
             "name": "CONFIG",
-            "line": 19,
+            "line": 20,
             "short_desc": "",
             "long_desc": ""
         }
