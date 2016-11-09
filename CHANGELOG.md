@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 1.0.0 - 2016-11-09
+
+### Added
+- Production package
+
 ## 5.0.0 - 2016-11-09
 
 ## 5.0.0 - 2016-11-09
