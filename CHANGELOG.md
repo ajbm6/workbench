@@ -4,6 +4,8 @@ All Notable changes to workbench will be documented in this file
 
 ## 5.0.0 - 2016-11-09
 
+## 5.0.0 - 2016-11-09
+
 ### Added
 - Added control Github password
 
