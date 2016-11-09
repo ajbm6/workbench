@@ -113,6 +113,7 @@ EOF;
         $command = $this;
         $this->workbenchSettings = new WorkbenchSettings($command);
 
+        //$this->workbenchSettings->prepare("github","git");
         $this->workbenchSettings->prepare($this->input->getOption("user"),"user");
         $this->workbenchSettings->prepare($this->input->getOption("password"),"password");
         $this->workbenchSettings->prepare($this->input->getOption("email") ,"email");

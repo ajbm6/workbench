@@ -70,8 +70,17 @@ class Password implements IEnumerable
 
     public function testPassword()
     {
-        $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/",[],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
-        if($response->psr7response->getReasonPhrase()=="Unauthorized")
+
+        if($this->requested["git"]["valore"]=='bitbucket') {
+            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.bitbucket.org/",[],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+
+        }
+        else {
+            $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/",[],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+        }
+
+
+        if(strtoupper($response->psr7response->getReasonPhrase())=="UNAUTHORIZED")
         {
             return false;
         }

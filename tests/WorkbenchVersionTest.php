@@ -48,8 +48,14 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
         }
         echo $this->pharSamiBinary;*/
 
+        $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/",[],'alevento','mnnlsnal');
 
 
+        if(strtoupper($response->psr7response->getReasonPhrase())=="UNAUTHORIZED")
+        {
+            return false;
+        }
+        return true;
 
         $dir="Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
         $user="alevento";
