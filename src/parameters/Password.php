@@ -9,6 +9,7 @@ namespace Padosoft\Workbench\Parameters;
 use Padosoft\Workbench\Workbench;
 use Padosoft\Workbench\Traits\Enumerable;
 use Illuminate\Console\Command;
+use Padosoft\HTTPClient\HttpHelperFacade;
 
 class Password implements IEnumerable
 {
@@ -42,6 +43,11 @@ class Password implements IEnumerable
         if(!$silent && !$this->requested["password"]["valore-valido"]){
 
             $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
+            if(!$this->testPassword())
+            {
+                $this->command->error("Invalid username or password!");
+                exit();
+            }
             $this->requested["password"]["valore-valido"]= true;
         }
         $this->command->getWorkbenchSettings()->setRequested($this->requested);
@@ -61,4 +67,15 @@ class Password implements IEnumerable
         }
         return true;
     }
+
+    public function testPassword()
+    {
+        $response = HttpHelperFacade::sendPostJsonWithAuth("https://api.github.com/",[],$this->requested["user"]["valore"],$this->requested["password"]["valore"]);
+        if($response->psr7response->getReasonPhrase()=="Unauthorized")
+        {
+            return false;
+        }
+        return true;
+    }
+
 }

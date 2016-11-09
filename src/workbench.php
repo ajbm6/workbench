@@ -80,6 +80,8 @@ EOF;
      */
     public function handle()
     {
+
+
         if(is_null($this->workbenchSettings) ){
             $this->workbenchSettings = new WorkbenchSettings($this);
         }

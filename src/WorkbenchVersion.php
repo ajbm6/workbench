@@ -280,7 +280,9 @@ EOF;
         }
 
         if ($this->confirm("Do you want push the active branch?",true)) {
-            $this->line($this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch));
+            $output=$this->pushOriginActiveBranch($gitSimpleWrapper,$activebranch);
+            $output=str_replace($this->workbenchSettings->requested['password']['valore'],'******',$output);
+            $this->line($output);
             $this->line("Active branch pushed on origin");
             if($tagged) {
                 $this->pushTagOriginActiveBranch($gitSimpleWrapper,implode(".",$tagVersion));

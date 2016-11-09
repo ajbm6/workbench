@@ -12,6 +12,7 @@ namespace Padosoft\Workbench\Test;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Process\ExecutableFinder;
 use Config;
+use Padosoft\HTTPClient\HttpHelperFacade;
 
 class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
 {
@@ -28,8 +29,14 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
     /** @test */
     public function testHardWorkCreateNoOk()
     {
-        $finder = new ExecutableFinder();
-        $finder->addSuffix('phar');
+
+
+
+
+
+
+        //$finder = new ExecutableFinder();
+        //$finder->addSuffix('phar');
 
         /*$this->gitBinary = '"'.str_replace("\\","/",$finder->find('git',null,[Config::get('workbench.git_path')])).'"';
         if (!$this->gitBinary) {
@@ -42,7 +49,8 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
         echo $this->pharSamiBinary;*/
 
 
-        /*
+
+
         $dir="Y:/Public/laravel-packages/www/laravel/5.2.x/packages/Padosoft/workbench/";
         $user="alevento";
         $password=env('PWD_ALE_GITHUB');
@@ -53,7 +61,7 @@ class WorkbenchVersionTest extends \Padosoft\LaravelTest\TestBase
             '--user'=>$user,
             '--password'=>$password,
             '--email'=>$email,
-        ]);*/
+        ]);
 
     }
 
