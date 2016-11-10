@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 1.0.1 - 2016-11-10
+
+### Added
+- In case of NONE in semver suggestion the procedure don't finish.
+
 ## 1.0.0 - 2016-11-09
 
 ### Added
