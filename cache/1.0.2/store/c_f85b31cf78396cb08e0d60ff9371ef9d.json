@@ -1,0 +1,158 @@
+{
+    "name": "Padosoft\\Workbench\\WorkbenchApiGeneration",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "Z:\\TEMP\\workbench\/src\\WorkbenchApiGeneration.php",
+    "relative_file": null,
+    "hash": "8d6ca900ca05c1b90d565735ac60171cf0e67b46",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "WorkbenchSettings": "Padosoft\\Workbench\\WorkbenchSettings",
+        "Command": "Illuminate\\Console\\Command",
+        "File": "File",
+        "Config": "Config",
+        "CommonMarkConverter": "League\\CommonMark\\CommonMarkConverter",
+        "GitWrapper": "GitWrapper\\GitWrapper",
+        "ExecutableFinder": "Symfony\\Component\\Process\\ExecutableFinder"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 33,
+            "short_desc": "* WorkbenchApiGeneration constructor.",
+            "long_desc": "* @param \\Padosoft\\Workbench\\WorkbenchSettings $workbenchSettings\n     * @param Command $command",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "workbenchSettings": {
+                    "name": "workbenchSettings",
+                    "line": 33,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Padosoft\\Workbench\\WorkbenchSettings",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Padosoft\\Workbench\\WorkbenchSettings",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "command": {
+                    "name": "command",
+                    "line": 33,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Illuminate\\Console\\Command",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Illuminate\\Console\\Command",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "apigeneration": {
+            "name": "apigeneration",
+            "line": 60,
+            "short_desc": "*",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "apiSamiGeneration": {
+            "name": "apiSamiGeneration",
+            "line": 89,
+            "short_desc": "*",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "transformReadmeMd": {
+            "name": "transformReadmeMd",
+            "line": 189,
+            "short_desc": "* @param $readmepathsource\n     * @param $readmepathdestination",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "readmepathsource": {
+                    "name": "readmepathsource",
+                    "line": 189,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "readmepathdestination": {
+                    "name": "readmepathdestination",
+                    "line": 189,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "dummy": {
+            "name": "dummy",
+            "line": 226,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,162 @@
+{
+    "name": "Padosoft\\Workbench\\WorkbenchChangelog",
+    "line": 13,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "Z:\\TEMP\\workbench\/src\\WorkbenchChangelog.php",
+    "relative_file": null,
+    "hash": "bbc34a3e24f0410b3dfcdce126a04e479399b3d8",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Command": "Illuminate\\Console\\Command"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 25,
+            "short_desc": "WorkbenchChangelog constructor.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "workbenchSettings": {
+                    "name": "workbenchSettings",
+                    "line": 25,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Padosoft\\Workbench\\WorkbenchSettings",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Padosoft\\Workbench\\WorkbenchSettings",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "command": {
+                    "name": "command",
+                    "line": 25,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Illuminate\\Console\\Command",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Illuminate\\Console\\Command",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "composeChangelog": {
+            "name": "composeChangelog",
+            "line": 33,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "question": {
+            "name": "question",
+            "line": 47,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Padosoft\\Workbench\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "writeChangeLog": {
+            "name": "writeChangeLog",
+            "line": 94,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "fileLog": {
+                    "name": "fileLog",
+                    "line": 94,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "tag": {
+                    "name": "tag",
+                    "line": 94,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getChanges": {
+            "name": "getChanges",
+            "line": 123,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

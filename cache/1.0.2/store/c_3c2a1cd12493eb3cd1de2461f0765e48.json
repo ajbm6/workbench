@@ -1,0 +1,307 @@
+{
+    "name": "Padosoft\\Workbench\\WorkbenchSettings",
+    "line": 14,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\WorkbenchSettings.php",
+    "relative_file": null,
+    "hash": "bc0517b86bb28bff03c1ca064b193cbe5c8a2332",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Command": "Illuminate\\Console\\Command",
+        "Config": "Config"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 39,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "command": {
+                    "name": "command",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Illuminate\\Console\\Command",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Illuminate\\Console\\Command",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "prepare": {
+            "name": "prepare",
+            "line": 43,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "val": {
+                    "name": "val",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "class": {
+                    "name": "class",
+                    "line": 43,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setRequested": {
+            "name": "setRequested",
+            "line": 85,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "requested": {
+                    "name": "requested",
+                    "line": 85,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getRequested": {
+            "name": "getRequested",
+            "line": 90,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "__get": {
+            "name": "__get",
+            "line": 95,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "property": {
+                    "name": "property",
+                    "line": 95,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "__set": {
+            "name": "__set",
+            "line": 102,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "property": {
+                    "name": "property",
+                    "line": 102,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "value": {
+                    "name": "value",
+                    "line": 102,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "ACTION": {
+            "name": "ACTION",
+            "line": 20,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "DOMAIN": {
+            "name": "DOMAIN",
+            "line": 21,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "TYPE": {
+            "name": "TYPE",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "DIRTYPE": {
+            "name": "DIRTYPE",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "DIR": {
+            "name": "DIR",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "GIT": {
+            "name": "GIT",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "GITACTION": {
+            "name": "GITACTION",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "GITHOOKENABLE": {
+            "name": "GITHOOKENABLE",
+            "line": 27,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "USER": {
+            "name": "USER",
+            "line": 28,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PASSWORD": {
+            "name": "PASSWORD",
+            "line": 29,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "EMAIL": {
+            "name": "EMAIL",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "ORGANIZATION": {
+            "name": "ORGANIZATION",
+            "line": 31,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "SSHHOST": {
+            "name": "SSHHOST",
+            "line": 32,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "SSHUSER": {
+            "name": "SSHUSER",
+            "line": 33,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "SSHPASSWORD": {
+            "name": "SSHPASSWORD",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PACKAGENAME": {
+            "name": "PACKAGENAME",
+            "line": 35,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PACKAGEDESCR": {
+            "name": "PACKAGEDESCR",
+            "line": 36,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PACKAGEKEYWORDS": {
+            "name": "PACKAGEKEYWORDS",
+            "line": 37,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}
