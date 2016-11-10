@@ -89,10 +89,20 @@ EOF;
 
         $this->BASE_PATH=$this->argument("dir");
         if(empty($this->argument("dir"))) {
-            $this->BASE_PATH=__DIR__;
+            $this->BASE_PATH=base_path();
 
         }
+
+        if(!DirHelper::isDirSafe($this->BASE_PATH)) {
+            if(DirHelper::isDirSafe(base_path().'/'.$this->BASE_PATH)) {
+                $this->BASE_PATH=base_path().'/'.$this->BASE_PATH;
+            }
+            else {
+                exit();
+            }
+        }
         $this->BASE_PATH=\Padosoft\Workbench\Parameters\Dir::adjustPath($this->BASE_PATH);
+        $this->line("Path analyzed: ". $this->BASE_PATH);
         $this->domain = basename($this->BASE_PATH);
         $this->ORGANIZATION_PATH = \Padosoft\Workbench\Parameters\Dir::adjustPath(substr($this->BASE_PATH,0,strlen($this->BASE_PATH)-(strlen($this->domain)+1)));
         $json = json_decode(file_get_contents($this->BASE_PATH."composer.json"),true);
