@@ -93,8 +93,8 @@ EOF;
 
         }
 
-        if(!DirHelper::isDirSafe($this->BASE_PATH)) {
-            if(DirHelper::isDirSafe(base_path().'/'.$this->BASE_PATH)) {
+        if(!is_dir($this->BASE_PATH)) {
+            if(is_dir(base_path().'/'.$this->BASE_PATH)) {
                 $this->BASE_PATH=base_path().'/'.$this->BASE_PATH;
             }
             else {
