@@ -4,6 +4,8 @@ All Notable changes to workbench will be documented in this file
 
 ## 1.0.1 - 2016-11-10
 
+## 1.0.1 - 2016-11-10
+
 ### Added
 - In case of NONE in semver result the procedure not finish.
 
