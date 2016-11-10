@@ -16,17 +16,20 @@
         "padosoft/httpclient": "0.*",
         "padosoft/support": "1.*"
     },
+    "require-dev": {
+        "padosoft/test": "0.*"
+    },
     "autoload": {
-		"classmap": [
-				"tests/TestBase.php",
-				"tests/MailTestCase.php"
-			],
         "psr-4": {
             "Padosoft\\Workbench\\": "src",
             "Phpseclib\\" : "phpseclib"
         }
     },
     "autoload-dev": {
+        "classmap": [
+            "tests/TestBase.php",
+            "tests/MailTestCase.php"
+        ],
         "psr-4": {
                 "Padosoft\\Workbench\\Test\\": "tests"
         }
