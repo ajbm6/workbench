@@ -201,20 +201,22 @@ EOF;
             $color = "";
             $tagVersionOriginal=$tagVersion;
             switch ($semVerVersion) {
-                case "MAJOR";
+                case "MAJOR":
                     $tagVersion[0] = $tagVersion[0] +1;
                     $tagVersion[1] = 0;
                     $tagVersion[2] = 0;
                     $color = "red";
                     break;
-                case "MINOR";
+                case "MINOR":
                     $tagVersion[1] = $tagVersion[1] +1;
                     $tagVersion[2] = 0;
                     $color = "yellow";
                     break;
-                case "PATCH";
+                case "PATCH":
                     $tagVersion[2] = $tagVersion[2] +1;
                     $color = "yellow";
+                    break;
+                case "NONE":
                     break;
                 default:
                     return;
