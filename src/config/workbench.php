@@ -72,4 +72,5 @@ return [
     'common_dev_lib_path' => env( 'WORKBENCH_PHP_PATH','C:/xampp/common-dev-lib'),
     'github_token' => env( 'WORKBENCH_GITHUB_TOKEN',''),
     'scrutinizer_token' => env( 'WORKBENCH_SCRUTINIZER_TOKEN',''),
+    'packagist_token' => env('WORKBENCH_PACKAGIST_TOKEN',''),
 ];
