@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.0.0",
         "padosoft/test": "0.*",
-        "padosoft/httpclient": "0.*",
+        "padosoft/httpclient": "1.*",
         "padosoft/support": "1.*"
     },
     "require-dev": {
