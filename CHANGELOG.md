@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 1.0.3 - 2016-11-17
+
+### Fixed
+- Fixe vendor name in push command
+
 ## 1.0.1 - 2016-11-10
 
 ## 1.0.1 - 2016-11-10
