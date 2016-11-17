@@ -512,7 +512,7 @@ EOF;
     public function pushOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $branch)
     {
         //return $gitWorkingCopy->push("https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git",$branch);
-        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$branch);
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/". $this->workbenchSettings->requested['organization']['valore'] ."/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$branch);
     }
 
     /**
@@ -533,7 +533,7 @@ EOF;
     public function pushTagOriginActiveBranch(GitSimpleWrapper $gitSimpleWrapper, $tag)
     {
         //return $gitWorkingCopy->pushTag($tag,"https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/workbench.git");
-        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/padosoft/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$tag );
+        return $gitSimpleWrapper->git("push https://". $this->workbenchSettings->requested['user']['valore'] .":". $this->workbenchSettings->requested['password']['valore'] ."@github.com/". $this->workbenchSettings->requested['organization']['valore'] ."/".$this->workbenchSettings->requested['packagename']['valore'].".git ".$tag );
     }
 
     /**
