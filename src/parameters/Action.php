@@ -39,7 +39,7 @@ class Action implements IEnumerable
 
 
         if(!$silent && !$this->requested["action"]["valore-valido"]){
-            $this->requested["action"]["valore"] = $this->command->choice('What do you want to do?', ['create', 'delete']);
+            $this->requested["action"]["valore"] = $this->command->choice('What do you want to do?', ['create', 'delete'],0);
             $this->requested["action"]["valore-valido"]= true;
 
         }

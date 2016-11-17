@@ -45,7 +45,7 @@ class Dirtype implements IEnumerable
             $this->requested["dirtype"]["valore-valido"]= true;
         }
         if(!$silent && !$this->requested["dirtype"]["valore-valido"]){
-            $this->requested["dirtype"]["valore"] = $this->command->choice('What type of dir?', ['public', 'private']);
+            $this->requested["dirtype"]["valore"] = $this->command->choice('What type of dir?', ['public', 'private'], 0);
             $this->requested["dirtype"]["valore-valido"]= true;
         }
         $dirtype= $this->requested["dirtype"]["valore"];
