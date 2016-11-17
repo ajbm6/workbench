@@ -316,15 +316,7 @@ EOF;
                 $response->psr7response;
                 $this->line("Tagged");
             }
-
-
-
-
-
-
         }
-
-
 
         /*
         if ($pushed) {
@@ -332,25 +324,8 @@ EOF;
             $this->line("Tagged");
         }*/
 
-
         $apiSamiGeneration = new WorkbenchApiGeneration($this->workbenchSettings,$this);
         $apiSamiGeneration->apiSamiGeneration();
-
-
-
-
-
-        //TODO
-        //chiedere messaggio di commit*
-        //commit del progetto*
-        //mostrare branch attivo*
-        //una volta committato fare pull del progetto
-        //mostrare il risultato del pull evidenziando parole tipo automerge e fail
-        //chiedere se continuare
-        //trovare l'ultimo tag del progetto
-        //se si continua creare 2 copie del progetto, fare checkout di una delle 2 all'ultimo tag di versione
-        //lanciare il confronto, evidenziare il tipo di cambiamento e suggerire la versione
-        //chiedere se pushare e taggare con la nuova versione
 
     }
 

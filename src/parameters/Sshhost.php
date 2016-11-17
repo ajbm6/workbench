@@ -45,14 +45,17 @@ class Sshhost
             return false;
         }
 
-        while(!$silent && (!$this->requested["sshhost"]["valore-valido"] || empty($this->requested["sshhost"]["valore"])) && $attemp<$attemps){
-            $this->command->error("This host '" .$this->requested["sshhost"]["valore"]. "' is not valid");
+        do {
+
             $this->requested["sshhost"]["valore"] = $this->command->ask('SSH host IP',
                 ($this->requested["sshhost"]["valore-valido-default"]?$this->requested["sshhost"]["valore-default"]:$this->requested["sshhost"]["valore"]));
             $this->requested["sshhost"]["valore-valido"] = Sshhost::isValidValue($this->requested["sshhost"]["valore"]);
+            if(!$this->requested["sshhost"]["valore-valido"]) {
+                $this->command->error("This host '" .$this->requested["sshhost"]["valore"]. "' is not valid");
+            }
             $attemp++;
             if ($attemp== $attemps) return $this->command->error("Exit for invalid host");
-        }
+        } while(!$silent && (!$this->requested["sshhost"]["valore-valido"] || empty($this->requested["sshhost"]["valore"])) && $attemp<$attemps);
 
 
         $this->command->getWorkbenchSettings()->setRequested($this->requested);
