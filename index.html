@@ -95,6 +95,9 @@
 
 ]
 </code></pre>
+<p>Sometimes in case of problem you can use:</p>
+<pre><code class="language-bash">php artisan config:clear
+</code></pre>
 <h1>Usage</h1>
 <p>php artisan workbench:new</p>
 <p>l'option --help mostra i parametri</p>
@@ -106,9 +109,8 @@ action                                   create or delete
 domain                                   domain name</p>
 <p>Options:
 -t, --type[=TYPE]                        laravel, normal, laravel_package or agnostic_package
--d, --dirtype[=DIRTYPE]                  project dir type, public or private
+-d, --dirtype[=DIRTYPE]                  project dir type, public or private, path set in config
 -g, --git[=GIT]                          github or bitbucket
--a, --gitaction[=GITACTION]              push or pull
 -u, --user[=USER]                        git user
 -p, --password[=PASSWORD]                git password
 -e, --email[=EMAIL]                      git email

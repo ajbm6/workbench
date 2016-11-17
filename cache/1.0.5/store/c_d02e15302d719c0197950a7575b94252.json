@@ -1,0 +1,23 @@
+{
+    "name": "Padosoft\\Workbench\\GitSimpleException",
+    "line": 14,
+    "short_desc": "Base class for exceptions thrown by the Git library.",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\GitSimpleException.php",
+    "relative_file": null,
+    "hash": "83c65764e54a6f3d12b2e29ebcd61f4ea1d42db6",
+    "parent": "RuntimeException",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}
