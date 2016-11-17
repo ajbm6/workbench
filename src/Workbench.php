@@ -271,13 +271,13 @@ EOF;
                 $gitSimpleWrapper->git("pull origin master");
                 $this->info("Download complete.");
             }
-
+            $this->substitute();
             if($upload && $this->workbenchSettings->requested['gitaction']['valore']==Parameters\GitAction::PUSH) {
                 $gitSimpleWrapper->git("remote remove origin");
 
                 $extension = ($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
                 $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".". $extension ."/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
-                $this->substitute();
+                //$this->substitute();
                 $gitSimpleWrapper->git("add .");
                 $gitSimpleWrapper->git("commit -m Substitute");
                 $this->info("Uploading repo...");
