@@ -1,0 +1,172 @@
+{
+    "name": "Padosoft\\Workbench\\WorkbenchDoc",
+    "line": 29,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Padosoft\\Workbench",
+    "file": "Z:\\TEMP\\workbench\/src\\WorkbenchDoc.php",
+    "relative_file": null,
+    "hash": "37870d213bf807273b5e61ffa77174c2acdfce6b",
+    "parent": "Illuminate\\Console\\Command",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Command": "Illuminate\\Console\\Command",
+        "GitWrapper": "GitWrapper\\GitWrapper",
+        "GitWorkingCopy": "GitWrapper\\GitWorkingCopy",
+        "GitBranches": "GitWrapper\\GitBranches",
+        "File": "File",
+        "Padding": "League\\CLImate\\TerminalObject\\Dynamic\\Padding",
+        "HTTPClient": "Padosoft\\HTTPClient\\HTTPClient",
+        "HttpHelperFacade": "Padosoft\\HTTPClient\\HttpHelperFacade",
+        "RequestHelper": "Padosoft\\HTTPClient\\RequestHelper",
+        "DirHelper": "Padosoft\\Io\\DirHelper",
+        "WorkbenchApiGeneration": "Padosoft\\Workbench\\WorkbenchApiGeneration",
+        "WorkbenchSettings": "Padosoft\\Workbench\\WorkbenchSettings",
+        "ExecutableFinder": "Symfony\\Component\\Process\\ExecutableFinder",
+        "Support": "Padosoft\\Support",
+        "HttpHelper": "Padosoft\\HTTPClient\\HttpHelper"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "handle": {
+            "name": "handle",
+            "line": 69,
+            "short_desc": "Execute the console command.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setWorkbenchSettings": {
+            "name": "setWorkbenchSettings",
+            "line": 139,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "workbenchSettings": {
+                    "name": "workbenchSettings",
+                    "line": 139,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getWorkbenchSettings": {
+            "name": "getWorkbenchSettings",
+            "line": 147,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "__get": {
+            "name": "__get",
+            "line": 157,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "property": {
+                    "name": "property",
+                    "line": 157,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "__set": {
+            "name": "__set",
+            "line": 168,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "property": {
+                    "name": "property",
+                    "line": 168,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "value": {
+                    "name": "value",
+                    "line": 168,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}
