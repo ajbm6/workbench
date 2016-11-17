@@ -39,7 +39,7 @@ class Organization implements IEnumerable
         }
 
         if(!$this->requested["organization"]["valore-valido"]){
-            $this->requested["organization"]["valore"] = $this->command->ask('Vendor name and git repository\'s organization');
+            $this->requested["organization"]["valore"] = $this->command->ask('Vendor name and git repository\'s organization',($this->requested["organization"]["valore-valido-default"]?$this->requested["organization"]["valore-default"]:$this->requested["organization"]["valore"]));
             $this->requested["organization"]["valore-valido"]= true;
         }
         $this->command->getWorkbenchSettings()->setRequested($this->requested);

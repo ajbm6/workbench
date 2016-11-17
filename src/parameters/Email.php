@@ -45,15 +45,16 @@ class Email implements IEnumerable
         $attemps = Config::get('workbench.attemps');
         $attemp=0;
 
-        while(!$silent && (!$this->requested["email"]["valore-valido"] || empty($this->requested["email"]["valore"])) && $attemp<$attemps){
-            $this->command->error("This email '" .$this->requested["email"]["valore"]. "' is not valid");
-
+        do {
             $this->requested["email"]["valore"] = $this->command->ask('The email associated to git repository',
                 ($this->requested["email"]["valore-valido-default"]?$this->requested["email"]["valore-default"]:$this->requested["email"]["valore"]));
             $this->requested["email"]["valore-valido"] = Email::isValidValue($this->requested["email"]["valore"]);
+            if(!$this->requested["email"]["valore-valido"]){
+                $this->command->error("This email '" .$this->requested["email"]["valore"]. "' is not valid");
+            }
             $attemp++;
             if ($attemp== $attemps) return $this->command->error("Exit for invalid email");
-        }
+        } while(!$silent && (!$this->requested["email"]["valore-valido"] || empty($this->requested["email"]["valore"])) && $attemp<$attemps);
 
         $this->command->getWorkbenchSettings()->setRequested($this->requested);
     }

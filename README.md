@@ -60,6 +60,12 @@ The following config file will be published in `config/workbench.php`
 ]
 ```
 
+Sometimes in case of problem you can use:
+``` bash
+php artisan config:clear
+```
+
+
 # Usage
 
 php artisan workbench:new
@@ -76,9 +82,8 @@ Arguments:
 
 Options:
   -t, --type[=TYPE]                        laravel, normal, laravel_package or agnostic_package
-  -d, --dirtype[=DIRTYPE]                  project dir type, public or private
+  -d, --dirtype[=DIRTYPE]                  project dir type, public or private, path set in config
   -g, --git[=GIT]                          github or bitbucket
-  -a, --gitaction[=GITACTION]              push or pull
   -u, --user[=USER]                        git user
   -p, --password[=PASSWORD]                git password
   -e, --email[=EMAIL]                      git email

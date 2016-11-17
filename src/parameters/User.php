@@ -40,7 +40,7 @@ class User implements IEnumerable
         }
         if(!$this->requested["user"]["valore-valido"]){
 
-            $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username');
+            $this->requested["user"]["valore"] = $this->command->ask('Git repository\'s username',($this->requested["user"]["valore-valido-default"]?$this->requested["user"]["valore-default"]:$this->requested["user"]["valore"]));
             $this->requested["user"]["valore-valido"]= true;
         }
         $this->command->getWorkbenchSettings()->setRequested($this->requested);

@@ -4,21 +4,13 @@ namespace Padosoft\Workbench;
 
 
 use Illuminate\Console\Command;
-use GitWrapper\GitWrapper;
-use GitWrapper\GitWorkingCopy;
-use GitWrapper\GitBranches;
 use File;
 use Config;
-use League\CLImate\TerminalObject\Dynamic\Padding;
-use Padosoft\HTTPClient\HTTPClient;
 use Padosoft\HTTPClient\HttpHelperFacade;
-use Padosoft\HTTPClient\RequestHelper;
 use Padosoft\Io\DirHelper;
-use Padosoft\Workbench\WorkbenchApiGeneration;
-use Padosoft\Workbench\WorkbenchSettings;
 use Symfony\Component\Process\ExecutableFinder;
 use Padosoft\Support;
-use Padosoft\HTTPClient\HttpHelper;
+
 
 
 class WorkbenchVersion extends Command

@@ -11,15 +11,10 @@ use File;
 use GuzzleHttp\Client;
 use Padosoft\HTTPClient\HTTPClient;
 use Padosoft\HTTPClient\RequestHelper;
-use Padosoft\HTTPClient\Response;
 use Padosoft\HTTPClient\HttpHelper;
 use Padosoft\HTTPClient\HttpHelperFacade;
-use GitWrapper\GitWrapper;
 use phpseclib\Net\SSH2;
 use League\CommonMark\CommonMarkConverter;
-use Padosoft\Workbench\WorkbenchSettings;
-use Padosoft\Workbench\WorkbenchApiGeneration;
-
 
 class Workbench extends Command
 {
@@ -32,9 +27,8 @@ class Workbench extends Command
                             {action? : create or delete}
                             {domain? : domain name}
                             {--t|type= : laravel, normal, laravel_package or agnostic_package}
-                            {--d|dirtype= : project dir type, public or private}
+                            {--d|dirtype= : project dir type, public or private, path set in config}
                             {--g|git= : github or bitbucket}
-                            {--a|gitaction= : push or pull}
                             {--githookenable : enable pre commit hook}
                             {--u|user= : git user}
                             {--p|password= : git password}
@@ -232,56 +226,62 @@ EOF;
     private function createAndDownloadFromGit(bool $upload)
     {
         try {
-            $gitWrapper = new GitWrapper();
+
+            $gitSimpleWrapper = new GitSimpleWrapper(null,null);
+
+
             if(substr($this->workbenchSettings->requested["type"]['valore'],-7) != 'package') {
-                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']."/www",[]));
+                $gitSimpleWrapper->setWorkingDirectory(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']."/www"));
+                $gitSimpleWrapper->git("init");
             }
             if(substr($this->workbenchSettings->requested["type"]['valore'],-7) == 'package') {
-                $gitWorkingCopy=$gitWrapper->init(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'],[]));
+                $gitSimpleWrapper->setWorkingDirectory(\Padosoft\Workbench\Parameters\Dir::adjustPath($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore']));
+                $gitSimpleWrapper->git("init");
             }
-            //$gitWorkingCopy=$gitWrapper->init($this->workbenchSettings->requested['dir']['valore'].$this->workbenchSettings->requested['domain']['valore'],[]);
-            $gitWrapper->git("config --global user.name ".$this->workbenchSettings->requested['user']['valore']);
-            $gitWrapper->git("config --global user.email ".$this->workbenchSettings->requested['email']['valore']);
-            $gitWrapper->git("config --global user.password ".$this->workbenchSettings->requested['password']['valore']);
-            $gitWorkingCopy->add('.');
+            $gitSimpleWrapper->git("config --global user.name ".$this->workbenchSettings->requested['user']['valore']);
+            $gitSimpleWrapper->git("config --global user.email ".$this->workbenchSettings->requested['email']['valore']);
+            $gitSimpleWrapper->git("config --global user.password ".$this->workbenchSettings->requested['password']['valore']);
+            $gitSimpleWrapper->git("add .");
 
             switch($this->workbenchSettings->requested['type']['valore']) {
                 case Parameters\Type::AGNOSTIC_PACKAGE:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.agnostic_package').".git" );
+                    $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.agnostic_package').".git");
                     $this->info("Downloading skeleton agnostic package...");
                     break;
                 case Parameters\Type::LARAVEL_PACKAGE:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel_package').".git" );
+                    $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel_package').".git");
                     $this->info("Downloading skeleton laravel package...");
                     break;
                 case Parameters\Type::LARAVEL:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel').".git" );
+                    $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.laravel').".git");
                     $this->info("Downloading skeleton laravel project...");
                     break;
                 case Parameters\Type::NORMAL:
-                    $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.normal').".git" );
+                    $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@github.com/padosoft/".Config::get('workbench.type_repository.normal').".git");
                     //$this->info("Downloading skeleton normal project...");
                     break;
             }
             if($this->workbenchSettings->requested['gitaction']['valore']==Parameters\GitAction::PULL) {
                 $this->info("Donwloading repo...");
-                $gitWorkingCopy->removeRemote('origin');
-                $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".com/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
+                $gitSimpleWrapper->git("remote remove origin");
+                $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".com/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
+
             }
             if($this->workbenchSettings->requested['type']['valore']!=Parameters\Type::NORMAL) {
-                $gitWorkingCopy->pull('origin','master');
+                $gitSimpleWrapper->git("pull origin master");
                 $this->info("Download complete.");
             }
 
             if($upload && $this->workbenchSettings->requested['gitaction']['valore']==Parameters\GitAction::PUSH) {
-                $gitWorkingCopy->removeRemote('origin');
+                $gitSimpleWrapper->git("remote remove origin");
+
                 $extension = ($this->workbenchSettings->requested["git"]["valore"]==Parameters\Git::BITBUCKET ? "org" : "com");
-                $gitWorkingCopy->addRemote('origin',"https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".". $extension ."/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
+                $gitSimpleWrapper->git("remote add origin https://".$this->workbenchSettings->requested['user']['valore'].":".$this->workbenchSettings->requested['password']['valore']."@".$this->workbenchSettings->requested["git"]["valore"].".". $extension ."/".$this->workbenchSettings->requested['organization']['valore']."/".$this->workbenchSettings->requested['packagename']['valore'].".git");
                 $this->substitute();
-                $gitWorkingCopy->add('.');
-                $gitWorkingCopy->commit("Substitute");
+                $gitSimpleWrapper->git("add .");
+                $gitSimpleWrapper->git("commit -m Substitute");
                 $this->info("Uploading repo...");
-                $gitWorkingCopy->push('origin','master');
+                $gitSimpleWrapper->git("push origin master");
                 $this->info("Upload complete");
             }
 
