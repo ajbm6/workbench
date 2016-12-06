@@ -2,6 +2,11 @@
 
 All Notable changes to workbench will be documented in this file
 
+## 2.0.0 - 2016-12-06
+
+### Added
+- Add ssh password control
+
 ## 1.0.3 - 2016-11-17
 
 ## 1.0.2 - 2016-11-17
