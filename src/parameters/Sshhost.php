@@ -41,7 +41,7 @@ class Sshhost
         $attemps = Config::get('workbench.attemps');
         $attemp=0;
 
-        if(!$silent && !$this->requested["sshhost"]["valore-valido"] && !$this->command->confirm('Do you want use ssh to '.$this->requested["action"]["valore"].' virtualhost?')) {
+        if(!$silent && !$this->requested["sshhost"]["valore-valido"] && !$this->command->confirm('Do you want use ssh to '.$this->requested["action"]["valore"].' virtualhost?','yes')) {
             return false;
         }
 

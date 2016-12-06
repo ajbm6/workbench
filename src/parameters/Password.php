@@ -42,7 +42,24 @@ class Password implements IEnumerable
 
         if(!$silent && !$this->requested["password"]["valore-valido"]){
 
-            $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
+
+            if($this->requested["password"]["valore-valido-default"])
+            {
+                if($this->command->confirm("Do you want use password in the config?","yes"))
+                {
+                    $this->requested["password"]["valore"] = $this->requested["password"]["valore-default"];
+                    $this->requested["password"]["valore-valido"] = true;
+                }
+                else{
+                    $this->requested["password"]["valore-valido"] = false;
+                }
+
+            }
+
+            if(!$this->requested["password"]["valore-valido"]){
+                $this->requested["password"]["valore"] = $this->command->secret('Git repository\'s password');
+
+            }
             if(!$this->testPassword())
             {
                 $this->command->error("Invalid username or password!");

@@ -538,7 +538,7 @@ EOF;
         $author = Config::get('workbench.substitute.author','Padosoft');
         $emailauthor = Config::get('workbench.substitute.emailauthor','helpdesk@padosoft.com');
         $siteauthor = Config::get('workbench.substitute.siteauthor','www.padosoft.com');
-        $vendor = str_replace(" ","_", strtolower(Config::get('workbench.substitute.vendor','Padosoft')));
+        $vendor = str_replace(" ","_", strtolower(Config::get('workbench.substitute.vendor',$this->workbenchSettings->requested['organization']['valore'])));
         $packagename = $this->workbenchSettings->requested['packagename']['valore'];
         $packagedescr = $this->workbenchSettings->requested['packagedescr']['valore'];
         $packagekeywords = $this->workbenchSettings->requested['packagekeywords']['valore'];
