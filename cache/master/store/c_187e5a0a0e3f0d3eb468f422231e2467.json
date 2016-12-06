@@ -8,7 +8,7 @@
     "namespace": "Padosoft\\Workbench\\Parameters",
     "file": "Z:\\TEMP\\workbench\/src\\parameters\\Password.php",
     "relative_file": null,
-    "hash": "f4e270712001a36c39f5df49f15e2e4944c0982f",
+    "hash": "fc8484a2c934c1a092c59cf52f656df84c5930d2",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -87,7 +87,7 @@
         },
         "isValidValue": {
             "name": "isValidValue",
-            "line": 62,
+            "line": 79,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -100,7 +100,7 @@
             "parameters": {
                 "valore": {
                     "name": "valore",
-                    "line": 62,
+                    "line": 79,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -113,7 +113,7 @@
         },
         "testPassword": {
             "name": "testPassword",
-            "line": 71,
+            "line": 88,
             "short_desc": "",
             "long_desc": "",
             "hint": null,

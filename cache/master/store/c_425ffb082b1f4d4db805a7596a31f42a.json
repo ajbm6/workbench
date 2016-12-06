@@ -1,14 +1,14 @@
 {
     "name": "Padosoft\\Workbench\\Parameters\\Sshpassword",
-    "line": 13,
+    "line": 14,
     "short_desc": "",
     "long_desc": "",
     "hint": null,
     "tags": [],
     "namespace": "Padosoft\\Workbench\\Parameters",
-    "file": "c:\\Users\\Alessandro\\Documents\\Public\\laravel-packages\\www\\laravel\\5.2.x\\packages\\Padosoft\\workbench\/src\\parameters\\Sshpassword.php",
+    "file": "Z:\\TEMP\\workbench\/src\\parameters\\Sshpassword.php",
     "relative_file": null,
-    "hash": "7a9698a7fd731b8b4968b919f10dba125598597f",
+    "hash": "e42405f92ffe2583e999ed20c1d57eb8cb11ff1e",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -16,7 +16,8 @@
     "aliases": {
         "Workbench": "Padosoft\\Workbench\\Workbench",
         "Enumerable": "Padosoft\\Workbench\\Traits\\Enumerable",
-        "Command": "Illuminate\\Console\\Command"
+        "Command": "Illuminate\\Console\\Command",
+        "SSH2": "phpseclib\\Net\\SSH2"
     },
     "errors": [],
     "interfaces": {
@@ -29,7 +30,7 @@
     "methods": {
         "__construct": {
             "name": "__construct",
-            "line": 24,
+            "line": 25,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -42,7 +43,7 @@
             "parameters": {
                 "command": {
                     "name": "command",
-                    "line": 24,
+                    "line": 25,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": [
@@ -60,7 +61,7 @@
         },
         "read": {
             "name": "read",
-            "line": 30,
+            "line": 31,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -73,7 +74,7 @@
             "parameters": {
                 "silent": {
                     "name": "silent",
-                    "line": 30,
+                    "line": 31,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -86,7 +87,7 @@
         },
         "isValidValue": {
             "name": "isValidValue",
-            "line": 55,
+            "line": 82,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
@@ -99,7 +100,7 @@
             "parameters": {
                 "valore": {
                     "name": "valore",
-                    "line": 55,
+                    "line": 82,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -109,12 +110,26 @@
                     "is_by_ref": false
                 }
             }
+        },
+        "testPasswordSSH": {
+            "name": "testPasswordSSH",
+            "line": 91,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
         }
     },
     "constants": {
         "CONFIG": {
             "name": "CONFIG",
-            "line": 22,
+            "line": 23,
             "short_desc": "",
             "long_desc": ""
         }

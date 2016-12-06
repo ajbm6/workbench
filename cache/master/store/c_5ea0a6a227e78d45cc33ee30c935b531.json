@@ -8,7 +8,7 @@
     "namespace": "Padosoft\\Workbench",
     "file": "Z:\\TEMP\\workbench\/src\\Workbench.php",
     "relative_file": null,
-    "hash": "2ca648279cabd5d41017801b9721134baafcc1b1",
+    "hash": "82d15c552f4fd0b89e4cd024805d7e144b45a4e2",
     "parent": "Illuminate\\Console\\Command",
     "modifiers": "Stmt_Class",
     "is_trait": false,
