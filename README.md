@@ -322,7 +322,7 @@ If you discover any security related issues, please email  instead of using the 
 
 # API Documentation
 
-Please see API documentation at [http://@@@organization.github.io/@@@package_name](http://padosoft.github.io/workbench)
+Please see API documentation at [http://padosoft.github.io/workbench](http://padosoft.github.io/workbench)
 
 - [master](http://padosoft.github.io/workbench/build/master/)
 
