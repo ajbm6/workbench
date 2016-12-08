@@ -293,7 +293,17 @@ return [
 
 ## Example
 
-# Screenshots
+## SCREENSHOOTS
+
+CONSOLE FOR NEW PROJECT:
+![screenshoot](https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnc.gif)
+
+CONSOLE FOR NEW PACKAGE:
+![screenshoot](https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnpc.gif)
+
+CONSOLE FOR VERSIONING OF PACKAGE:
+![screenshoot](https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wvpc.gif)
+
 
 # Change Log
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
