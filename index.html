@@ -17,8 +17,7 @@
 <div id="content">
     <h1>workbench</h1>
     <div class="panel panel-default" style="padding: 20px;">
-    <h2>WORK IN PROGRESS</h2>
-<h1>workbench</h1>
+    <h1>workbench</h1>
 <p><a href="https://packagist.org/packages/padosoft/workbench"><img src="https://img.shields.io/packagist/v/padosoft/workbench.svg?style=flat-square" alt="Latest Version on Packagist" /></a>
 <a href="LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License" /></a>
 <a href="https://travis-ci.org/padosoft/workbench"><img src="https://img.shields.io/travis/padosoft/workbench/master.svg?style=flat-square" alt="Build Status" /></a>
@@ -26,6 +25,8 @@
 <a href="https://scrutinizer-ci.com/g/padosoft/workbench"><img src="https://img.shields.io/scrutinizer/g/padosoft/workbench.svg?style=flat-square" alt="Quality Score" /></a>
 <a href="https://packagist.org/packages/padosoft/workbench"><img src="https://img.shields.io/packagist/dt/padosoft/workbench.svg?style=flat-square" alt="Total Downloads" /></a>
 <a href="https://insight.sensiolabs.com/projects/@@@sensiolabs"><img src="https://insight.sensiolabs.com/projects/@@@sensiolab/small.png" alt="SensioLabsInsight" /></a></p>
+<p>CONSOLE FOR NEW PROJECT:
+<img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnc.gif" alt="screenshoot" /></p>
 <h1>Table of Contents</h1>
 <ul>
 <li>
@@ -104,134 +105,48 @@
 <p>php artisan workbench:new --help
 Usage:
 workbench:new [options] [--] [<action>] [<domain>]</p>
-<p>Arguments:
-action                                   create or delete
-domain                                   domain name</p>
-<p>Options:
--t, --type[=TYPE]                        laravel, normal, laravel_package or agnostic_package
--d, --dirtype[=DIRTYPE]                  project dir type, public or private, path set in config
--g, --git[=GIT]                          github or bitbucket
--u, --user[=USER]                        git user
--p, --password[=PASSWORD]                git password
--e, --email[=EMAIL]                      git email
--o, --organization[=ORGANIZATION]        organization in github or bitbucket
--s, --silent                             no questions
---sshhost[=SSHHOST]                  host ssh
---sshuser[=SSHUSER]                  user ssh
---sshpassword[=SSHPASSWORD]          password ssh
---filehosts                          add or remove in local file /etc/hosts
---packagename[=PACKAGENAME]          name of package
---packagedescr[=PACKAGEDESCR]        description of package
---packagekeywords[=PACKAGEKEYWORDS]  keywords of package
--h, --help                               Display this help message
--q, --quiet                              Do not output any message
--V, --version                            Display this application version
---ansi                               Force ANSI output
---no-ansi                            Disable ANSI output
--n, --no-interaction                     Do not ask any interactive question
---env[=ENV]                          The environment the command should run under.
--v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug</p>
-<p>Help:
-The workbench:new ....</p>
-<p>Esempio di wizard</p>
-<p>php artisan workbench:new</p>
-<p>What's the domain name?:</p>
-<blockquote>
-<p>provadocumentazione</p>
-</blockquote>
-<p>What do you want to do?:
-[0] create
-[1] delete</p>
-<blockquote>
-<p>0</p>
-</blockquote>
-<p>Project type?:
-[0] laravel
-[1] normal
-[2] laravel_package
-[3] agnostic_package</p>
-<blockquote>
-<p>0</p>
-</blockquote>
-<p>Do you want use ssh to create virtualhost? (yes/no) [no]:</p>
-<blockquote>
-<p>y</p>
-</blockquote>
-<p>This host '' is not valid</p>
-<p>SSH host IP:</p>
-<blockquote>
-<p>192.168.0.29</p>
-</blockquote>
-<p>SSH username:</p>
-<blockquote>
-<p>root</p>
-</blockquote>
-<p>SSH password:</p>
-<blockquote>
-</blockquote>
-<p>Vendor name and git repository's organization:</p>
-<blockquote>
-<p>padosoft</p>
-</blockquote>
-<p>What type of dir?:
-[0] public
-[1] private</p>
-<blockquote>
-<p>0</p>
-</blockquote>
-<p>Do you want add to git repository? (yes/no) [no]:</p>
-<blockquote>
-<p>y</p>
-</blockquote>
-<p>Github or Bitbucket?:
-[0] github
-[1] bitbucket</p>
-<blockquote>
-<p>0</p>
-</blockquote>
-<p>Git repository's username:</p>
-<blockquote>
-<p>utentegit</p>
-</blockquote>
-<p>Git repository's password:</p>
-<blockquote>
-</blockquote>
-<p>This email '' is not valid</p>
-<p>The email associated to git repository:</p>
-<blockquote>
-<p>example@email.com</p>
-</blockquote>
-<p>Name of package.:</p>
-<blockquote>
-<p>provadocumentazione</p>
-</blockquote>
-<p>Description of package.:</p>
-<blockquote>
-<p>prova per documentazione</p>
-</blockquote>
-<p>Keywords of package, split by comma.:</p>
-<blockquote>
-<p>prova, documentazione</p>
-</blockquote>
-<p>Parameters read
-Domain dir created at Y:/public/provadocumentazione
-Created repo https://github.com/padosoft/provadocumentazione
-Downloading skeleton laravel project...
-Download complete.
-Changing value in files
-Changing in Y:/public/provadocumentazione/readme.md
-Changing in Y:/public/provadocumentazione/changelog.md
-Changing in Y:/public/provadocumentazione/license.md
-Changing in Y:/public/provadocumentazione/travis.yml
-Changing in Y:/public/provadocumentazione/composer.json
-Changing in Y:/public/provadocumentazione/tests/config/sedCommand.sh
-Changing in Y:/public/provadocumentazione/tests/config/sedCommandProvider.sh
-Changing complete
-Uploading repo...
-Upload complete
-Creating virtualhost
-Virtualhost created
-Creation complete</p>
+<p>Arguments:</p>
+<p>action                                   create or delete</p>
+<p>domain                                   domain name</p>
+<p>Options:</p>
+<p>-t, --type[=TYPE]                        laravel, normal, laravel_package or agnostic_package</p>
+<p>-d, --dirtype[=DIRTYPE]                  project dir type, public or private, path set in config</p>
+<p>-g, --git[=GIT]                          github or bitbucket</p>
+<p>-u, --user[=USER]                        git user</p>
+<p>-p, --password[=PASSWORD]                git password</p>
+<p>-e, --email[=EMAIL]                      git email</p>
+<p>-o, --organization[=ORGANIZATION]        organization in github or bitbucket</p>
+<p>-s, --silent                             no questions</p>
+<pre><code>  --sshhost[=SSHHOST]                  host ssh
+  
+  --sshuser[=SSHUSER]                  user ssh
+  
+  --sshpassword[=SSHPASSWORD]          password ssh
+  
+  --filehosts                          add or remove in local file /etc/hosts
+  
+  --packagename[=PACKAGENAME]          name of package
+  
+  --packagedescr[=PACKAGEDESCR]        description of package
+  
+  --packagekeywords[=PACKAGEKEYWORDS]  keywords of package
+  
+</code></pre>
+<p>-h, --help                               Display this help message</p>
+<p>-q, --quiet                              Do not output any message</p>
+<p>-V, --version                            Display this application version</p>
+<pre><code>  --ansi                               Force ANSI output
+  
+  --no-ansi                            Disable ANSI output
+  
+</code></pre>
+<p>-n, --no-interaction                     Do not ask any interactive question</p>
+<pre><code>  --env[=ENV]                          The environment the command should run under.
+  
+</code></pre>
+<p>-v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug</p>
+<p>Help:</p>
+<p>The workbench:new ....</p>
 <p>Nel caso package la parte di virtualhost non è richiesta, se inserita nelle option viene ignorata</p>
 <p>Esempio di utilizzo con parametri</p>
 <p>Creazione sito Laravel</p>
@@ -244,75 +159,131 @@ Creation complete</p>
 <p>Y:\Public\laravel-packages\www\laravel\5.2.x&gt;php artisan workbench:new create laravelsilent14 --silent</p>
 <p>Per la modalità silent devono essere completi i campi in workbench.php</p>
 <p>Parametri nel config workbench.php</p>
-<p>return [
-'action' =&gt; env(
-'WORKBENCH_ACTION',
-'create'
+<p>return [</p>
+<pre><code>'action' =&gt; env(
+
+    'WORKBENCH_ACTION',
+    
+    'create'
+    
 ),
+
 'type' =&gt; env(
-'WORKBENCH_TYPE',
-'laravel'
+
+    'WORKBENCH_TYPE',
+    
+    'laravel'
+    
 ),
+
 'dir'  =&gt; env(
-'WORKBENCH_DIR',
-'public'
+
+    'WORKBENCH_DIR',
+    
+    'public'
+    
 ),
+
 'diraccess' =&gt; [
-'private' =&gt; [
-'apache' =&gt; env('WORKBENCH_DIR_PRIVATE_APACHE','/var/www/html/private/'),
-'local' =&gt; env('WORKBENCH_DIR_PRIVATE_LOCAL','Y:/private/'),
-'packages' =&gt; env('WORKBENCH_DIR_PRIVATE_PACKAGES','Y:/private/laravel-packages/www/packages/'),
-'doc' =&gt; env('WORKBENCH_DIR_PRIVATE_DOC','Y:/private/laravel-packages/www/doc/'),
-],
-'public' =&gt; [
-'apache' =&gt; env('WORKBENCH_DIR_PUBLIC_APACHE','/var/www/html/public/'),
-'local' =&gt; env('WORKBENCH_DIR_PUBLIC_LOCAL','Y:/public/'),
-'packages' =&gt; env('WORKBENCH_DIR_PUBLIC_PACKAGES','Y:/public/laravel-packages/www/packages/'),
-'doc' =&gt; env('WORKBENCH_DIR_PUBLIC_DOC','Y:/Public/laravel-packages/www/doc/'),
-],
+
+    'private' =&gt; [
+    
+        'apache' =&gt; env('WORKBENCH_DIR_PRIVATE_APACHE','/var/www/html/private/'),
+        
+        'local' =&gt; env('WORKBENCH_DIR_PRIVATE_LOCAL','Y:/private/'),
+        
+        'packages' =&gt; env('WORKBENCH_DIR_PRIVATE_PACKAGES','Y:/private/laravel-packages/www/packages/'),
+        
+        'doc' =&gt; env('WORKBENCH_DIR_PRIVATE_DOC','Y:/private/laravel-packages/www/doc/'),
+        
+    ],
+    
+    'public' =&gt; [
+    
+        'apache' =&gt; env('WORKBENCH_DIR_PUBLIC_APACHE','/var/www/html/public/'),
+        
+        'local' =&gt; env('WORKBENCH_DIR_PUBLIC_LOCAL','Y:/public/'),
+        
+        'packages' =&gt; env('WORKBENCH_DIR_PUBLIC_PACKAGES','Y:/public/laravel-packages/www/packages/'),
+        
+        'doc' =&gt; env('WORKBENCH_DIR_PUBLIC_DOC','Y:/Public/laravel-packages/www/doc/'),
+        
+    ],
 ],
 'dirtype' =&gt; env(
-'WORKBENCH_DIRTYPE',
-'public'
+
+    'WORKBENCH_DIRTYPE',
+    
+    'public'
+    
 ),
+
 'attemps' =&gt; env( 'WORKBENCH_ATTEMPS',
-'5'
+
+    '5'
+    
 ),
+
 'git' =&gt; [
-'hosting' =&gt; env('WORKBENCH_GIT_HOSTING', 'github'),
-'action' =&gt; env('WORKBENCH_GIT_ACTION', 'push'),
-'user' =&gt; env('WORKBENCH_GIT_USER', ''),
-'password' =&gt; env('WORKBENCH_GIT_PASSWORD', ''),
-'email' =&gt; env('WORKBENCH_GIT_EMAIL', ''),
+
+    'hosting' =&gt; env('WORKBENCH_GIT_HOSTING', 'github'),
+    
+    'action' =&gt; env('WORKBENCH_GIT_ACTION', 'push'),
+    
+    'user' =&gt; env('WORKBENCH_GIT_USER', ''),
+    
+    'password' =&gt; env('WORKBENCH_GIT_PASSWORD', ''),
+    
+    'email' =&gt; env('WORKBENCH_GIT_EMAIL', ''),
+    
 ],
+
 'organization' =&gt; env('WORKBENCH_GIT_GITHUB_ORGANIZATION', 'padosoft'),
+
 'ssh' =&gt; [
-'server' =&gt; env('WORKBENCH_SSH_SERVER', '192.168.0.29'),
-'user' =&gt; env('WORKBENCH_SSH_USER', ''),
-'password' =&gt; env('WORKBENCH_SSH_SERVER', ''),
+
+    'server' =&gt; env('WORKBENCH_SSH_SERVER', '192.168.0.29'),
+    
+    'user' =&gt; env('WORKBENCH_SSH_USER', ''),
+    
+    'password' =&gt; env('WORKBENCH_SSH_SERVER', ''),
+    
 ],
+
 'type_repository' =&gt; [
-'laravel' =&gt; env('WORKBENCH_TYPE_REPOSITORY_LARAVEL', 'laravel5.2.x-skeleton'),
-'normal' =&gt; env('WORKBENCH_TYPE_REPOSITORY_NORMAL', ''),
-'laravel_package' =&gt; env('WORKBENCH_TYPE_REPOSITORY_LARAVEL_PACKAGE', 'laravel5.2.x-package-skeleton'),
-'agnostic_package' =&gt; env('WORKBENCH_TYPE_REPOSITORY_AGNOSTIC_PACKAGE', 'package-skeleton'),
+
+    'laravel' =&gt; env('WORKBENCH_TYPE_REPOSITORY_LARAVEL', 'laravel5.2.x-skeleton'),
+    
+    'normal' =&gt; env('WORKBENCH_TYPE_REPOSITORY_NORMAL', ''),
+    
+    'laravel_package' =&gt; env('WORKBENCH_TYPE_REPOSITORY_LARAVEL_PACKAGE', 'laravel5.2.x-package-skeleton'),
+    
+    'agnostic_package' =&gt; env('WORKBENCH_TYPE_REPOSITORY_AGNOSTIC_PACKAGE', 'package-skeleton'),
+    
 ],
+
 'substitute' =&gt; [
-'author' =&gt;env('WORKBENCH_SUBSTITUTION_AUTHOR', 'Padosoft'),
-'emailauthor' =&gt;env('WORKBENCH_SUBSTITUTION_EMAILAUTHOR', 'helpdesk@padosoft.com'),
-'siteauthor' =&gt;env('WORKBENCH_SUBSTITUTION_SITEAUTHOR', 'www.padosoft.com'),
-'vendor' =&gt;env('WORKBENCH_SUBSTITUTION_VENDOR', 'Padosoft'),
-'files' =&gt;env('WORKBENCH_SUBSTITUTION_FILES', 'readme.md,changelog.md,license.md,travis.yml,composer.json,tests/config/sedCommand.sh,tests/config/sedCommandProvider.sh'),
+
+    'author' =&gt;env('WORKBENCH_SUBSTITUTION_AUTHOR', 'Padosoft'),
+    
+    'emailauthor' =&gt;env('WORKBENCH_SUBSTITUTION_EMAILAUTHOR', 'helpdesk@padosoft.com'),
+    
+    'siteauthor' =&gt;env('WORKBENCH_SUBSTITUTION_SITEAUTHOR', 'www.padosoft.com'),
+    
+    'vendor' =&gt;env('WORKBENCH_SUBSTITUTION_VENDOR', 'Padosoft'),
+    
+    'files' =&gt;env('WORKBENCH_SUBSTITUTION_FILES', 'readme.md,changelog.md,license.md,travis.yml,composer.json,tests/config/sedCommand.sh,tests/config/sedCommandProvider.sh'),
 ],
-];</p>
+</code></pre>
+<p>];</p>
 <h2>Example</h2>
 <h2>SCREENSHOOTS</h2>
-<p>CONSOLE FOR NEW PROJECT:
-<img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnc.gif" alt="screenshoot" /></p>
-<p>CONSOLE FOR NEW PACKAGE:
-<img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnpc.gif" alt="screenshoot" /></p>
-<p>CONSOLE FOR VERSIONING OF PACKAGE:
-<img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wvpc.gif" alt="screenshoot" /></p>
+<p>CONSOLE FOR NEW PROJECT:</p>
+<p><img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnc.gif" alt="screenshoot" /></p>
+<p>CONSOLE FOR NEW PACKAGE:</p>
+<p><img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wnpc.gif" alt="screenshoot" /></p>
+<p>CONSOLE FOR VERSIONING OF PACKAGE:</p>
+<p><img src="https://raw.githubusercontent.com/padosoft/workbench/master/resources/img/wvpc.gif" alt="screenshoot" /></p>
 <h1>Change Log</h1>
 <p>Please see <a href="CHANGELOG.md">CHANGELOG</a> for more information what has changed recently.</p>
 <h1>Testing</h1>
@@ -330,10 +301,10 @@ Creation complete</p>
 <h1>Credits</h1>
 <ul>
 <li>
-<a href="https://github.com/padosoft">Padosoft</a>
+<p><a href="https://github.com/padosoft">Padosoft</a></p>
 </li>
 <li>
-<a href="../../contributors">All Contributors</a>
+<p><a href="../../contributors">All Contributors</a></p>
 </li>
 </ul>
 <h1>About Padosoft</h1>
