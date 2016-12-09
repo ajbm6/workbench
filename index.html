@@ -147,18 +147,19 @@ workbench:new [options] [--] [<action>] [<domain>]</p>
 <p>-v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug</p>
 <p>Help:</p>
 <p>The workbench:new ....</p>
-<p>Nel caso package la parte di virtualhost non è richiesta, se inserita nelle option viene ignorata</p>
-<p>Esempio di utilizzo con parametri</p>
-<p>Creazione sito Laravel</p>
+<p>In the case of the package the part of virtualhost is not required, if inserted in the option is ignored</p>
+<p>Example with parameters</p>
+<p>Laravel create:</p>
 <p>php artisan workbench:new create laravelsite -t laravel -d public -g github -u alevento -p******** -e ale@mail.it -o b2msrl --sshhost=192.168.0.29 --sshuser=root --sshpassword=********* --packagename=laravelsite --packagedescr=descr --packagekeywords=descr</p>
-<p>Creazione package Laravel</p>
+<p>Laravel package create:</p>
 <p>Y:\Public\laravel-packages\www\laravel\5.2.x&gt;php artisan workbench:new create laravelpackage -t laravel_package -d public -g github -u user -p********** -e ale@mail.it -o b2msrl --packagename=laravelpackage --packagedescr=descr --packagekeywords=descr</p>
-<p>Creazione package Agnostic</p>
+<p>Agnostic package create:</p>
 <p>Y:\Public\laravel-packages\www\laravel\5.2.x&gt;php artisan workbench:new create agnosticpackage -t agnostic_package -d public -g github -u user -p******** -e ale@mail.it -o b2msrl --packagename=agnosticpackage --packagedescr=descr --packagekeywords=descr</p>
-<p>Creazione in modalità silent</p>
-<p>Y:\Public\laravel-packages\www\laravel\5.2.x&gt;php artisan workbench:new create laravelsilent14 --silent</p>
-<p>Per la modalità silent devono essere completi i campi in workbench.php</p>
-<p>Parametri nel config workbench.php</p>
+<p>Silent create:</p>
+<p>Y:\Public\laravel-packages\www\laravel\5.2.x&gt;php artisan workbench:new create laravelsilent --silent</p>
+<p>In silent mode
+In silent mode, the parameters must be filled in workbench.php</p>
+<p>Parameters in workbench.php config file:</p>
 <p>return [</p>
 <pre><code>'action' =&gt; env(
 

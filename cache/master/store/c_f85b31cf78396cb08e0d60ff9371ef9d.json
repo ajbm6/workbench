@@ -8,7 +8,7 @@
     "namespace": "Padosoft\\Workbench",
     "file": "Z:\\TEMP\\workbench\/src\\WorkbenchApiGeneration.php",
     "relative_file": null,
-    "hash": "50a8dd4385ca3f226ec0c3b89c20950ea3acc21e",
+    "hash": "6bf6dac9fbd4a9390a794c4b020a0832c674ff39",
     "parent": null,
     "modifiers": "Stmt_Class",
     "is_trait": false,
@@ -104,7 +104,7 @@
         },
         "transformReadmeMd": {
             "name": "transformReadmeMd",
-            "line": 189,
+            "line": 190,
             "short_desc": "* @param $readmepathsource\n     * @param $readmepathdestination",
             "long_desc": "",
             "hint": null,
@@ -117,7 +117,7 @@
             "parameters": {
                 "readmepathsource": {
                     "name": "readmepathsource",
-                    "line": 189,
+                    "line": 190,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -128,7 +128,7 @@
                 },
                 "readmepathdestination": {
                     "name": "readmepathdestination",
-                    "line": 189,
+                    "line": 190,
                     "short_desc": null,
                     "long_desc": null,
                     "hint": null,
@@ -141,7 +141,7 @@
         },
         "dummy": {
             "name": "dummy",
-            "line": 226,
+            "line": 227,
             "short_desc": "",
             "long_desc": "",
             "hint": null,
