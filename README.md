@@ -141,33 +141,35 @@ Help:
 
 
 
-Nel caso package la parte di virtualhost non è richiesta, se inserita nelle option viene ignorata
+In the case of the package the part of virtualhost is not required, if inserted in the option is ignored
 
-Esempio di utilizzo con parametri
+Example with parameters
 
-Creazione sito Laravel
+Laravel create:
 
 php artisan workbench:new create laravelsite -t laravel -d public -g github -u alevento -p******** -e ale@mail.it -o b2msrl --sshhost=192.168.0.29 --sshuser=root --sshpassword=********* --packagename=laravelsite --packagedescr=descr --packagekeywords=descr
 
 
-Creazione package Laravel
+Laravel package create:
 
 Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create laravelpackage -t laravel_package -d public -g github -u user -p********** -e ale@mail.it -o b2msrl --packagename=laravelpackage --packagedescr=descr --packagekeywords=descr
 
 
-Creazione package Agnostic
+Agnostic package create:
 
 Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create agnosticpackage -t agnostic_package -d public -g github -u user -p******** -e ale@mail.it -o b2msrl --packagename=agnosticpackage --packagedescr=descr --packagekeywords=descr
 
 
-Creazione in modalità silent
+Silent create:
 
-Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create laravelsilent14 --silent
-
-Per la modalità silent devono essere completi i campi in workbench.php
+Y:\Public\laravel-packages\www\laravel\5.2.x>php artisan workbench:new create laravelsilent --silent
 
 
-Parametri nel config workbench.php
+In silent mode 
+In silent mode, the parameters must be filled in workbench.php
+
+
+Parameters in workbench.php config file:
 
 
 return [
